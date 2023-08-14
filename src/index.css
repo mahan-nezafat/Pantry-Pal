@@ -58,6 +58,7 @@ ul li:hover::after {
     align-items: center;
     padding: 10px 0;
     background-color: #F9D5E5; 
+    border-bottom: 1px solid #FFFFFF;
 }
 
 .logo {
@@ -89,4 +90,68 @@ ul li:hover::after {
 
 .social-link a {
     padding-left: 5px;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    height: 559px;
+}
+
+.hero {
+    display: flex;
+    width: 60%;
+    height: 100%;
+    background-image: url(./img/hero.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* position: relative; */
+    justify-content: center;
+    align-items: center;
+}
+
+.hero form {
+}
+
+.hero form input {
+    padding: 5px 15px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: #FFFFFF;
+    font-size: 1rem;
+}
+
+input::placeholder {
+    color: #FFFFFF;
+}
+
+.hero form button {
+    border: none;
+    padding: 10px;
+    background-color: #FF6F61;
+    color: #FFFFFF;
+}
+
+.recipe-list {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    height: 100%;
+}
+
+.recipe-item {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: #F9D5E5; 
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.recipe-item p span {
+    margin: 0 5px;
 }

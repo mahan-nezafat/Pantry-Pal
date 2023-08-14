@@ -3,7 +3,7 @@ import Item from './Item';
 
 const Menu = () => {
 
-    const items = ['Taste','Recommended','Types','Equipments'];
+    const items = ['Tastes','Recommended','Types','Equipments'];
 
     return ( 
     <>
