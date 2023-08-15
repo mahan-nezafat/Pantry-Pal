@@ -1,7 +1,7 @@
 import React from 'react';
 import RecipeItem from './RecipeItem';
 
-const RecipeList = () => {
+const RecipeList = ({ results }) => {
 
     const list = [
         {
@@ -25,14 +25,17 @@ const RecipeList = () => {
             ingredients: ['buns', 'cheese', 'minced meat', 'onion', 'tommato', 'pickels']
         }
     ]
+    console.log(typeof results)
 
     return ( 
         <>
             <div className="recipe-list">
-                {
-                    list.map((item, index) => {
-                        return <RecipeItem item={item} />
+                { typeof results !== "undefined" ?
+                    Object.values(results).map((item, index) => {
+                        return <RecipeItem item={item} key={item.id} />
                     })
+                    :
+                    ""
                 }
             </div>
         </>
