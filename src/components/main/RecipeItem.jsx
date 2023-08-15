@@ -3,12 +3,17 @@ import React from 'react';
 const RecipeItem = ({ item }) => {
 
     const {title, image } = item
-    console.log(title, image);
+    // console.log(title, image);
     return (
         <>
             <div className="recipe-item">
-                <h3>{title}</h3>
-                <img src={image} alt="food" />
+                <div className="details">
+                    <h3>{title}</h3>
+                </div>
+                <div className="image">
+                    <img src={image} alt="food" />
+
+                </div>
                 {/* <p>{
                 
                     ingredients.map(ingredient => {

@@ -25,7 +25,7 @@ const RecipeList = ({ results }) => {
             ingredients: ['buns', 'cheese', 'minced meat', 'onion', 'tommato', 'pickels']
         }
     ]
-    console.log(typeof results)
+    // console.log(typeof results)
 
     return ( 
         <>

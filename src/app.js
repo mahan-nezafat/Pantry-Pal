@@ -6,6 +6,7 @@ import './index.css';
 const App = () => {
     const initialState = {
         data: [],
+        bulkData: [],
         searchQuery: "",
         isSubmit: false,
 
@@ -17,7 +18,7 @@ const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     
     const { results } = state.data;
-    
+    // const { extendedIngredients } = state.bulkData.map(item => console.log(item))
 
 
     function reducer(state, action) {
@@ -29,6 +30,13 @@ const App = () => {
                    ...state, 
                    data: action.payload
                 }
+
+            case "FetchedBulkInfo":
+                return    {
+                    ...state,
+                    bulkData: action.payload
+                }
+                
             case "Search":
 
                 return {
@@ -62,10 +70,32 @@ const App = () => {
         }
         fetchData();
         
-    },[state.searchQuery,state.isSubmit])
+    },[state.searchQuery,state.isSubmit]);
+
+    useEffect(() => {
+        const ids = []
+        if(!state.isSubmit) return
+        if(typeof results !== "undefined") {
+            Object.values(results).map(result => {
+               return ids.push(result.id);
+            })
+        }
+        async function fetchIngredients() {
+            
+                const response = await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=856ff9a8e5554f3198e5a473b5d101a8&ids=${ids}`);
+                const data = await response.json();
+                dispatch({type: "FetchedBulkInfo", payload: data});
+                dispatch({type: "Reset", payload: false});
+            
+        }
+        fetchIngredients();
+        
+    },[results, state])
     
-    console.log(state);
-    console.log(results);
+    console.log(state.bulkData);
+    
+    // console.log(results);
+    // console.log(id);
 
 
 
