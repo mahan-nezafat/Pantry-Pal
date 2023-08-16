@@ -1,28 +1,36 @@
 import React from 'react';
 
-const RecipeItem = ({ item }) => {
+const RecipeItem = ({ item, fullInfo }) => {
 
     const {title, image } = item
-    // console.log(title, image);
+    const { extendedIngredients } = typeof fullInfo !== "undefined" ? fullInfo : 0
+    
+    
+    
     return (
         <>
             <div className="recipe-item">
                 <div className="details">
                     <h3>{title}</h3>
+                    <ul>{ typeof extendedIngredients !== "undefined" ?
+                
+                extendedIngredients.map((ingredient, index) => {
+                    
+                   
+                    return index < 4 ?  <li key={index}><span>{ingredient.nameClean}</span></li> : ""
+                    
+                })
+                    :
+                    ""
+                }</ul>
                 </div>
                 <div className="image">
                     <img src={image} alt="food" />
 
                 </div>
-                {/* <p>{
-                
-                    ingredients.map(ingredient => {
-                        return <span>{ingredient}</span>
-                    })
-                }</p> */}
+               
             </div>
         </>
     );
 }
- 
 export default RecipeItem;

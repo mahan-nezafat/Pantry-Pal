@@ -10,8 +10,8 @@ const Menu = () => {
        <div className="menu">
             <ul>
                 {
-                    items.map(item => {
-                        return <Item itemName={item} />
+                    items.map((item, index) => {
+                        return <Item itemName={item} key={index} />
                     })
                 }
             </ul>

@@ -158,7 +158,7 @@ input::placeholder {
 }
 
 .recipe-item .details {
-    width: 50%;
+    width: 79%;
 }
 
 .recipe-item .image img {
@@ -169,6 +169,12 @@ input::placeholder {
     font-size: 1rem;
 }
 
-.recipe-item p span {
-    margin: 0 5px;
+.recipe-item ul {
+    padding: 5px 0;
+}
+
+.recipe-item ul li {
+    margin: 3px 5px;
+    padding: 3px;
+    background-color: #F8F4F1;
 }

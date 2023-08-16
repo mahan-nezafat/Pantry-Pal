@@ -9,11 +9,13 @@ const App = () => {
         bulkData: [],
         searchQuery: "",
         isSubmit: false,
+        ids: []
 
       
     }
 
-    const apiKey = '856ff9a8e5554f3198e5a473b5d101a8';
+    const apiKey = "4defd47d816c4e5692caafff6528e6a2";
+    // '856ff9a8e5554f3198e5a473b5d101a8';
    
     const [state, dispatch] = useReducer(reducer, initialState);
     
@@ -30,7 +32,7 @@ const App = () => {
                    ...state, 
                    data: action.payload
                 }
-
+                
             case "FetchedBulkInfo":
                 return    {
                     ...state,
@@ -48,6 +50,12 @@ const App = () => {
                     ...state,
                     isSubmit: action.payload
                 }
+            
+            case "SetIds": 
+                return {
+                    ...state,
+                    ids: [...state.ids, action.payload]
+                }    
             case "Reset":
                 return {
                     ...state,
@@ -62,47 +70,47 @@ const App = () => {
 
     useEffect(() => {
         if(!state.isSubmit) return
-        async function fetchData() {
-            const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${state.searchQuery}`);
-            const data = await response.json();
-            dispatch({type: "Fetched", payload: data})
-            dispatch({type: "Reset", payload: false})
-        }
-        fetchData();
+        const controller = new AbortController();
         
-    },[state.searchQuery,state.isSubmit]);
+        async function fetchData() {
+          try {
+            const response1 = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${state.searchQuery}`);
+            const data1 = await response1.json();
+            const response2 = await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=${apiKey}&ids=${state.ids}`);
+            const data2 = await response2.json();
+            if(!state) {
+                dispatch({type: "Fetched", payload: data1});
+                dispatch({type: "FetchedBulkInfo", payload: data2});
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    fetchData();
+    dispatch({type: "Reset", payload: false});
+        
+    return () => {
+    
+        controller.abort();
+    }
+    },[state.searchQuery, state.ids, state.isSubmit]);
+
 
     useEffect(() => {
-        const ids = []
-        if(!state.isSubmit) return
         if(typeof results !== "undefined") {
             Object.values(results).map(result => {
-               return ids.push(result.id);
+            return dispatch({type: "SetIds", payload: result.id})
             })
         }
-        async function fetchIngredients() {
-            
-                const response = await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=856ff9a8e5554f3198e5a473b5d101a8&ids=${ids}`);
-                const data = await response.json();
-                dispatch({type: "FetchedBulkInfo", payload: data});
-                dispatch({type: "Reset", payload: false});
-            
-        }
-        fetchIngredients();
-        
-    },[results, state])
-    
-    console.log(state.bulkData);
-    
-    // console.log(results);
-    // console.log(id);
+    },[results])
 
+    console.log(state)
 
 
     return ( 
         <>
             <Header />
-            <Main dispatch={dispatch} searchQuery={state.searchQuery} results={results} />
+            <Main bulkData={state.bulkData} dispatch={dispatch} searchQuery={state.searchQuery} results={results} />
         </>
      );
 }
