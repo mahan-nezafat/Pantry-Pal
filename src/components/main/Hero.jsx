@@ -21,6 +21,7 @@ const Hero = ({ dispatch, searchQuery }) => {
                     <input value={searchQuery} onChange={handleChange} type="text" placeholder='Enter your query...' />
                     <button>Search</button>
                 </form>
+                <button className='show-ingredients' onClick={() => dispatch({type: "Show", payload: true})}>Show ingredients</button>
             </div>
         </>
     );
