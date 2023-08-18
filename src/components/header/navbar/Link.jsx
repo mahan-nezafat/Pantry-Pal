@@ -5,7 +5,7 @@ const Link = () => {
         <>
             <div className="social-link">
                 <img src={github} alt="github" />
-                <a href="https://github.com/mahan-nezafat">Github</a>
+                <a href="https://github.com/mahan-nezafat" target='_blank'>Github</a>
             </div>
         </>
      );
