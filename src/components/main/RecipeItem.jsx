@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RecipeItem = ({ item, fullInfo }) => {
+const RecipeItem = ({ item, fullInfo, dispatch }) => {
 
     const {title, image } = item
     const { extendedIngredients } = typeof fullInfo !== "undefined" ? fullInfo : 0
@@ -9,7 +9,7 @@ const RecipeItem = ({ item, fullInfo }) => {
     
     return (
         <>
-            <div className="recipe-item">
+            <div className="recipe-item" onClick={() => dispatch({type: "SelectedFoodId", payload: item.id})}>
                 <div className="details">
                     <h3>{title}</h3>
                     <ul>{ typeof extendedIngredients !== "undefined" ?

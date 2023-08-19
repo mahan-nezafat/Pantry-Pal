@@ -9,15 +9,18 @@ const Home = () => {
         searchQuery: "",
         isSubmit: false,
         ids: [],
-        isShow: false
+        isShow: false,
+        selectedFoodId: null,
+        selectedFoodInformation: {},
+        isSelected: false
 
       
     }
 
-    const apiKey = "8c9b44dff7454d2bb7def613b0bade75"
-    // "f88e395dfddb4a21837e281aa658717c"
-    // "76c7a80de4fc4832927537ed53f92d14" 
-    // "856ff9a8e5554f3198e5a473b5d101a8"
+    const apiKey = "f88e395dfddb4a21837e281aa658717c";
+    // "8c9b44dff7454d2bb7def613b0bade75";
+    // "76c7a80de4fc4832927537ed53f92d14";
+    // "856ff9a8e5554f3198e5a473b5d101a8";
     // "4defd47d816c4e5692caafff6528e6a2";
    
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -65,6 +68,18 @@ const Home = () => {
                     isShow: action.payload
                 }
 
+            case "SelectedFoodId":
+                return {
+                    ...state,
+                    selectedFoodId: action.payload
+                }
+
+            case "SelectedFoodInformation":
+                return {
+                    ...state,
+                    selectedFoodInformation: action.payload,
+                    isSelected: true
+                }
 
             case "Reset":
                 return {
@@ -125,13 +140,30 @@ const Home = () => {
         fetchInfo();
     },[state.isShow, state.ids])
 
-    console.log(state)
+    useEffect(() => {
+        if(!state.selectedFoodId) return;
+       async function getSingleRecipe() {
+            const response = await fetch(`https://api.spoonacular.com/recipes/${state.selectedFoodId}/information?apiKey=${apiKey}`);
+            const data = await response.json();
+            dispatch({type: "SelectedFoodInformation", payload: data});
+        }
+        getSingleRecipe();
+    },[state.selectedFoodId]);
+
+    // console.log(state.selectedFoodInformation)
 
 
     return ( 
-        <>
+        <>  
+            <Main
             
-            <Main bulkData={state.bulkData} dispatch={dispatch} searchQuery={state.searchQuery} results={results} />
+            bulkData={state.bulkData}
+            dispatch={dispatch}
+            searchQuery={state.searchQuery}
+            results={results} 
+            selectedFoodInformation={state.selectedFoodInformation}
+            isSelected={state.isSelected}
+            />
         </>
      );
 }
