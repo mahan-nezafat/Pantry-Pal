@@ -17,8 +17,8 @@ const Home = () => {
       
     }
 
-    const apiKey = "f88e395dfddb4a21837e281aa658717c";
-    // "8c9b44dff7454d2bb7def613b0bade75";
+    const apiKey = "8c9b44dff7454d2bb7def613b0bade75";
+    // "f88e395dfddb4a21837e281aa658717c";
     // "76c7a80de4fc4832927537ed53f92d14";
     // "856ff9a8e5554f3198e5a473b5d101a8";
     // "4defd47d816c4e5692caafff6528e6a2";
@@ -69,17 +69,19 @@ const Home = () => {
                 }
 
             case "SelectedFoodId":
+                // if(state.selectedFoodInformation) return {...state, isSelected: true}
                 return {
                     ...state,
                     selectedFoodId: action.payload,
-                    isSelected: state.selectedFoodInformation ? true : false
-
+                    // isSelected: Object.values(state.selectedFoodInformation) > 0 ? true : false
+                    
                 }
 
             case "SelectedFoodInformation":
                 return {
                     ...state,
                     selectedFoodInformation: action.payload,
+                    isSelected: true
                 }
             
             case "Close": 
@@ -159,7 +161,7 @@ const Home = () => {
         getSingleRecipe();
     },[state.selectedFoodId]);
 
-    console.log(state)
+    // console.log(state)
 
 
     return ( 
