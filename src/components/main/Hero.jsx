@@ -18,7 +18,7 @@ const Hero = ({ dispatch, searchQuery, selectedFoodInformation, isSelected }) =>
     return ( 
         <>
            { isSelected ?
-                    <Food selectedFoodInformation={selectedFoodInformation} />
+                    <Food selectedFoodInformation={selectedFoodInformation} dispatch={dispatch} />
                 :
                 
 

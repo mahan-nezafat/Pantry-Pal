@@ -71,14 +71,21 @@ const Home = () => {
             case "SelectedFoodId":
                 return {
                     ...state,
-                    selectedFoodId: action.payload
+                    selectedFoodId: action.payload,
+                    isSelected: state.selectedFoodInformation ? true : false
+
                 }
 
             case "SelectedFoodInformation":
                 return {
                     ...state,
                     selectedFoodInformation: action.payload,
-                    isSelected: true
+                }
+            
+            case "Close": 
+                return {
+                    ...state,
+                    isSelected: action.payload,
                 }
 
             case "Reset":
@@ -145,12 +152,14 @@ const Home = () => {
        async function getSingleRecipe() {
             const response = await fetch(`https://api.spoonacular.com/recipes/${state.selectedFoodId}/information?apiKey=${apiKey}`);
             const data = await response.json();
+
             dispatch({type: "SelectedFoodInformation", payload: data});
+            console.log("fetched")
         }
         getSingleRecipe();
     },[state.selectedFoodId]);
 
-    // console.log(state.selectedFoodInformation)
+    console.log(state)
 
 
     return ( 

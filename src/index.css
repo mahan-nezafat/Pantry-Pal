@@ -260,3 +260,15 @@ input::placeholder {
     height: 7%;
     border-radius: 50%;
 }
+
+.close-btn {
+    width: 5%;
+    background-color: #F9D5E5;
+    color: #FF6F61;
+    border: 1px solid #FF6F61;
+    outline: none;
+    padding: 5px;
+    border-radius: 4px;
+    margin: 5px 0;
+    font-size: 1rem;
+}

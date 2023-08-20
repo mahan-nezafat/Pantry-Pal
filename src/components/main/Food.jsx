@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Food = ({ selectedFoodInformation }) => {
+const Food = ({ selectedFoodInformation, dispatch }) => {
 
     const {
         analyzedInstructions,
@@ -22,6 +22,7 @@ const Food = ({ selectedFoodInformation }) => {
     return (
         <>
             <div className='food'>
+                        <button className='close-btn' onClick={() => dispatch({type: "Close", payload: false})}>&times;</button>
                         <img src={`https://spoonacular.com/recipeImages/${id}-636x393.${imageType}`} alt="food" />
                         <h1>{title}</h1>
                         <div className="ingredients">
