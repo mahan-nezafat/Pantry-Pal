@@ -22,21 +22,21 @@ const Food = ({ selectedFoodInformation, dispatch }) => {
     return (
         <>
             <div className='food'>
-                        {/* <button className='close-btn' onClick={() => dispatch({type: "Close", payload: false})}>&times;</button> */}
-                        <h1>{title}</h1>
+                        <button className='close-btn' onClick={() => dispatch({type: "Close", payload: false})}>&times;</button>
                         <div className='upper-part'>
+                            <h1>{title}</h1>
                             <div className='food-image'>
                                 <img src={`https://spoonacular.com/recipeImages/${id}-636x393.${imageType}`} alt="food" />
                             </div>
+                                    {/* <h4>Ingredients:</h4> */}
                             <div className="ingredients">
-                                <ul>
-                                    <h4>Ingredients:</h4>
+                            
                                     {
                                         extendedIngredients.map((ingredient, index) => {
-                                            return <li><img src={`https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`} alt="ingredient" /> <span>{ingredient.nameClean}</span></li>
+                                            return <p><img src={`https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`} alt="ingredient" /> <span>{ingredient.nameClean}</span></p>
                                         })
                                     }
-                                </ul>    
+                               
                                 
                             </div>
                         </div>
@@ -46,27 +46,27 @@ const Food = ({ selectedFoodInformation, dispatch }) => {
                             <h4>Estimated Price: ${Math.floor(pricePerServing)}</h4>
                             <h4>Estimated Time: {readyInMinutes < 60 ? `${readyInMinutes}min` : `${Math.floor(readyInMinutes / 60)} hours`}</h4>
                             <h4>Vegan: {vegan ? "yes" : "no"}</h4>
-                            <div className="diets">
+                            <div className="diets d-flex">
                                 {diets.length > 0 && <h4>Diets: </h4>} 
                                 
                                 {diets && 
                                 
-                                diets.map((diet, index) => <span>{diet}</span>)
+                                diets.map((diet, index) => <span className='ml-5'>{diet},</span>)
                                 }   
 
                             </div>
-                            <div className="dish-types">
+                            <div className="dish-types d-flex">
                                 {
                                     dishTypes.length > 0 && <h4>Dish Types:</h4>
                                 }
                                 {
-                                    dishTypes && dishTypes.map((dishType, index) => <span>{dishType}</span>)
+                                    dishTypes && dishTypes.map((dishType, index) => <span className='ml-5'>{dishType},</span>)
                                 }
                             </div>
                             
                             <div className="instructions">
-                                    <h4>Instructions:</h4>
                                     <ul>
+                                    <h4>Instructions:</h4>
                                         { analyzedInstructions &&  Object.values(analyzedInstructions)[0].steps.map((item, index) => {
                                             return <li><p>{index + 1}-{item.step}</p></li>
                                         })}

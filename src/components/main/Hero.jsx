@@ -1,7 +1,7 @@
 import React from 'react';
 import Food from './Food';
 
-const Hero = ({ dispatch, searchQuery, selectedFoodInformation, isSelected }) => {
+const Hero = ({ dispatch, searchQuery, selectedFoodInformation, isSelected, isSubmit }) => {
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -22,7 +22,7 @@ const Hero = ({ dispatch, searchQuery, selectedFoodInformation, isSelected }) =>
                 :
                 
 
-                    <div className="hero" >
+                    <div className={`hero ${searchQuery ? "w-80" : ""}`} >
                         <form onSubmit={handleSubmit}>
                             <input value={searchQuery} onChange={handleChange} type="text" placeholder='Enter your query...' />
                             <button>Search</button>
