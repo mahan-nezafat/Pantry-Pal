@@ -1,7 +1,10 @@
 import React from 'react';
 import Food from './Food';
+import { useHome } from '../../contexts/HomeProvider';
 
-const Hero = ({ dispatch, searchQuery, selectedFoodInformation, isSelected, isSubmit }) => {
+const Hero = () => {
+
+    const { dispatch, searchQuery, isSelected } = useHome();
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -10,15 +13,18 @@ const Hero = ({ dispatch, searchQuery, selectedFoodInformation, isSelected, isSu
     
     
     function handleChange(e) {
-
+        // if(e.target.value === "") {
+        //     dispatch({ type:"Reset" });
+        // }
         dispatch({type: "Search", payload: e.target.value})
 
+        
     }
 
     return ( 
         <>
            { isSelected ?
-                    <Food selectedFoodInformation={selectedFoodInformation} dispatch={dispatch} />
+                    <Food />
                 :
                 
 

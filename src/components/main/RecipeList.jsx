@@ -1,14 +1,16 @@
 import React from 'react';
 import RecipeItem from './RecipeItem';
+import { useHome } from '../../contexts/HomeProvider';
 
-const RecipeList = ({ results, bulkData, dispatch, isSubmit,  searchQuery }) => {
-
+const RecipeList = () => {
+    const { results, searchQuery, bulkData } = useHome();
+    
     return ( 
         <>
             <div className={`recipe-list ${searchQuery ? "w-20" : ""}`}>
                 { typeof results !== "undefined" ?
                     Object.values(results).map((item, index) => {
-                        return <RecipeItem item={item} key={item.id} fullInfo={bulkData[index]} dispatch={dispatch} />
+                        return <RecipeItem item={item} key={item.id} fullInfo={bulkData[index]}/>
                     })
                     :
                     ""

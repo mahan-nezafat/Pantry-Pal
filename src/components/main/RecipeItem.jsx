@@ -1,8 +1,9 @@
 import React from 'react';
+import { useHome } from '../../contexts/HomeProvider';
 
-const RecipeItem = ({ item, fullInfo, dispatch }) => {
-
-    const {title, image } = item
+const RecipeItem = ({ item, fullInfo }) => {
+    const { dispatch } = useHome();
+    const {title, image } = item;
     const { extendedIngredients } = typeof fullInfo !== "undefined" ? fullInfo : 0
     
     

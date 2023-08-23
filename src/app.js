@@ -8,6 +8,7 @@ import Recommended from './pages/Recommended';
 import Types from './pages/Types';
 import Equipments from './pages/Equipments';
 import Notfounded from './pages/Notfounded';
+import { HomeProvider } from './contexts/HomeProvider';
 
 const App = () => {
    
@@ -17,7 +18,7 @@ const App = () => {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={<HomeProvider><Home /></HomeProvider>} /> 
                     <Route path='tastes' element={<Tastes />} />
                     <Route path='recommended' element={<Recommended />} />
                     <Route path='types' element={<Types />} />

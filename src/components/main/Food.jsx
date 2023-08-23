@@ -1,24 +1,27 @@
 import React from 'react';
+import { useHome } from '../../contexts/HomeProvider';
 
-const Food = ({ selectedFoodInformation, dispatch }) => {
+const Food = () => {
+    const { selectedFoodInformation, dispatch } = useHome();
 
     const {
-        analyzedInstructions,
-        diets,
-        dishTypes,
-        extendedIngredients,
-        image,
-        instructions,
-        pricePerServing,
-        readyInMinutes,
-        summary,
-        vegan,
-        winePairing,
-        title,
-        imageType,
-        id
-    } = selectedFoodInformation;
-    console.log(Object.values(selectedFoodInformation).length)
+            analyzedInstructions,
+            diets,
+            dishTypes,
+            extendedIngredients,
+            image,
+            instructions,
+            pricePerServing,
+            readyInMinutes,
+            summary,
+            vegan,
+            winePairing,
+            title,
+            imageType,
+            id
+                } = selectedFoodInformation;
+
+    // console.log(Object.values(selectedFoodInformation).length)
     return (
         <>
             <div className='food'>
@@ -33,7 +36,7 @@ const Food = ({ selectedFoodInformation, dispatch }) => {
                             
                                     {
                                         extendedIngredients.map((ingredient, index) => {
-                                            return <p><img src={`https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`} alt="ingredient" /> <span>{ingredient.nameClean}</span></p>
+                                            return <p key={index}><img src={`https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`} alt="ingredient" /> <span>{ingredient.nameClean}</span></p>
                                         })
                                     }
                                
@@ -51,7 +54,7 @@ const Food = ({ selectedFoodInformation, dispatch }) => {
                                 
                                 {diets && 
                                 
-                                diets.map((diet, index) => <span className='ml-5'>{diet},</span>)
+                                diets.map((diet, index) => <span key={index} className='ml-5'>{diet},</span>)
                                 }   
 
                             </div>
@@ -60,7 +63,7 @@ const Food = ({ selectedFoodInformation, dispatch }) => {
                                     dishTypes.length > 0 && <h4>Dish Types:</h4>
                                 }
                                 {
-                                    dishTypes && dishTypes.map((dishType, index) => <span className='ml-5'>{dishType},</span>)
+                                    dishTypes && dishTypes.map((dishType, index) => <span key={index} className='ml-5'>{dishType},</span>)
                                 }
                             </div>
                             
@@ -68,7 +71,7 @@ const Food = ({ selectedFoodInformation, dispatch }) => {
                                     <ul>
                                     <h4>Instructions:</h4>
                                         { analyzedInstructions &&  Object.values(analyzedInstructions)[0].steps.map((item, index) => {
-                                            return <li><p>{index + 1}-{item.step}</p></li>
+                                            return <li key={index}><p>{index + 1}-{item.step}</p></li>
                                         })}
                                     </ul>
                             </div>
