@@ -9,16 +9,27 @@
 }
 
 body {
-    font-size: 16px;
-    background-color: #FFFFFF;
+    font-size: 18px;
     width: 100%;
-    color: #FF6F61;
+    color: #43100F;
+    background-image: url(./img/hero.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
 }
 
 a {
     text-decoration: none;
-    color: #FF6F61;
-
+    /* color: #070602; */
+    color: #C48C3E;
+    /* #D1C6BC */
+    /* #5A7A48; */
+     /* #8A6E24; */
+    /* #E4B92F; */
+    /* #853423; */
+    /* #BB7B3D;  */
+    /* #625242; */
 }
 
 button {
@@ -29,28 +40,42 @@ ul {
     list-style-type: none;
 }
 
-ul li {
+.nav-bar ul li {
     display: inline-block;
     margin: 0 10px;
     padding: 5px 10px;
     position: relative;
     cursor: pointer;
+    background-color: #43100F;
+    border-radius: 4px;
+    z-index: 0;
+}
+
+.nav-bar ul li a {
+    transition: color 0.3s ease;
+    z-index: 100;
 }
 
 .nav-bar ul li::after {
+    z-index: -1;
     content: "";
     width: 0%;
-    height: 2px;
+    height: 100%;
     position: absolute;
     left: 0;
-    background-color: #FFFFFF;
+    background-color: #C48C3E;
     bottom: 0;
     transition: all 0.4s ease-in-out;
+    border-radius: 3px;
 }
 
 .nav-bar ul li:hover::after {
     width: 100%;
 
+}
+
+.nav-bar ul li:hover a  {
+    color: #43100F;
 }
 
 .header {
@@ -64,15 +89,42 @@ ul li {
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    background-color: #F9D5E5; 
-    border-bottom: 1px solid #FFFFFF;
+    /* margin-top: 20px; */
+    transform: translateY(30px);
+    background-color: transparent; 
+    /* border-bottom: 1px solid #FFFFFF; */
 }
 
 .logo {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 2px solid #C48C3E;
+    border-radius: 4px;
+    padding: 5px 10px;
+    background-color: #43100F;
+    position: relative;
 }
+
+/* .logo::after {
+    content: "";
+    position: absolute;
+    right: -45%;
+    top: 50%;
+    background-color: #C48C3E;
+    height: 2px;
+    width: 40px;
+}
+
+.logo::before {
+    content: "";
+    position: absolute;
+    left: -45%;
+    top: 50%;
+    background-color: #C48C3E;
+    height: 2px;
+    width: 40px;
+} */
 
 .logo img {
     width: 40px;
@@ -110,10 +162,7 @@ ul li {
     width: 100%;
 
     height: 100%;
-    background-image: url(./img/hero.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    
     /* position: relative; */
     justify-content: center;
     align-items: center;
@@ -140,41 +189,57 @@ ul li {
     border: none;
     background-color: transparent;
     outline: none;
-    color: #FFFFFF;
+    color: #43100F;
     font-size: 1rem;
     font-family:  "Lato" ;
-    border: 1px solid #F9D5E5;
+    border: 1px solid #43100F;
     margin-right: 4px;
+    border-radius: 4px;
 }
 
 input::placeholder {
-    color: #FFFFFF;
+    color: #43100F;
     font-family:  "Lato" ;
 }
 
 .hero form button {
     border: none;
     padding: 10px;
-    background-color: #FF6F61;
-    color: #FFFFFF;
+    background-color: #43100F;
+    color: #C48C3E;
     font-family:  "Lato" ;
+    border-radius: 4px;
+}
+
+.show-ingredients {
+    border: none;
+    padding: 10px;
+    background-color: #43100F;
+    color: #C48C3E;
+    font-family:  "Lato" ;
+    margin-left: 3px;
+    border-radius: 4px;
 }
 
 .recipe-list {
     display: flex;
     width: 0%;
     flex-direction: column;
-    height: 100%;
+    height: 90%;
     overflow-y: scroll;
     position: relative;
-    overflow-x: hidden;
+    /* overflow: hidden; */
     transition: all 0.3s ease-in-out;
     opacity: 0;
+    transform: translateY(10%);
+    margin-left: 10px;
+    background-color: transparent;
+    border-radius: 4px;
 }
 
 .recipe-list::-webkit-scrollbar {
     visibility: hidden;
-    width: 5px;
+    width: 0px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -209,7 +274,8 @@ input::placeholder {
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    background-color: #F9D5E5; 
+    background-color: #43100F;
+    color: #C48C3E; 
     border-bottom: 1px solid #FFFFFF;
     cursor: pointer;
 }
@@ -247,14 +313,7 @@ input::placeholder {
     border-radius: 4px;
 }
 
-.show-ingredients {
-    border: none;
-    padding: 10px;
-    background-color: #FF6F61;
-    color: #FFFFFF;
-    font-family:  "Lato" ;
-    margin-left: 3px;
-}
+
 
 .food {
     display: flex;
