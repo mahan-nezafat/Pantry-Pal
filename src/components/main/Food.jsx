@@ -34,7 +34,7 @@ const Food = () => {
                                     {/* <h4>Ingredients:</h4> */}
                             <div className="ingredients">
                             
-                                    {
+                                    {extendedIngredients &&
                                         extendedIngredients.map((ingredient, index) => {
                                             return <p key={index}><img src={`https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`} alt="ingredient" /> <span>{ingredient.nameClean}</span></p>
                                         })
@@ -50,7 +50,7 @@ const Food = () => {
                             <h4>Estimated Time: {readyInMinutes < 60 ? `${readyInMinutes}min` : `${Math.floor(readyInMinutes / 60)} hours`}</h4>
                             <h4>Vegan: {vegan ? "yes" : "no"}</h4>
                             <div className="diets d-flex">
-                                {diets.length > 0 && <h4>Diets: </h4>} 
+                                {diets &&   diets.length > 0 && <h4>Diets: </h4>} 
                                 
                                 {diets && 
                                 
@@ -59,7 +59,7 @@ const Food = () => {
 
                             </div>
                             <div className="dish-types d-flex">
-                                {
+                                {dishTypes &&
                                     dishTypes.length > 0 && <h4>Dish Types:</h4>
                                 }
                                 {

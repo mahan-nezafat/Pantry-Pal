@@ -4,19 +4,15 @@ import { Link } from 'react-router-dom';
 
 const Menu = () => {
 
-    const items = ['Tastes','Recommended','Types','Equipments'];
+    // const items = ['Tastes','Recommended','Types','Equipments'];
 
     return ( 
     <>
        <div className="menu">
-            {/* <ul>
-                {
-                    items.map((item, index) => {
-                        return <Item itemName={item} key={index} />
-                    })
-                }
-            </ul> */}
+           
             <ul>
+                <li><Link to="/search" >Search</Link></li>
+
                 <li><Link to="/tastes" >Tastes</Link></li>
 
                 <li><Link to="/recommended" >Recommended</Link></li>
