@@ -7,8 +7,10 @@ const Navbar = () => {
     return ( 
         <>
            <div className="nav-bar">
-            <Logo />
-            <Menu />
+            <div className='d-flex'>
+               <Logo />
+               <Menu />
+            </div>
             <Link />
            </div>
         </>

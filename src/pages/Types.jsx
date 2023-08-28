@@ -5,7 +5,6 @@ const Types = () => {
     return (
         <>
             <Header />
-
             <h1>Types</h1>
         </>
     );

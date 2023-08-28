@@ -15,11 +15,13 @@ const HomeProvider = ({ children }) => {
             isShow: false,
             selectedFoodId: null,
             selectedFoodInformation: {},
-            isSelected: false
+            isSelected: false,
+            foodTitle: "",
+            youtubeId: ""
         }
     
-        const apiKey = "f88e395dfddb4a21837e281aa658717c";
-        //  "8c9b44dff7454d2bb7def613b0bade75";
+        const apiKey = "8c9b44dff7454d2bb7def613b0bade75";
+        //  "f88e395dfddb4a21837e281aa658717c";
         // "76c7a80de4fc4832927537ed53f92d14";
         // "856ff9a8e5554f3198e5a473b5d101a8";
         // "4defd47d816c4e5692caafff6528e6a2";
@@ -33,10 +35,12 @@ const HomeProvider = ({ children }) => {
             isShow,
             selectedFoodId,
             selectedFoodInformation,
-            isSelected } = state;
+            isSelected,
+            foodTitle,
+            youtubeId } = state;
         const { results } =   data;
     
-        console.log(state)
+        // console.log(state)
         function reducer(state, action) {
             switch (action.type) {
     
@@ -101,7 +105,19 @@ const HomeProvider = ({ children }) => {
                     return {
                         state: initialState
                     }
-            
+                    
+                case "Title":
+                    return {
+                        ...state,
+                        foodTitle: action.payload
+                    }
+                case "Youtube": 
+                    return {
+                        ...state,
+                        youtubeId: action.payload
+                    }
+
+
                 default:
                     throw Error("payload not founded")
             }
@@ -138,15 +154,6 @@ const HomeProvider = ({ children }) => {
             }
         },[isSubmit, searchQuery]);
     
-    
-        // useEffect(() => {
-        //     if(typeof results !== "undefined") {
-        //         Object.values(results).map(result => {
-        //         return dispatch({type: "SetIds", payload: result.id})
-        //         })
-        //     }
-        // },[results])
-    
         useEffect(() => {
             if(!isShow) return
             async function fetchInfo() {
@@ -170,7 +177,23 @@ const HomeProvider = ({ children }) => {
             getSingleRecipe();
         },[selectedFoodId]);
 
-        
+        useEffect(() => {
+            if(!isSelected) return
+            async function getVideo() {
+                try {
+                    const response = await fetch(`https://api.spoonacular.com/food/videos/search?apiKey=${apiKey}&query=${foodTitle}`)
+                    const data = await response.json();
+                    const videos = data.videos[0];
+                    const youtubeId = Object.values(videos)[2];
+                    dispatch({type: "Youtube", payload: youtubeId})
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            getVideo()
+        }, [foodTitle, isSelected])
+
+        console.log(youtubeId)
     return (
         <HomeContext.Provider
             value={{ data,

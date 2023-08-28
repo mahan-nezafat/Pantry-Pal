@@ -10,7 +10,16 @@ const RecipeItem = ({ item, fullInfo }) => {
     
     return (
         <>
-            <div className="recipe-item" onClick={() => dispatch({type: "SelectedFoodId", payload: item.id})}>
+            <div className="recipe-item" onClick={() =>{ 
+
+                dispatch({type: "SelectedFoodId", payload: item.id});
+                dispatch({type: "Title", payload: title});}}>
+                
+                <div className="image">
+                    <img src={image} alt="food" />
+
+                </div>
+
                 <div className="details">
                     <h3>{title}</h3>
                     <ul>{ typeof extendedIngredients !== "undefined" ?
@@ -25,10 +34,7 @@ const RecipeItem = ({ item, fullInfo }) => {
                     ""
                 }</ul>
                 </div>
-                <div className="image">
-                    <img src={image} alt="food" />
 
-                </div>
                
             </div>
         </>

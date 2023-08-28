@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import Hero from './Hero';
 import RecipeList from './RecipeList';
 import Header from '../header/Header';
-
+import searchImage from '../../../src/assets/images/search-image.jpg';
+import typesImage from '../../assets/images/types.jpg';
+import recommendedImage from '../../assets/images/recommended.jpg';
+import tastesImage from '../../assets/images/tastes.jpg';
 const Main = () => {
 
     const [searchVisible, setSearchVisible] = useState(false);
@@ -41,7 +44,7 @@ const Main = () => {
     const options = {
         root: null,
         rootMargin: "0px",
-        threshold: 0.25
+        threshold: 0.2
     }
 
     useEffect(() => {
@@ -84,43 +87,61 @@ const Main = () => {
                 <div ref={search}  className={`search-main vh-100 d-flex ${searchVisible ? "animate" : ""}`}>
                     {
                         searchVisible && 
-                        <>
-                            <h1>this is search</h1>
-                            <p>search detail</p>
-                        </>
-
-
-
+                        <div className='section'>
+                            <div className='left-part'>
+                                <img src={searchImage} alt="search" />
+                            </div>
+                            <div className='right-part'>
+                                <h1>this is search</h1>
+                                <p>search detail</p>
+                            </div>
+                        </div>
                     }
                 </div>
                 <div ref={types} className={`types-main vh-100 d-flex ${typesVisible ? "animate" : ""}`}>
                     {
                         typesVisible && 
-                        <>
-                            
-                            <h1>this is types</h1>
-                            <p>types detail</p>
-                        </>
+                        <div className='section'>
+                           <div className='left-part'>
+                            <img src={typesImage} alt="types" />
+                           </div>
+                            <div className='right-part'>
+                                <h1>this is types</h1>
+                                <p>types detail</p>
+                            </div>
+                           
+                        </div>
                     }
                 </div>
                 <div ref={recommended} className={`recommended-main vh-100 d-flex ${recommendedVisible ? "animate" : ""}`}>
                     {
                         recommendedVisible && 
-                        <>
+                        <div className='section'>
+                           <div className='left-part'>
+                            <img src={recommendedImage} alt="types" />
+                           </div>
+                            <div className='right-part'>
                             <h1>this is recommended</h1>
                             <p>recommended detail</p>
+                            </div>
                             
-                        </>
+                            
+                        </div>
                     }
                 </div>
                 <div ref={tastes} className={`tastes-main vh-100 d-flex ${tastesVisible ? "animate" : ""}`}>
                     {
                         tastesVisible && 
-                        <>
+                        <div className='section'>
+                            <div className='left-part'>
+                            <img src={tastesImage} alt="types" />
+                           </div>
+                            <div className='right-part'>
                             <h1>this is tastes</h1>
-                            
                             <p>tastes detail</p>
-                        </>
+                            </div>
+                            
+                        </div>
                     }
                 
                 </div>
