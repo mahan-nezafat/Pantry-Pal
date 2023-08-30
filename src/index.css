@@ -150,10 +150,13 @@ ul {
     height: 100%;
     flex-direction: column;
     overflow: hidden;
-    /* background-image: linear-gradient(to top, #eaeaec, #ececee, #eeeef0, #f0f0f2, #f2f2f4); */
     background-color: #E0DBDF;
 }
 
+body::-webkit-scrollbar {
+    width: 0%;
+    visibility: hidden;
+}
 
 
 .hero {
@@ -164,10 +167,30 @@ ul {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    justify-content: center;
+    justify-content: space-between;
     font-family:  "Lato" ;
     transition: width 0.3s ease-in-out;
-    
+    flex-direction: column;
+    align-items: center;   
+}
+
+.hero-title {
+
+}
+
+.more-info {
+    transform: translateY(-20px);
+    justify-content: space-between !important;
+    height: 10%;
+    font-size: 1.3rem;
+}
+
+.more-info img {
+    width: 25px;
+    animation-name: jump;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .w-80 {
@@ -468,7 +491,8 @@ input::placeholder {
     opacity: 0;
     transform: translateX(60%);
     filter: blur(4px);
-    margin: 50px 0;
+    transition-delay: 0.5s;
+    /* margin: 50px 0; */
 }
 
 .animate {
@@ -556,5 +580,17 @@ h4 {
 
 .dish-types h4 {
     border-bottom: 2px solid red;
+
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(10px);
+    }
+    
+    100% {
+        transform: translateY(0px);
+
+    }
 
 }

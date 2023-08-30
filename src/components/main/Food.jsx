@@ -7,7 +7,7 @@ const Food = () => {
   const { analyzedInstructions, diets, dishTypes, extendedIngredients, image, instructions, pricePerServing, readyInMinutes, summary, vegan, winePairing, title, imageType, id } =
     selectedFoodInformation;
 
-  console.log((selectedFoodInformation))
+  // console.log((selectedFoodInformation))
   return (
     <>
       {isSelected ? (
@@ -20,9 +20,14 @@ const Food = () => {
             <div className="food-image">
               <img src={`https://spoonacular.com/recipeImages/${id}-636x393.${imageType}`} alt="food" />
             </div>
-            <div className="food-video">
-              <iframe width="560" height="315" src={`https://www.youtube.com/embed/${youtubeId}?si=-nxhoaFiO_zVNH6H`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+            {
+              youtubeId !== "" ?
+                <div className="food-video">
+                  <iframe width="560" height="315" src={`https://www.youtube.com/embed/${youtubeId}?si=-nxhoaFiO_zVNH6H`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                :
+                ""
+            }
             
           </div>
 

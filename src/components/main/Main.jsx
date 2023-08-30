@@ -6,13 +6,14 @@ import searchImage from '../../../src/assets/images/search-image.jpg';
 import typesImage from '../../assets/images/types.jpg';
 import recommendedImage from '../../assets/images/recommended.jpg';
 import tastesImage from '../../assets/images/tastes.jpg';
+import { useMemo } from 'react';
 const Main = () => {
 
     const [searchVisible, setSearchVisible] = useState(false);
     const [tastesVisible, setTastesVisible] = useState(false);
     const [typesVisible, setTypesVisible] = useState(false);
     const [recommendedVisible, setRecommendedVisible] = useState(false);
-    
+    const [scroll, setScroll] = useState(0);
     const search = useRef(null)
     const tastes = useRef(null)
     const types = useRef(null)
@@ -21,7 +22,6 @@ const Main = () => {
     function handleIntersect(entries) {
 
         entries.forEach(entry => {
-            console.log(entry)
             if(entry.target === search.current) {
                 setSearchVisible(entry.isIntersecting)
             }
@@ -41,16 +41,15 @@ const Main = () => {
 
     }
 
-    const options = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.2
-    }
-
+   const options = {
+    root: null,
+    rootMargin: "50px",
+    threshold: 0.25
+    } 
     useEffect(() => {
         function createObserver() {
             let observer;
-        
+            
             observer = new IntersectionObserver(handleIntersect, options);
             // if(ref.current) observer.observe(ref.current);
 
@@ -80,9 +79,31 @@ const Main = () => {
                 createObserver();
             },[options]);
 
+    useEffect(() => {
+
+        function handleScroll() {
+           
+        
+            setScroll(scroll => scroll < 708 ? scroll + 708 : 708)
+            window.scrollTo({top: scroll, behavior:"instant"})
+            console.log(scroll)    
+        }
+
+        window.addEventListener("scroll",handleScroll);
+
+        // if(scroll > 1000) {
+        //     window.scrollTo({top: scroll-300, behavior:"smooth"})
+        // }
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+          };
+    }, [scroll])
+
+
     return ( 
         <>
-            <div  className="main">
+            <div  className="main" >
                 <Hero />
                 <div ref={search}  className={`search-main vh-100 d-flex ${searchVisible ? "animate" : ""}`}>
                     {

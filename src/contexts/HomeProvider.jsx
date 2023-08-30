@@ -38,9 +38,9 @@ const HomeProvider = ({ children }) => {
             isSelected,
             foodTitle,
             youtubeId } = state;
+
         const { results } =   data;
     
-        // console.log(state)
         function reducer(state, action) {
             switch (action.type) {
     
@@ -111,7 +111,13 @@ const HomeProvider = ({ children }) => {
                         ...state,
                         foodTitle: action.payload
                     }
-                case "Youtube": 
+                case "Youtube":
+                    if(!action.payload) { 
+                        return {
+                            ...state,
+                            youtubeId: ""
+                        }
+                    } 
                     return {
                         ...state,
                         youtubeId: action.payload
@@ -138,7 +144,6 @@ const HomeProvider = ({ children }) => {
                                 return dispatch({type: "SetIds", payload: result.id})
                                 })
                             
-                // console.log(data1)
             } catch (error) {
                 console.log(error);
             }
@@ -172,7 +177,6 @@ const HomeProvider = ({ children }) => {
                 const data = await response.json();
     
                 dispatch({type: "SelectedFoodInformation", payload: data});
-                console.log("fetched")
             }
             getSingleRecipe();
         },[selectedFoodId]);
@@ -184,16 +188,20 @@ const HomeProvider = ({ children }) => {
                     const response = await fetch(`https://api.spoonacular.com/food/videos/search?apiKey=${apiKey}&query=${foodTitle}`)
                     const data = await response.json();
                     const videos = data.videos[0];
+                    if(typeof videos === "undefined") {
+                       return dispatch({type: "Youtube", payload: false})
+                    }
                     const youtubeId = Object.values(videos)[2];
                     dispatch({type: "Youtube", payload: youtubeId})
+
                 } catch (error) {
                     console.log(error)
                 }
             }
             getVideo()
         }, [foodTitle, isSelected])
+        console.log(state)                    
 
-        console.log(youtubeId)
     return (
         <HomeContext.Provider
             value={{ data,
