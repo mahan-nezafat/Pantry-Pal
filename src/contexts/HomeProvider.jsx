@@ -13,6 +13,7 @@ const HomeProvider = ({ children }) => {
             isSubmit: false,
             ids: [],
             isShow: false,
+            isLoading: false,
             selectedFoodId: null,
             selectedFoodInformation: {},
             isSelected: false,
@@ -20,8 +21,8 @@ const HomeProvider = ({ children }) => {
             youtubeId: ""
         }
     
-        const apiKey = "76c7a80de4fc4832927537ed53f92d14";
-        // "8c9b44dff7454d2bb7def613b0bade75";
+        const apiKey = "8c9b44dff7454d2bb7def613b0bade75";
+        // "76c7a80de4fc4832927537ed53f92d14";
         //  "f88e395dfddb4a21837e281aa658717c";
         // "856ff9a8e5554f3198e5a473b5d101a8";
         // "4defd47d816c4e5692caafff6528e6a2";
@@ -37,7 +38,8 @@ const HomeProvider = ({ children }) => {
             selectedFoodInformation,
             isSelected,
             foodTitle,
-            youtubeId } = state;
+            youtubeId,
+            isLoading } = state;
 
         const { results } =   data;
     
@@ -66,7 +68,8 @@ const HomeProvider = ({ children }) => {
                 case "Submit":
                     return {
                         ...state,
-                        isSubmit: action.payload
+                        isSubmit: action.payload,
+                        isLoading: action.payload
                     }
                 
                 case "SetIds":
@@ -136,7 +139,7 @@ const HomeProvider = ({ children }) => {
             
             async function fetchData() {
               try {
-                    const response1 = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchQuery}`);
+                    const response1 = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchQuery}&number=100`);
                     const data1 = await response1.json();
                        
                     dispatch({type: "Fetched", payload: data1});
@@ -144,17 +147,22 @@ const HomeProvider = ({ children }) => {
                                 return dispatch({type: "SetIds", payload: result.id})
                                 })
                             
-            } catch (error) {
-                console.log(error);
-            }
-           
-        }
-       
-        fetchData();
-        dispatch({type: "Submit", payload: false});
-                
+                            } catch (error) {
+                                console.log(error);
+                            }
+                            
+                            
+                            
+                        }
+                        
+                        fetchData();
+                        
+                        setTimeout(() => {
+                            dispatch({type: "Submit", payload: false});
+
+                        }, 3000);
             return () => {
-            
+                            
                 controller.abort();
             }
         },[isSubmit, searchQuery]);
@@ -215,7 +223,8 @@ const HomeProvider = ({ children }) => {
                 isSelected,
                 dispatch,
                 results,
-                youtubeId }}
+                youtubeId,
+                isLoading }}
         >
             {children}
         </HomeContext.Provider>

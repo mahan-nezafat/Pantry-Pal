@@ -79,26 +79,26 @@ const Main = () => {
                 createObserver();
             },[options]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        function handleScroll() {
+    //     function handleScroll() {
            
         
-            setScroll(scroll => scroll < 708 ? scroll + 708 : 708)
-            window.scrollTo({top: scroll, behavior:"instant"})
-            console.log(scroll)    
-        }
+    //         setScroll(scroll => scroll < 708 ? scroll + 708 : 708)
+    //         window.scrollTo({top: scroll, behavior:"instant"})
+    //         console.log(scroll)    
+    //     }
 
-        window.addEventListener("scroll",handleScroll);
+    //     window.addEventListener("scroll",handleScroll);
 
-        // if(scroll > 1000) {
-        //     window.scrollTo({top: scroll-300, behavior:"smooth"})
-        // }
+    //     // if(scroll > 1000) {
+    //     //     window.scrollTo({top: scroll-300, behavior:"smooth"})
+    //     // }
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-          };
-    }, [scroll])
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //       };
+    // }, [scroll])
 
 
     return ( 
