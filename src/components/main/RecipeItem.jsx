@@ -2,13 +2,15 @@ import React from 'react';
 import { useHome } from '../../contexts/HomeProvider';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useDispatch, useSelector } from 'react-redux';
 
-const RecipeItem = ({ item, fullInfo }) => {
-    const { dispatch, isLoading } = useHome();
+const RecipeItem = ({ item }) => {
+    // const { dispatch, isLoading } = useHome();
     const {title, image } = item;
     // const { extendedIngredients } = typeof fullInfo !== "undefined" ? fullInfo : 0
-    
-    
+    const dispatch = useDispatch();
+    const isLoading = useSelector(state => state.search.isLoading);
+     
     
     return (
         <div className='recipe-item'>

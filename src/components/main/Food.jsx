@@ -1,8 +1,12 @@
 import React from "react";
-import { useHome } from "../../contexts/HomeProvider";
+import { useDispatch, useSelector } from "react-redux";
+// import { useHome } from "../../contexts/HomeProvider";
 
 const Food = () => {
-  const { selectedFoodInformation, dispatch, youtubeId, isSelected } = useHome();
+  // const { selectedFoodInformation, dispatch, youtubeId, isSelected } = useHome();
+
+  const dispatch = useDispatch();
+  const { selectedFoodInformation, youtubeId, isSelected } = useSelector(state => state.food)
 
   const { analyzedInstructions, diets, dishTypes, extendedIngredients, image, instructions, pricePerServing, readyInMinutes, summary, vegan, winePairing, title, imageType, id } =
     selectedFoodInformation;

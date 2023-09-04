@@ -11,8 +11,6 @@ const HomeProvider = ({ children }) => {
             bulkData: [],
             searchQuery: "",
             isSubmit: false,
-            ids: [],
-            isShow: false,
             isLoading: false,
             selectedFoodId: null,
             selectedFoodInformation: {},
@@ -64,31 +62,22 @@ const HomeProvider = ({ children }) => {
                     return {
                         ...state,
                         searchQuery: action.payload
+                    
                     }
                 case "Submit":
                     return {
                         ...state,
                         isSubmit: action.payload,
                         isLoading: action.payload
+                    
                     }
-                
-                case "SetIds":
-                    return {
-                        ...state,
-                        ids: [...state.ids, action.payload]
-                    }    
-    
-                case "Show":
-                    return {
-                        ...state,
-                        isShow: action.payload
-                    }
-    
+                    
                 case "SelectedFoodId":
                     return {
                         ...state,
                         selectedFoodId: action.payload,
                         
+        
                     }
     
                 case "SelectedFoodInformation":
@@ -96,12 +85,14 @@ const HomeProvider = ({ children }) => {
                         ...state,
                         selectedFoodInformation: action.payload,
                         isSelected: true
+        
                     }
                 
                 case "Close": 
                     return {
                         ...state,
                         isSelected: action.payload,
+        
                     }
     
                 case "Reset":
@@ -113,6 +104,7 @@ const HomeProvider = ({ children }) => {
                     return {
                         ...state,
                         foodTitle: action.payload
+        
                     }
                 case "Youtube":
                     if(!action.payload) { 
@@ -124,6 +116,7 @@ const HomeProvider = ({ children }) => {
                     return {
                         ...state,
                         youtubeId: action.payload
+        
                     }
 
 
@@ -165,19 +158,10 @@ const HomeProvider = ({ children }) => {
                             
                 controller.abort();
             }
+   
         },[isSubmit, searchQuery]);
     
-        useEffect(() => {
-            if(!isShow) return
-            async function fetchInfo() {
-                const response2 = await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=${apiKey}&ids=${ids}`);
-                const data2 = await response2.json();
-                dispatch({type: "FetchedBulkInfo", payload: data2});
-                
-            }
-            fetchInfo();
-        },[isShow, ids])
-    
+
         useEffect(() => {
             if(!selectedFoodId) return;
            async function getSingleRecipe() {

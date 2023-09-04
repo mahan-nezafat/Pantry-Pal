@@ -1,9 +1,9 @@
 import React, { Suspense, lazy } from 'react';
-import Header from './components/header/Header';
-import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HomeProvider } from './contexts/HomeProvider';
 import Loading from './components/Loading';
+import './index.css';
+// import Header from './components/header/Header';
+// import { HomeProvider } from './contexts/HomeProvider';
 // import Home from './pages/Home';
 // import Tastes from './pages/Tastes';
 // import Recommended from './pages/Recommended';
@@ -11,7 +11,6 @@ import Loading from './components/Loading';
 // import Equipments from './pages/Equipments';
 // import Notfounded from './pages/Notfounded';
 // import Search from './pages/Search';
-
 
 const Home = lazy(() => import("./pages/Home"));
 const Tastes = lazy(() => import("./pages/Tastes"));
@@ -26,7 +25,7 @@ const App = () => {
 
     return ( 
         <>
-               <HomeProvider>
+               {/* <HomeProvider> */}
             <BrowserRouter>
                     <Suspense fallback={<Loading/>}>
                         <Routes>
@@ -42,7 +41,7 @@ const App = () => {
                     </Suspense>
             
             </BrowserRouter>
-               </HomeProvider>
+               {/* </HomeProvider> */}
         </>
      );
 }
