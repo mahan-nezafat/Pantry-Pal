@@ -1,22 +1,87 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useHome } from "../../contexts/HomeProvider";
-
+import Skeleton from 'react-loading-skeleton';
+import { closeFood } from "../../features/food/foodSlice";
 const Food = () => {
-  // const { selectedFoodInformation, dispatch, youtubeId, isSelected } = useHome();
 
   const dispatch = useDispatch();
-  const { selectedFoodInformation, youtubeId, isSelected } = useSelector(state => state.food)
+  const { selectedFoodInformation, youtubeId, isSelected, isLoading } = useSelector(state => state.food)
 
   const { analyzedInstructions, diets, dishTypes, extendedIngredients, image, instructions, pricePerServing, readyInMinutes, summary, vegan, winePairing, title, imageType, id } =
     selectedFoodInformation;
 
-  // console.log((selectedFoodInformation))
   return (
     <>
-      {isSelected ? (
+      {isLoading ?
+        <>
+        <button className="close-btn" onClick={() => dispatch(closeFood(false))}>
+            &times;
+          </button> 
+          <div className="food">
+            <Skeleton width={50} height={20}/>
+            <div className="upper-part">
+              <div className="food-image">
+                <Skeleton width={400} height={300} />
+              </div>
+              <div className="food-video">
+                <Skeleton width={400} height={300}/>
+              </div>
+            </div>
+            <div className="lower-part">
+              <div className="ingredients">
+              {extendedIngredients &&
+                extendedIngredients.map((ingredient, index) => {
+                  return (
+                    <div key={index}>
+                      <Skeleton width={40} height={10}/>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="d-flex row">
+                <Skeleton width={200} height={40} /> 
+                <Skeleton width={200} height={40} /> 
+                <Skeleton width={200} height={40} /> 
+              </div>
+              <div className="diets">
+                {diets && diets.length > 0 && <Skeleton width={50} height={20} />}
+
+                {diets &&
+                  diets.map((diet, index) => (
+                    <span key={index} className="ml-5">
+                      <Skeleton width={40} height={20} />
+                    </span>
+                  ))}
+              </div>
+              <div className="dish-types">
+                {dishTypes && dishTypes.length > 0 && <Skeleton width={50} height={20} />}
+                {dishTypes &&
+                  dishTypes.map((dishType, index) => (
+                    <span key={index} className="ml-5">
+                      <Skeleton width={40} height={20} />
+                    </span>
+                  ))}
+              </div>
+              <div className="instructions">
+              <ul>
+              <Skeleton width={50} height={20} />
+                {analyzedInstructions &&
+                  Object.values(analyzedInstructions)[0].steps.map((item, index) => {
+                    return (
+                      <li key={index}>
+                          <Skeleton width={500} height={40} />
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+            </div>
+          </div>
+        </>
+      :
+      isSelected ? (
         <div className="food">
-          <button className="close-btn" onClick={() => dispatch({ type: "Close", payload: false })}>
+          <button className="close-btn" onClick={() => dispatch(closeFood(false))}>
             &times;
           </button>
           <h1>{title}</h1>
@@ -91,7 +156,8 @@ const Food = () => {
       )
         :
         ""
-    }
+    
+      }
     </>
   );
 };

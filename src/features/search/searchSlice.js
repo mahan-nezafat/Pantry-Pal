@@ -3,7 +3,7 @@ import apiKey from "../../services/apiKeys";
 
 const initialState = {
   data: [],
-  searchQuery: "",
+  searchQuery: null,
   isSubmit: false,
   isLoading: false,
 };
@@ -14,7 +14,6 @@ const searchSlice = createSlice({
   reducers: {
     setData(state, action) {
       state.data = action.payload;
-      console.log(state);
     },
     setSearchQuery(state, action) {
       state.searchQuery = action.payload;
@@ -27,7 +26,7 @@ const searchSlice = createSlice({
 });
 
 export function setData(searchQuery, isSubmit, data) {
-  if (!isSubmit) return { type: "search/setData", payload: data }
+  // if (!isSubmit) return { type: "search/setData", payload: data }
   return async function (dispatch) {
     try {
       const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchQuery}&number=100`);
@@ -38,6 +37,7 @@ export function setData(searchQuery, isSubmit, data) {
         dispatch({ type: "search/submitSearch", payload: false });
   
         }, 2000);
+        console.log(searchQuery, data)
     } catch (error) {
       console.log(error);
     }
