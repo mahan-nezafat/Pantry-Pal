@@ -1,7 +1,7 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Loading from './components/Loading';
-import './index.css';
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Loading from "./components/Loading";
+import "./index.css";
 // import Header from './components/header/Header';
 // import { HomeProvider } from './contexts/HomeProvider';
 // import Home from './pages/Home';
@@ -13,37 +13,28 @@ import './index.css';
 // import Search from './pages/Search';
 
 const Home = lazy(() => import("./pages/Home"));
-const Tastes = lazy(() => import("./pages/Tastes"));
-const Recommended = lazy(() => import("./pages/Recommended"));
-const Types = lazy(() => import("./pages/Types"));
-const Equipments = lazy(() => import("./pages/Equipments"));
+// const Tastes = lazy(() => import("./pages/Tastes"));
+// const Recommended = lazy(() => import("./pages/Recommended"));
+// const Types = lazy(() => import("./pages/Types"));
+// const Equipments = lazy(() => import("./pages/Equipments"));
 const Notfounded = lazy(() => import("./pages/Notfounded"));
 const Search = lazy(() => import("./pages/Search"));
-
+const Food = lazy(() => import("./pages/Food"));
 const App = () => {
-   
+  return (
+    <>
+      <BrowserRouter>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/food" element={<Food />} />
+            <Route path="*" element={<Notfounded />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </>
+  );
+};
 
-    return ( 
-        <>
-               {/* <HomeProvider> */}
-            <BrowserRouter>
-                    <Suspense fallback={<Loading/>}>
-                        <Routes>
-                            <Route path='/' element={<Home />} /> 
-                            <Route path='search' element={<Search />}/> 
-                            <Route path='tastes' element={<Tastes />} />
-                            <Route path='recommended' element={<Recommended />} />
-                            <Route path='types' element={<Types />} />
-                            <Route path='equipments' element={<Equipments />} />
-                            <Route path='*' element={<Notfounded />} />
-
-                        </Routes>
-                    </Suspense>
-            
-            </BrowserRouter>
-               {/* </HomeProvider> */}
-        </>
-     );
-}
- 
 export default App;

@@ -1,28 +1,23 @@
 import React from "react";
-import Food from "../components/main/Food";
-import RecipeList from "../components/main/RecipeList";
+// import Food from "../components/main/Food";
+import RecipeList from "../components/search/RecipeList";
 import Header from "../components/header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchQuery, submitSearch, setData } from "../features/search/searchSlice";
+import { setIsLoading, submitSearch, setData } from "../features/search/searchSlice";
 import { useState } from "react";
 const Search = () => {
-  // const { dispatch, searchQuery, isSelected } = useHome();
-  const { data, isLoading, isSubmit, searchQuery } = useSelector((state) => state.search);
+  const {isLoading} = useSelector((state) => state.search);
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    if(!searchValue) return
     dispatch(submitSearch(true));
-    dispatch(setData(searchQuery, isSubmit, data));
-    // console.log(data);
+    dispatch(setData(searchValue));
+    dispatch(setIsLoading(true));
   }
   
-  function handleChange(e) {
-    setSearchValue(e.target.value);
-    dispatch(setSearchQuery(searchValue));
-  }
 
   return (
     <>
@@ -31,13 +26,12 @@ const Search = () => {
       <div className="search">
         <div className="query-search">
           <form onSubmit={handleSubmit}>
-            <input value={searchValue} onChange={handleChange} type="text" placeholder="Enter your query..." />
+            <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="Enter your query..." />
             <button className={isLoading ? "bg-gray" : ""} >Search</button>
           </form>
         </div>
       </div>
       <RecipeList />
-      <Food />
     </>
   );
 };

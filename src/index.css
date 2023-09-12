@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Lato&family=Montserrat&family=Open+Sans&family=Roboto&display=swap');
 
@@ -326,7 +329,7 @@ input::placeholder {
 .food {
     display: flex;
     width: 80%;
-    margin: 0 auto;
+    margin: 40px auto;
     flex-direction: column;
     /* overflow-y: scroll; */
     padding-left: 10px;

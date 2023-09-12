@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Hero from './Hero';
-import RecipeList from './RecipeList';
-import Header from '../header/Header';
+// import RecipeList from './RecipeList';
+// import Header from '../header/Header';
 import searchImage from '../../../src/assets/images/search-image.jpg';
 import typesImage from '../../assets/images/types.jpg';
 import recommendedImage from '../../assets/images/recommended.jpg';
@@ -60,10 +60,6 @@ const Main = () => {
             if(recommended.current) observer.observe(recommended.current)
 
             if(tastes.current) observer.observe(tastes.current)
-
-
-           
-                
                 return () => {
                         
                     if(search.current) observer.unobserve(search.current)
@@ -79,27 +75,7 @@ const Main = () => {
                 createObserver();
             },[options]);
 
-    // useEffect(() => {
-
-    //     function handleScroll() {
-           
-        
-    //         setScroll(scroll => scroll < 708 ? scroll + 708 : 708)
-    //         window.scrollTo({top: scroll, behavior:"instant"})
-    //         console.log(scroll)    
-    //     }
-
-    //     window.addEventListener("scroll",handleScroll);
-
-    //     // if(scroll > 1000) {
-    //     //     window.scrollTo({top: scroll-300, behavior:"smooth"})
-    //     // }
-
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //       };
-    // }, [scroll])
-
+  
 
     return ( 
         <>

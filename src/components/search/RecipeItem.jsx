@@ -1,23 +1,22 @@
 import React from 'react';
-import { useHome } from '../../contexts/HomeProvider';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getFood, selectFood, setFoodTitle, getYoutubeId, loadingFood } from '../../features/food/foodSlice';
+import { useNavigate } from 'react-router-dom';
 const RecipeItem = ({ item }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {title, image } = item;
     const isLoading = useSelector(state => state.search.isLoading);
-    const { isSelected, selectedFoodId, foodTitle } = useSelector(state => state.food);
-    const dispatch = useDispatch();
     
 
     function handleSelected(id, title) {
-        dispatch(selectFood(id));
-        dispatch(setFoodTitle(title));
-        dispatch(getFood(selectedFoodId));
-        dispatch(getYoutubeId(foodTitle));
+        dispatch(selectFood());
+        dispatch(getFood(id));
+        dispatch(getYoutubeId(title));
         dispatch(loadingFood(true));
-        console.log(isSelected, selectedFoodId);
+        navigate("/food")
  
     }
 
@@ -41,7 +40,7 @@ const RecipeItem = ({ item }) => {
                 
                 <div className="details">
                     
-                    <h3>{title}</h3>
+                    <h3>{title.length > 45 ? title.slice(0,45) : title}</h3>
 
                 </div>
 
