@@ -15,22 +15,13 @@ body {
     font-size: 18px;
     width: 100%;
     color: #000000;
-   
     height: 100%;
 }
 
 a {
     text-decoration: none;
-    /* color: #070602; */
     color: #000000;
-    /* #C48C3E; */
-    /* #D1C6BC */
-    /* #5A7A48; */
-     /* #8A6E24; */
-    /* #E4B92F; */
-    /* #853423; */
-    /* #BB7B3D;  */
-    /* #625242; */
+    
 }
 
 button {
@@ -47,113 +38,6 @@ ul {
 
 .green-color {
     color: #15a108;
-}
-
-.nav-bar ul li {
-    display: inline-block;
-    margin: 0 10px;
-    padding: 5px 10px;
-    position: relative;
-    cursor: pointer;
-    /* background-color: #EEEEF0; */
-    border-radius: 4px;
-    z-index: 0;
-}
-
-.nav-bar .d-flex {
-    flex-direction: row;
-    justify-content: space-around;
-    width: 56%;
-}
-
-.nav-bar ul li a {
-    transition: color 0.3s ease;
-    z-index: 100;
-}
-
-.nav-bar ul li::after {
-    z-index: -1;
-    content: "";
-    width: 0%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    background-color: #000000;
-    bottom: 0;
-    transition: all 0.4s ease-in-out;
-    border-radius: 3px;
-}
-
-.nav-bar ul li:hover::after {
-    width: 100%;
-
-}
-
-.nav-bar ul li:hover a  {
-    color: #EEEEF0;
-}
-
-.header {
-    display: inline-block;
-    width: 100%;
-}
-
-.nav-bar { 
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px 10px 0;
-    transform: translateY(30px);
-    background-color: transparent; 
-}
-
-.logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 2px solid ; */
-    border-radius: 4px;
-    padding: 5px 10px;
-    /* background-color: #43100F; */
-    position: relative;
-}
-
-
-
-.logo img {
-    width: 40px;
-}
-
-.logo h1 {
-    font-size: 1rem;
-}
-
-.menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* margin-right: 500px; */
-}
-
-
-.social-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.social-link a {
-    padding-left: 5px;
-}
-
-.main {
-    width: 100%;
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: #E0DBDF;
 }
 
 body::-webkit-scrollbar {
@@ -177,9 +61,7 @@ body::-webkit-scrollbar {
     align-items: center;   
 }
 
-.hero-title {
 
-}
 
 .more-info {
     transform: translateY(-20px);
@@ -276,7 +158,6 @@ input::placeholder {
 
 
 .recipe-item {
-    /* padding: 20px; */
     display: flex;
     flex-direction: column;
     width: 24%;
@@ -284,7 +165,6 @@ input::placeholder {
     align-items: center;
     background-color: #FFFFFF;
     color: #000000; 
-    /* border: 1px solid #000000; */
     cursor: pointer;
 
 }
@@ -331,9 +211,7 @@ input::placeholder {
     width: 80%;
     margin: 40px auto;
     flex-direction: column;
-    /* overflow-y: scroll; */
     padding-left: 10px;
-    /* overflow-x: hidden; */
 }
 
 .food h1 {
@@ -360,37 +238,6 @@ input::placeholder {
     margin: 5px 0;
     font-size: 1rem;
 }
-
-/* 
-.food::-webkit-scrollbar {
-    visibility: hidden;
-    width: 5px;
-    transition: all 0.3s ease-in-out;
-}
-
-
-.food::-webkit-scrollbar-track {
-    background-color: #F8F4F1;
-    transition: all 0.3s ease-in-out;
-    opacity: 0;
-}
-
-.food::-webkit-scrollbar-thumb {
-    background-color: #F8F4F1;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
-    opacity: 0;
-}
-
-.food:hover::-webkit-scrollbar-track{
-    background-color: #F9D5E5;
-    opacity: 1;
-}
-.food:hover::-webkit-scrollbar-thumb {
-    background-color: #FF6F61;
-    opacity: 1;
-    
-} */
 
 .food .upper-part {
     display: flex;
@@ -431,7 +278,6 @@ input::placeholder {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    /* margin: 0 auto; */
 }
 
 
@@ -442,9 +288,7 @@ input::placeholder {
     margin: 14px 0;
     align-items: center;
     justify-content: flex-start;
-    /* background-color: #000000; */
-    /* padding: 20px 0; */
-    /* margin-left: 4px; */
+   
 }
 
 .food .lower-part .ingredients div span{

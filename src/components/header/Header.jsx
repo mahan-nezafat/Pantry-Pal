@@ -4,7 +4,7 @@ import Navbar from './navbar/Navbar';
 const Header = () => {
     return ( 
     <>  
-       <div className="header">
+       <div className="inline-block w-100">
             <Navbar />
        </div>
 

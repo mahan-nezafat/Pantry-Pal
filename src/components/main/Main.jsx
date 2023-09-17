@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Hero from './Hero';
-// import RecipeList from './RecipeList';
-// import Header from '../header/Header';
 import searchImage from '../../../src/assets/images/search-image.jpg';
 import typesImage from '../../assets/images/types.jpg';
 import recommendedImage from '../../assets/images/recommended.jpg';
@@ -75,11 +73,10 @@ const Main = () => {
                 createObserver();
             },[options]);
 
-  
 
     return ( 
         <>
-            <div  className="main" >
+            <div  className="w-full flex h-full flex-col overflow-hidden bg-[#E0DBDF]" >
                 <Hero />
                 <div ref={search}  className={`search-main vh-100 d-flex ${searchVisible ? "animate" : ""}`}>
                     {
