@@ -22,25 +22,25 @@ const RecipeItem = ({ item }) => {
 
 
     return (
-        <div className='recipe-item'>
+        <div className='w-[24%] flex justify-center items-center flex-col cursor-pointer bg-white text-black'>
            {
              isLoading ? 
 
-                <div className='d-flex'>
+                <div className='flex'>
                     <Skeleton width={360} height={262} />
                     <Skeleton width={150} height={10} />
                 </div>
              :
 
-             <div className='w-100' onClick={() =>  handleSelected(item.id, title)  } >
+             <div className='w-full' onClick={() =>  handleSelected(item.id, title)  } >
 
-                <div className="image">
-                        <img src={image} alt="food" />
+                <div className="w-full">
+                        <img className='w-full rounded' src={image} alt="food" />
                 </div>
                 
-                <div className="details">
+                <div className="flex w-full justify-center items-center">
                     
-                    <h3>{title.length > 45 ? title.slice(0,45) : title}</h3>
+                    <h3 className='font-[1rem] whitespace-nowrap' >{title.length > 45 ? title.slice(0,45) : title}</h3>
 
                 </div>
 

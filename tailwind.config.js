@@ -4,7 +4,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+          'hero': "url('src/assets/images/hero.jpg')"
+      },
+      animation: {
+          'bounce-slow': "bounce 1.5s infinite"
+      }
+    },
   },
   plugins: [],
 }

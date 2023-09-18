@@ -15,7 +15,6 @@ const Food = () => {
   function handleClose() {
     dispatch(closeFood(false));
     navigate("/search", {replace: true});
-    console.log("gg")
   }
 
   return (
@@ -87,18 +86,18 @@ const Food = () => {
           </div>
         </>
       ) :  (
-        <div className="food">
-          <button className="close-btn" onClick={handleClose}>
+        <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
+          <button className="w-[5%] bg-black text-white outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
             &times;
           </button>
-          <h1>{title}</h1>
-          <div className="upper-part">
-            <div className="food-image">
-              <img src={`https://spoonacular.com/recipeImages/${id}-636x393.${imageType}`} alt="food" />
+          <h1 className="font-[1.2rem] my-[10px] mx-0" >{title}</h1>
+          <div className="flex justify-between items-center">
+            <div className="w-[48%] h-full flex justify-center">
+              <img className="w-full h-full rounded-lg" src={`https://spoonacular.com/recipeImages/${id}-636x393.${imageType}`} alt="food" />
             </div>
             {youtubeId !== "" ? (
-              <div className="food-video">
-                <iframe
+              <div className="w-[48%] h-full flex justify-center">
+                <iframe className="rounded-lg"
                   width="560"
                   height="315"
                   src={`https://www.youtube.com/embed/${youtubeId}?si=-nxhoaFiO_zVNH6H`}
@@ -113,53 +112,53 @@ const Food = () => {
             )}
           </div>
 
-          <div className="lower-part">
-            <div className="ingredients">
+          <div >
+            <div className="w-[90%] h-full flex  justify-start items-center flex-wrap">
               {extendedIngredients &&
                 extendedIngredients.map((ingredient, index) => {
                   return (
-                    <div key={index}>
-                      <img src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} alt="ingredient" /> <span>{ingredient.nameClean}</span>
+                    <div className="flex w-[25%] my-[14px] mx-0 items-center justify-start" key={index}>
+                      <img className="w-[15%] my-0 mx-[4px] rounded-lg h-auto" src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} alt="ingredient" /> <span className="font-[0.8rem]">{ingredient.nameClean}</span>
                     </div>
                   );
                 })}
             </div>
-            <div className="d-flex row">
-              <h4>
-                Estimated Price: <span className="green-color">${Math.floor(pricePerServing)}</span>
+            <div className="flex justify-around">
+              <h4 className="border-[1px] border-black border-solid p-[10px] rounded text-black">
+                Estimated Price: <span className="text-green-500">${Math.floor(pricePerServing)}</span>
               </h4>
-              <h4>Estimated Time: {readyInMinutes < 60 ? `${readyInMinutes}min` : `${Math.floor(readyInMinutes / 60)} hours`}</h4>
-              <h4>Vegan: {vegan ? <span className="green-color">yes</span> : <span className="red-color">No</span>}</h4>
+              <h4 className="border-[1px] border-black border-solid p-[10px] rounded text-black">Estimated Time: {readyInMinutes < 60 ? `${readyInMinutes}min` : `${Math.floor(readyInMinutes / 60)} hours`}</h4>
+              <h4 className="border-[1px] border-black border-solid p-[10px] rounded text-black">Vegan: {vegan ? <span className="text-green-500">yes</span> : <span className="text-red-500">No</span>}</h4>
             </div>
-            <div className="diets">
-              {diets && diets.length > 0 && <h4>Diets: </h4>}
+            <div className="flex my-[30px] mx-0">
+              {diets && diets.length > 0 && <h4 className="border-b-2 border-b-red-500">Diets: </h4>}
 
               {diets &&
                 diets.map((diet, index) => (
-                  <span key={index} className="ml-5">
+                  <span key={index} className="ml-[5px]">
                     {diet},
                   </span>
                 ))}
             </div>
-            <div className="dish-types">
-              {dishTypes && dishTypes.length > 0 && <h4>Dish Types:</h4>}
+            <div className="flex my-[30px] mx-0">
+              {dishTypes && dishTypes.length > 0 && <h4 className="border-b-2 border-b-red-500">Dish Types:</h4>}
               {dishTypes &&
                 dishTypes.map((dishType, index) => (
-                  <span key={index} className="ml-5">
+                  <span key={index} className="ml-[5px]">
                     {dishType},
                   </span>
                 ))}
             </div>
 
-            <div className="instructions">
+            <div className="flex flex-col ">
               <ul>
                 <h4>Instructions:</h4>
                 {analyzedInstructions &&
                   Object.values(analyzedInstructions)[0].steps.map((item, index) => {
                     return (
-                      <li key={index}>
-                        <div className="instruction">
-                          <span>{index + 1}</span>
+                      <li className="w-full inline-block" key={index}>
+                        <div className="flex justify-start items-center m-[12px]">
+                          <span className="text-white bg-black py-[5px] px-[8px] rounded-[50%] mr-[4px]">{index + 1}</span>
                           <p> {item.step}</p>
                         </div>
                       </li>
