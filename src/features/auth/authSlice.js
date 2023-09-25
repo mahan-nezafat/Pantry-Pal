@@ -17,14 +17,18 @@ const authSlice = createSlice({
         setLoggedIn(state, action) {
             state.isLoggedIn = action.payload;
         },
-        createUser(state, action) {
-            state.admin = action.payload.admin
-            state.created_at = action.payload.created_at
-            state.email  = action.payload.email
-            state.fullName  = action.payload.full_name
-            state.id  = action.payload.id
-            state.password  = action.payload.password
+        setFullName(state, action) {
+            state.fullName = action.payload
         },
+        
+        setEmail(state, action) {
+            state.email = action.payload
+        },
+        
+        setPassword(state, action) {
+            state.password = action.payload
+        },
+
         checkUser(state, action) {
 
         }
@@ -32,6 +36,6 @@ const authSlice = createSlice({
     }
 })
 
-export const {setLoggedIn, createUser} = authSlice.actions;
+export const {setLoggedIn, setFullName, setEmail, setPassword} = authSlice.actions;
 
 export default authSlice.reducer;
