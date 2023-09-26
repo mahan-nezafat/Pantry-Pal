@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import Header from "../components/header/Header";
 import Button from "../components/utils/Button";
 import Input from "../components/utils/Input";
-import { deleteUser, fetchUsers, insertUser, updateUser } from "../services/dataBaseApis";
 import { useDispatch, useSelector } from "react-redux";
-import { setFullName, setEmail, setPassword, setLoggedIn } from "../features/auth/authSlice";
+import { setFullName, setEmail, setPassword, setLoggedIn, loginUser } from "../features/auth/authSlice";
 import { handleSignUp } from "../handlers/handleSignUp";
 import { handleLogin } from "../handlers/handleLogin";
 import { randomNumber } from "../handlers/randomNumber";
+import { filterUser } from "../services/dataBaseApis";
 const Login = () => {
     const { isLoggedIn, fullName, email, password } = useSelector(state => state.auth)
-
+    const auth = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
     const [signUp, setSignUp] = useState(false);
@@ -23,17 +23,23 @@ const Login = () => {
             password,
             admin: false
         }
-    
-
-    
+        
+        const handleLogin = async (e, email, password, dispatch) => {
+            e.preventDefault();
+            const data = await filterUser(email, password)
+            if(!data) return
+            dispatch(loginUser(data))
+            // console.log(data)
+            console.log(auth)
+    }
 
     return (
         <>
             <Header />
 
-            <div className="flex flex-col justify-center w-[30%] h-[400px] mx-auto py-10 rounded shadow-lg items-center border-[1px] border-black my-40">
+            <div className="flex flex-col justify-center w-[30%] h-[400px] mx-auto py-10 rounded shadow-lg items-center border-[1px] border-black mt-40 ">
                 <h1>{signUp ? "LogIn Form" : "SignUp Form"}</h1>
-                <form onSubmit={(e) => signUp ? handleLogin : handleSignUp(e, newUser)}  className="flex flex-col justify-center items-center w-full">
+                <form onSubmit={(e) => signUp ? handleLogin(e, email, password, dispatch) : handleSignUp(e, newUser)}  className="flex flex-col justify-center items-center w-full">
                     {!signUp && 
                         <Input handler={(e) => dispatch(setFullName(e.target.value)) } value={fullName} label="Full Name" htmlFor="full-name" name="full-name" type="text" placeHolder="Enter your full name"/>
                     }

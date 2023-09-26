@@ -9,7 +9,6 @@ export const fetchUsers = async () => {
     return {users, error}
 }
 
-
 export const insertUser = async (newUser) => {
 
     const { data, error } = await supabase
@@ -41,4 +40,13 @@ export const deleteUser = async (id) => {
     .eq('id', id)
 
     return { error }
+}
+
+export const filterUser = async (email, password) => {
+    const { data, error } = await supabase
+    .from('users')
+    .select('id, full_name, email, admin')
+    .match({ email: email, password: password })
+
+    return data
 }
