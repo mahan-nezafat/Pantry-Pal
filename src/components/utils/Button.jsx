@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ children, type }) => {
+const Button = ({ children, type, handleClick }) => {
 
 
     const classTypes = {
@@ -9,7 +9,7 @@ const Button = ({ children, type }) => {
 
     return(
         <>
-            <button className={classTypes[type]}>{children}</button>
+            <button onClick={handleClick} className={classTypes[type]}>{children}</button>
         </>
     );
 }

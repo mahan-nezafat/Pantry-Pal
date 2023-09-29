@@ -17,7 +17,7 @@ export const insertUser = async (newUser) => {
         newUser
     ])
     .select()
-    console.log({data, error})   
+    // console.log(data);
     return {data, error}
 }
 

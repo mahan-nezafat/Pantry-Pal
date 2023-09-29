@@ -30,11 +30,10 @@ const authSlice = createSlice({
         },
 
         loginUser(state, action) {
-            state.admin =  action.payload.admin
-            state.fullName = action.payload.full_name
-            state.email = action.payload.email
-            state.id = action.payload.id
-            state.isLoggedIn = true
+            state.admin =  action.payload[0].admin
+            state.fullName = action.payload[0].full_name
+            state.email = action.payload[0].email
+            state.id = action.payload[0].id
         }
         
     }

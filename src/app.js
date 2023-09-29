@@ -8,8 +8,9 @@ const Home = lazy(() => import("./pages/Home"));
 const Notfounded = lazy(() => import("./pages/Notfounded"));
 const Search = lazy(() => import("./pages/Search"));
 const Food = lazy(() => import("./pages/Food"));
-const Login = lazy(() => import("./pages/Login"))
-const mealPlaner = lazy(() => import("./pages/MealPlaner"))
+const Login = lazy(() => import("./pages/Login"));
+const MealPlaner = lazy(() => import("./pages/MealPlaner"));
+const UserPanel = lazy(() => import("./pages/UserPanel"));
 const App = () => {
   return (
     <>
@@ -21,8 +22,8 @@ const App = () => {
             <Route path="/search" element={<Search />} />
             <Route path="/food" element={<Food />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/mealplaner" element={<mealPlaner />} />
-
+            <Route path="/mealplaner" element={<MealPlaner />} />
+            <Route path="/userpanel" element={<UserPanel />} />
             <Route path="*" element={<Notfounded />} />
           </Routes>
         </Suspense>
