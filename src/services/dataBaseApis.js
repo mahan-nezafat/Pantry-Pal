@@ -1,12 +1,12 @@
 import supabase from "./supabase";
 
-export const fetchUsers = async () => {
+export const fetchUser = async (id) => {
 
-    const { data: users, error } = await supabase
+    const { data: user, error } = await supabase
     .from('users')
     .select('*')
-
-    return {users, error}
+    .eq('id', id)
+    return {user, error}
 }
 
 export const insertUser = async (newUser) => {
