@@ -4,7 +4,8 @@ const Button = ({ children, type, handleClick }) => {
 
 
     const classTypes = {
-        default: "border-[1px] border-black p-1 px-3 rounded"
+        default: "border-[1px] border-black p-1 px-3 rounded",
+        panel: " border-black p-1 px-3"
     }
 
     return(

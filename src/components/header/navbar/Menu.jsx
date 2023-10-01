@@ -11,8 +11,8 @@ const Menu = () => {
            
             <ul>
                 <Item><Link className='transition-colors duration-300 py-3 px-4  hover:text-white' to="/search" >Search</Link></Item>
-                <Item><Link className='transition-colors duration-300 py-3 px-4  hover:text-white' to={"/login"} >Login</Link></Item>
                 <Item><Link className='transition-colors duration-300 py-3 px-4  hover:text-white' to={"/mealplaner"}>Meal Planer</Link></Item>
+                <Item><Link className='transition-colors duration-300 py-3 px-4  hover:text-white' to={"/login"} >Login</Link></Item>
               
             </ul>
        </div>

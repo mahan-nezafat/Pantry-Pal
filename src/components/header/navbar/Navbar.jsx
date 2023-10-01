@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex w-full justify-between items-center py-3 px-2 translate-y-7 bg-transparent">
+      <div className="flex h-full w-full justify-between items-center  px-2 bg-transparent">
         <div className="flex w-[40%] justify-around">
           <Logo />
           <Menu />

@@ -11,6 +11,7 @@ const Link = () => {
                 <div className="">
                     <button>Dark Mode</button>
                 </div>
+                
            </div>
         </>
      );

@@ -35,7 +35,7 @@ const Login = () => {
         <>
             <Header />
 
-            <div className="flex flex-col justify-center w-[30%] h-[400px] mx-auto py-10 rounded shadow-lg items-center border-[1px] border-black mt-40 ">
+            <div className="flex flex-col justify-center w-[30%] h-[400px] mx-auto py-10 rounded shadow-lg items-center border-[1px] border-black mt-20 ">
                 <h1>{signUp ? "LogIn Form" : "SignUp Form"}</h1>
                 <form onSubmit={(e) => signUp ? handleLogin(e, email, password, dispatch) : handleSignUp(e, newUser, dispatch)}  className="flex flex-col justify-center items-center w-full">
                     {!signUp && 

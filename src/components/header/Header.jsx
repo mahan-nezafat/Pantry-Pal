@@ -4,7 +4,7 @@ import Navbar from './navbar/Navbar';
 const Header = () => {
     return ( 
     <>  
-       <div className="inline-block w-full">
+       <div className="flex h-[100px] w-full justify-center items-center">
             <Navbar />
        </div>
 
