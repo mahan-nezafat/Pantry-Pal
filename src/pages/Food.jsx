@@ -14,7 +14,7 @@ const Food = () => {
 
   function handleClose() {
     dispatch(closeFood(false));
-    navigate("/search", {replace: true});
+    navigate(-1)
   }
 
   return (

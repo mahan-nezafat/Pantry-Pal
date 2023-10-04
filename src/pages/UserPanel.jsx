@@ -25,7 +25,7 @@ const UserPanel = () => {
 
                 <Header />
                 <div className="flex w-full h-full justify-center items-center">
-                    <div className="w-[20%] h-full justify-center items-center flex flex-col pl-4">
+                    <div className="w-[10%] h-full justify-center items-center flex flex-col pl-4">
                         <ul className="w-full">
                             <li onClick={() => setPanelContent("mealplaner")} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Meal Planer</Button></li>
                             <li onClick={() => setPanelContent("shoppinglist")}  className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Shopping List</Button></li>
@@ -36,7 +36,7 @@ const UserPanel = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className="w-[80%]">
+                    <div className="w-[90%] h-full flex justify-center items-start">
                         {
                             panelContent === "mealplaner" && <MealPlaner />
                         }
