@@ -10,7 +10,7 @@ const RecipeList = () => {
   return (
     <>
       {
-        <div className="flex flex-wrap h-full relative justify-start items-center pl-[10px] gap-[14px]">
+        <div className="flex flex-wrap h-full relative justify-start items-center pl-[10px] gap-[14px] mb-5">
           {typeof results !== "undefined"
             ? Object.values(results).map((item, index) => {
                 return <RecipeItem item={item} key={item.id} />;

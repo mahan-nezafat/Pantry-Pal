@@ -1,98 +1,109 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Hero from './Hero';
-import searchImage from '../../../src/assets/images/search-image.jpg';
-import { useMemo } from 'react';
+import React, { useEffect, useRef, useState } from "react";
+import Hero from "./Hero";
+import searchImage from "../../assets/images/search-image.jpg";
+import mealPlanerImage from "../../assets/images/mealplaner.jpg"
+import { Link } from 'react-router-dom';
+
 const Main = () => {
+  const [searchVisible, setSearchVisible] = useState(false);
+  const [mealPlanerVisible, setMealPlanerVisible] = useState(false);
+  const [scroll, setScroll] = useState(0);
+  const search = useRef(null);
+  const mealPlaner = useRef(null);
 
-    const [searchVisible, setSearchVisible] = useState(false);
-    const [tastesVisible, setTastesVisible] = useState(false);
-    const [typesVisible, setTypesVisible] = useState(false);
-    const [recommendedVisible, setRecommendedVisible] = useState(false);
-    const [scroll, setScroll] = useState(0);
-    const search = useRef(null)
-    const tastes = useRef(null)
-    const types = useRef(null)
-    const recommended = useRef(null)
+  function handleIntersect(entries) {
+    entries.forEach((entry) => {
+      if (entry.target === search.current) {
+        setSearchVisible(entry.isIntersecting);
+      }
+      if (entry.target === mealPlaner.current) {
+        setMealPlanerVisible(entry.isIntersecting);
+      }
+    });
+  }
 
-    function handleIntersect(entries) {
-
-        entries.forEach(entry => {
-            if(entry.target === search.current) {
-                setSearchVisible(entry.isIntersecting)
-            }
-            if(entry.target === tastes.current) {
-                setTastesVisible(entry.isIntersecting)
-            }
-            if(entry.target === types.current) {
-                setTypesVisible(entry.isIntersecting)
-            }
-            if(entry.target === recommended.current) {
-                setRecommendedVisible(entry.isIntersecting)
-            }
-
-        });
-        
-    
-
-    }
-
-   const options = {
+  const options = {
     root: null,
     rootMargin: "50px",
-    threshold: 0.25
-    } 
-    useEffect(() => {
-        function createObserver() {
-            let observer;
-            
-            observer = new IntersectionObserver(handleIntersect, options);
-            // if(ref.current) observer.observe(ref.current);
+    threshold: 0.25,
+  };
+  useEffect(() => {
+    function createObserver() {
+      let observer;
 
-            if(search.current) observer.observe(search.current)
-            
-            if(types.current) observer.observe(types.current)
+      observer = new IntersectionObserver(handleIntersect, options);
 
-            if(recommended.current) observer.observe(recommended.current)
+      if (search.current) observer.observe(search.current);
 
-            if(tastes.current) observer.observe(tastes.current)
-                return () => {
-                        
-                    if(search.current) observer.unobserve(search.current)
-                    
-                    if(types.current) observer.unobserve(types.current)
+      if (mealPlaner.current) observer.observe(mealPlaner.current);
 
-                    if(recommended.current) observer.unobserve(recommended.current)
+      return () => {
+        if (search.current) observer.unobserve(search.current);
 
-                    if(tastes.current) observer.unobserve(tastes.current)
-
-                    }
-                }
-                createObserver();
-            },[options]);
-
-
-    return ( 
-        <>
-            <div  className="w-full flex h-full flex-col overflow-hidden bg-[#E0DBDF]" >
-                <Hero />
-                <div ref={search}  className={`w-full h-[100vh] transition-all duration-[1.5s] ease-in-out opacity-0 translate-x-[60%] filter:blur-[4px]  flex ${searchVisible ? "animate" : ""}`}>
-                    {
-                        searchVisible && 
-                        <div className='w-full h-full flex'>
-                            <div className='w-[40%] h-full my-[20px] mx-[30px]'>
-                                <img className='w-full h-full' src={searchImage} alt="search" />
-                            </div>
-                            <div className='flex justify-center items-center flex-col w-[40%] h-full '>
-                                <h1>this is search</h1>
-                                <p>search detail</p>
-                            </div>
-                        </div>
-                    }
-                </div>
-               
+        if (mealPlaner.current) observer.unobserve(mealPlaner.current);
+      };
+    }
+    createObserver();
+  }, [options]);
+             
+  return (
+    <>
+      <div className="w-full flex h-full flex-col overflow-hidden bg-[#E0DBDF]">
+        <Hero />
+        <div
+          ref={search}
+          className={`w-full h-[100vh] transition-all duration-[1.5s] ease-in-out opacity-0 translate-x-[60%] filter:blur-[4px]  flex ${
+            searchVisible ? "animate" : ""
+          }`}
+        >
+          {searchVisible && (
+            <div className="w-full h-full flex items-start">
+              <div className="w-[40%] h-full flex-col my-[10px] mx-[30px]">
+                <img
+                  className="w-full h-full rounded"
+                  src={searchImage}
+                  alt="search"
+                />
+              </div>
+              <div className="flex justify-center flex-col items-center w-[40%] h-full ">
+                <h1 className="border-black border-[1px] border-solid rounded p-2"><Link to="/search" >SEARCH</Link>
+</h1>
+                <p className="mt-5 w-[50%] text-center">
+                  Search for your favorite foods by name, ingredients, tastes,
+                  types and diets.
+                </p>
+              </div>
             </div>
-        </>
-     );
-}
- 
-export default Main ;
+          )}
+        </div>
+        <div
+          ref={mealPlaner}
+          className={`w-full mb-5 h-[100vh] transition-all duration-[1.5s] ease-in-out opacity-0 translate-x-[60%] filter:blur-[4px]  flex ${
+            mealPlanerVisible ? "animate" : ""
+          }`}
+        >
+          {mealPlanerVisible && (
+            <div className="w-full h-full flex items-start">
+              <div className="w-[40%] h-full flex-col my-[10px] mx-[30px]">
+                <img
+                  className="w-full h-full rounded"
+                  src={mealPlanerImage}
+                  alt="mealplaner"
+                />
+              </div>
+              <div className="flex justify-center flex-col items-center w-[40%] h-full ">
+                <h1 className="border-black border-[1px] border-solid rounded p-2"><Link to={"/mealplaner"}>MEAL PLANER</Link>
+</h1>
+                <p className="mt-5 px-10 text-center">
+                    get, create, add and delete meal planes 
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Main;

@@ -13,7 +13,7 @@ const MealPlaner = lazy(() => import("./pages/MealPlaner"));
 const UserPanel = lazy(() => import("./pages/UserPanel"));
 const App = () => {
   return (
-    <>
+    <> 
       <BrowserRouter>
         <Suspense fallback={<Loading />}>
           <Routes>

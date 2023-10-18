@@ -21,14 +21,14 @@ export const insertUser = async (newUser) => {
     return {data, error}
 }
 
-export const updateUser = async (id, updatedUser) => {
+export const updateUser = async (id, updatedContent) => {
 
     const { data, error } = await supabase
     .from('users')
-    .update({ full_name: updatedUser.full_name })
+    .update(updatedContent)
     .eq('id', id)
     .select()
-
+    console.log(data, error)
     return {data, error}
 }
 

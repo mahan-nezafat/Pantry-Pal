@@ -19,26 +19,38 @@ const searchSlice = createSlice({
     },
     submitSearch(state, action) {
       state.isSubmit = action.payload;
+      state.isLoading = action.payload;
+
     },
   },
 });
 
-export function setData(searchQuery, isSubmit, data) {
+export function setData(searchQuery) {
   return async function (dispatch) {
     try {
+      // dispatch({ type: "search/setIsLoading", payload: true });
       const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchQuery}&number=100`);
       const data = await response.json();
 
       dispatch({ type: "search/setData", payload: data });
-      dispatch({ type: "search/setIsLoading", payload: false })
-    
+      if(data.results.length > 1) {
+        setTimeout(() => {
+          dispatch({ type: "search/submitSearch", payload: false });
+
+        }, 4000)
+      }
+      
     } catch (error) {
-    
+      
       console.log(error);
-    
-    }finally {      
-        dispatch({ type: "search/submitSearch", payload: false });
+      
+    }finally {
+        // dispatch({ type: "search/setIsLoading", payload: false });
+        // dispatch({ type: "search/submitSearch", payload: false });
+        
+      
     }
+    
   };
 }
 

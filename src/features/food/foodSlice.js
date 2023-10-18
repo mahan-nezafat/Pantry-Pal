@@ -11,6 +11,7 @@ const initialState = {
   youtubeId: "",
   isSelected: false,
   isLoading: false,
+  favFoodsIds: [],
 };
 
 const foodSlice = createSlice({
@@ -38,6 +39,17 @@ const foodSlice = createSlice({
     loadingFood(state, action) {
       state.isLoading = action.payload;
     },
+    addFavFoodsIds(state, action) {
+      if(state.favFoodsIds.find(id => id === action.payload)) return
+      state.favFoodsIds.push(action.payload)
+      console.log(state.favFoodsIds)
+    },
+    removeFavFoodsIds(state, action) {
+      // if(state.favFoodsIds.length === 1) state.favFoodsIds = initialState.favFoodsIds
+      state.favFoodsIds = state.favFoodsIds.filter(id => id !== action.payload)
+      console.log(state.favFoodsIds)
+    }
+  
   },
 });
 
@@ -75,6 +87,6 @@ export function getYoutubeId(foodTitle) {
   };
 }
 
-export const { selectFood, closeFood, setFoodTitle, loadingFood } = foodSlice.actions;
+export const { selectFood, closeFood, setFoodTitle, loadingFood, addFavFoodsIds, removeFavFoodsIds } = foodSlice.actions;
 
 export default foodSlice.reducer;

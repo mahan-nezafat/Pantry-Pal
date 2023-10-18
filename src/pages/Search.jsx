@@ -14,8 +14,8 @@ const Search = () => {
     e.preventDefault();
     if(!searchValue) return
     dispatch(submitSearch(true));
+    // dispatch(setIsLoading(true));
     dispatch(setData(searchValue));
-    dispatch(setIsLoading(true));
   }
   
 

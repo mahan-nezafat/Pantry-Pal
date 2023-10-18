@@ -23,34 +23,37 @@ const Food = () => {
 
       {isLoading ? (
         <>
-          <div className="food my-36">
-            
+          <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
+            <button className="w-[5%] bg-black text-white outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
             <Skeleton width={50} height={20} />
-            <div className="upper-part">
-              <div className="food-image">
+            <div className="flex justify-between items-center">
+              <div className="w-[48%] h-full flex justify-center">
                 <Skeleton width={400} height={300} />
               </div>
-              <div className="food-video">
+              <div className="w-[48%] h-full flex justify-center">
                 <Skeleton width={400} height={300} />
               </div>
             </div>
-            <div className="lower-part">
-              <div className="ingredients">
+            <div className="w-[90%] h-full flex  justify-start items-center flex-wrap">
+              <div >
                 {extendedIngredients &&
                   extendedIngredients.map((ingredient, index) => {
                     return (
-                      <div key={index}>
+                      <div className="flex w-[25%] my-[14px] mx-0 items-center justify-start" key={index}>
                         <Skeleton width={40} height={10} />
+                        <Skeleton width={50} height={5} />
                       </div>
                     );
                   })}
               </div>
-              <div className="d-flex row">
+              <div className="flex justify-around w-full items-center">
                 <Skeleton width={200} height={40} />
                 <Skeleton width={200} height={40} />
                 <Skeleton width={200} height={40} />
               </div>
-              <div className="diets">
+              <div className="flex my-[30px] mx-0">
                 {diets && diets.length > 0 && <Skeleton width={50} height={20} />}
 
                 {diets &&
@@ -60,7 +63,7 @@ const Food = () => {
                     </span>
                   ))}
               </div>
-              <div className="dish-types">
+              <div className="flex my-[30px] mx-0">
                 {dishTypes && dishTypes.length > 0 && <Skeleton width={50} height={20} />}
                 {dishTypes &&
                   dishTypes.map((dishType, index) => (
@@ -69,13 +72,13 @@ const Food = () => {
                     </span>
                   ))}
               </div>
-              <div className="instructions">
+              <div className="flex flex-col">
                 <ul>
                   <Skeleton width={50} height={20} />
                   {analyzedInstructions &&
                     Object.values(analyzedInstructions)[0].steps.map((item, index) => {
                       return (
-                        <li key={index}>
+                        <li className="w-full inline-block" key={index}>
                           <Skeleton width={500} height={40} />
                         </li>
                       );
@@ -88,7 +91,7 @@ const Food = () => {
       ) :  (
         <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
           <button className="w-[5%] bg-black text-white outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
-            &times;
+          <i class="fa-solid fa-arrow-left"></i>
           </button>
           <h1 className="font-[1.2rem] my-[10px] mx-0" >{title}</h1>
           <div className="flex justify-between items-center">
