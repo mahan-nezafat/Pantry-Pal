@@ -95,7 +95,7 @@ const Main = () => {
                 <h1 className="border-black border-[1px] border-solid rounded p-2"><Link to={"/mealplaner"}>MEAL PLANER</Link>
 </h1>
                 <p className="mt-5 px-10 text-center">
-                    get, create, add and delete meal planes 
+                    get, add and delete meal planes 
                 </p>
               </div>
             </div>

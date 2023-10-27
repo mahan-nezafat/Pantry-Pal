@@ -11,6 +11,7 @@ import Settings from "../components/panel/Settings";
 
 const UserPanel = () => {
     const {isLoggedIn} = useSelector(store => store.auth);
+    const {favFoodsIds} = useSelector(store => store.food);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [panelContent, setPanelContent] = useState("mealplaner");

@@ -1,15 +1,18 @@
 import { connectUser } from "../services/apiMealPlaner";
-import { insertUser } from "../services/dataBaseApis";
+import { fetchFoodIds, insertUser, updateFoodIds } from "../services/dataBaseApis";
 import { loginUser, setLoggedIn } from "../features/auth/authSlice";
 import { filterUser } from "../services/dataBaseApis";
 import { randomNumber } from "./randomNumber";
+import { setFoodsIds } from "../features/food/foodSlice";
 
 export  const handleLogin = async (e, email, password, dispatch) => {
     e.preventDefault();
     const data = await filterUser(email, password)
+    let ids = data[0].favorite_foods_ids.split(" ")
     if(!data) return
     dispatch(loginUser(data))
     dispatch(setLoggedIn(true));
+    dispatch(setFoodsIds(ids));
 }       
 
 export const handleSignUp = async (e, user, dispatch) => {

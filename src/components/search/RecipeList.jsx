@@ -5,7 +5,7 @@ import Food from "../../pages/Food";
 
 const RecipeList = () => {
   const { data, searchQuery } = useSelector((state) => state.search);
-  const { isSelected } = useSelector((state) => state.food);
+  const { isSelected, favFoodsIds } = useSelector((state) => state.food);
   const { results } = data;
   return (
     <>

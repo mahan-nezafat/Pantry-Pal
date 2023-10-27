@@ -17,8 +17,8 @@ const MealItem = ({ mealItem }) => {
     }
 
     return (
-        <div onClick={() => handleSelected(id, title)} className="flex justify-between flex-col w-full h-[30%] border-b-[1px] border-black border-solid">
-            <img className="w-full h-[80px]" src={`https://spoonacular.com/recipeImages/${mealItem.id}-636x393.jpg`} alt="mealfood" />
+        <div onClick={() => handleSelected(id, title)} className="flex justify-between flex-col w-full h-[40%] border-b-[1px] border-black border-solid">
+            <img className="w-full h-[90%]" src={`https://spoonacular.com/recipeImages/${mealItem.id}-636x393.jpg`} alt="mealfood" />
             <span className="text-sm">{mealItem.title.length > 20 ? mealItem.title.slice(0,20) : mealItem.title}</span>
         </div>
     );

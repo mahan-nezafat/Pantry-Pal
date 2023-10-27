@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const apiKey = "f88e395dfddb4a21837e281aa658717c";
-// "8c9b44dff7454d2bb7def613b0bade75";
-//  "76c7a80de4fc4832927537ed53f92d14";
-// "856ff9a8e5554f3198e5a473b5d101a8";
-// "4defd47d816c4e5692caafff6528e6a2";
 
 const initialState = {
   selectedFoodInformation: {},
@@ -40,14 +36,16 @@ const foodSlice = createSlice({
       state.isLoading = action.payload;
     },
     addFavFoodsIds(state, action) {
+      console.log(typeof state.favFoodsIds, state.favFoodsIds)
       if(state.favFoodsIds.find(id => id === action.payload)) return
       state.favFoodsIds.push(action.payload)
-      console.log(state.favFoodsIds)
+      
     },
     removeFavFoodsIds(state, action) {
-      // if(state.favFoodsIds.length === 1) state.favFoodsIds = initialState.favFoodsIds
       state.favFoodsIds = state.favFoodsIds.filter(id => id !== action.payload)
-      console.log(state.favFoodsIds)
+    },
+    setFoodsIds(state, action) {
+      state.favFoodsIds = action.payload
     }
   
   },
@@ -87,6 +85,6 @@ export function getYoutubeId(foodTitle) {
   };
 }
 
-export const { selectFood, closeFood, setFoodTitle, loadingFood, addFavFoodsIds, removeFavFoodsIds } = foodSlice.actions;
+export const { selectFood, closeFood, setFoodTitle, loadingFood, addFavFoodsIds, removeFavFoodsIds, setFoodsIds } = foodSlice.actions;
 
 export default foodSlice.reducer;

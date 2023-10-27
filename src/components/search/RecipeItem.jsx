@@ -4,17 +4,23 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getFood, selectFood, setFoodTitle, getYoutubeId, loadingFood, removeFavFoodsIds, addFavFoodsIds } from '../../features/food/foodSlice';
 import { useNavigate } from 'react-router-dom';
-import { updateUser } from '../../services/dataBaseApis';
+import { updateFoodIds } from '../../services/dataBaseApis';
 import Button from '../utils/Button';
-import heart from '../../assets/images/heart-svgrepo-com.svg'
 const RecipeItem = ({ item }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {title, image} = item;
     const {isLoading} = useSelector(store => store.search);
-    const {id} = useSelector(store => store.auth);
+    const {id, isLoggedIn} = useSelector(store => store.auth);
     const {favFoodsIds} = useSelector(store => store.food)
     const [isLiked, setIsLiked] = useState(false);    
+    
+    
+    useEffect(() => {
+        favFoodsIds.map(itemId =>{
+            itemId === item.id ? console.log('find it') : console.log('false')
+        })
+    }, [])
 
     function handleSelected(id, title) {
         dispatch(selectFood());
@@ -24,18 +30,26 @@ const RecipeItem = ({ item }) => {
         navigate("/food")
     }
 
+    
     function handleLike() {
-            setIsLiked(!isLiked); 
-            if(isLiked) {
-                dispatch(removeFavFoodsIds(item.id));
-            }
-            else {
-                dispatch(addFavFoodsIds(item.id));   
-            }
+        if(!isLoggedIn) return navigate("/login");
+        
+        setIsLiked(!isLiked); 
+        let foodIds = favFoodsIds.join(" ")
+        if(isLiked) {
+            dispatch(removeFavFoodsIds(item.id));
+            updateFoodIds(id, foodIds)
+            
+        }else {
+            dispatch(addFavFoodsIds(item.id));   
+            updateFoodIds(id, foodIds)
+        }        
+
+       
     }
 
 
-
+      
     return (
         <div className='w-[24%] flex justify-center items-center flex-col cursor-pointer bg-white text-black'>
            {
@@ -63,7 +77,7 @@ const RecipeItem = ({ item }) => {
                     
                     <h3 className='font-[1rem] whitespace-nowrap' >{title.length > 30 ? title.slice(0,30) : title}</h3>
                     <div className="flex justify-start items-center w-full">
-                    <Button type="like" handleClick={ handleLike } >
+                    <Button type="like" handleClick={handleLike} >
                         { isLiked ? 
                             <i className={`fa-solid fa-heart absolute `}></i>
                             :
