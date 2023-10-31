@@ -7,8 +7,15 @@ import { setFoodsIds } from "../features/food/foodSlice";
 
 export  const handleLogin = async (e, email, password, dispatch) => {
     e.preventDefault();
-    const data = await filterUser(email, password)
-    let ids = data[0].favorite_foods_ids.split(" ")
+    let data;
+    let ids;
+    try {
+        data = await filterUser(email, password)
+        ids =  data === null ? [] : data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
+        console.log(ids)
+    } catch (error) {
+        console.log(error)
+    }
     if(!data) return
     dispatch(loginUser(data))
     dispatch(setLoggedIn(true));

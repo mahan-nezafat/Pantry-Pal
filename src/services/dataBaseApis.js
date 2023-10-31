@@ -26,7 +26,6 @@ export const updateFoodIds = async (id, foodIds) => {
     .update({favorite_foods_ids: foodIds})
     .eq('id', id)
     .select()
-    console.log(data, error)
     return {data, error}
 }
 
@@ -41,11 +40,11 @@ export const insertUser = async (newUser) => {
     return {data, error}
 }
 
-export const updateUser = async (id, updatedContent) => {
+export const updateUser = async (id, updatedUser) => {
 
     const { data, error } = await supabase
     .from('users')
-    .update(updatedContent)
+    .update({email: updateUser.email, password: updatedUser.password})
     .eq('id', id)
     .select()
     return {data, error}

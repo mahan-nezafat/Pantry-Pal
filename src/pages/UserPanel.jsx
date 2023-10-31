@@ -29,7 +29,7 @@ const UserPanel = () => {
                     <div className="w-[10%] h-full justify-center items-center flex flex-col pl-4">
                         <ul className="w-full">
                             <li onClick={() => setPanelContent("mealplaner")} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Meal Planer</Button></li>
-                            <li onClick={() => setPanelContent("shoppinglist")}  className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Shopping List</Button></li>
+                            {/* <li onClick={() => setPanelContent("shoppinglist")}  className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Shopping List</Button></li> */}
                             <li onClick={() => setPanelContent("favoritefoods")} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button  type="panel" >Favorite Foods</Button></li>
                             <li onClick={() => setPanelContent("settings")} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button  type="panel" >Settings</Button></li>
                             <li onClick={logOut}  className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer">
@@ -41,9 +41,9 @@ const UserPanel = () => {
                         {
                             panelContent === "mealplaner" && <MealPlaner />
                         }
-                        {
+                        {/* {
                             panelContent === "shoppinglist" && <ShoppingList />
-                        } 
+                        }  */}
                         {
                             panelContent === "favoritefoods" && <FavoriteFoods />
                         }

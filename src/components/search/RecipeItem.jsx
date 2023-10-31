@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getFood, selectFood, setFoodTitle, getYoutubeId, loadingFood, removeFavFoodsIds, addFavFoodsIds } from '../../features/food/foodSlice';
+import { getFood, selectFood, getYoutubeId, loadingFood, removeFavFoodsIds, addFavFoodsIds, setIsLiked } from '../../features/food/foodSlice';
 import { useNavigate } from 'react-router-dom';
 import { updateFoodIds } from '../../services/dataBaseApis';
 import Button from '../utils/Button';
@@ -12,15 +12,11 @@ const RecipeItem = ({ item }) => {
     const {title, image} = item;
     const {isLoading} = useSelector(store => store.search);
     const {id, isLoggedIn} = useSelector(store => store.auth);
-    const {favFoodsIds} = useSelector(store => store.food)
+    const {favFoodsIds, isSelected} = useSelector(store => store.food)
     const [isLiked, setIsLiked] = useState(false);    
     
     
-    useEffect(() => {
-        favFoodsIds.map(itemId =>{
-            itemId === item.id ? console.log('find it') : console.log('false')
-        })
-    }, [])
+   
 
     function handleSelected(id, title) {
         dispatch(selectFood());
@@ -34,21 +30,32 @@ const RecipeItem = ({ item }) => {
     function handleLike() {
         if(!isLoggedIn) return navigate("/login");
         
-        setIsLiked(!isLiked); 
-        let foodIds = favFoodsIds.join(" ")
+        setIsLiked(!isLiked);
         if(isLiked) {
             dispatch(removeFavFoodsIds(item.id));
-            updateFoodIds(id, foodIds)
             
         }else {
             dispatch(addFavFoodsIds(item.id));   
-            updateFoodIds(id, foodIds)
         }        
-
-       
     }
 
+    useEffect(() => {
+        if(!isLoggedIn) return;
 
+        let foodIds = favFoodsIds.join(" ")
+        updateFoodIds(id, foodIds)
+
+    }, [isLiked, favFoodsIds]);
+
+    useEffect(() => {
+        if(!isLoading) return;
+        favFoodsIds.find(id => {
+            if(Number(id) === item.id) { 
+                setIsLiked(true)
+                console.log(typeof id, id, typeof item.id, item.id)
+            }
+        })
+    }, [isLoading, isSelected])
       
     return (
         <div className='w-[24%] flex justify-center items-center flex-col cursor-pointer bg-white text-black'>

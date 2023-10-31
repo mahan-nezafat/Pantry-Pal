@@ -6,7 +6,8 @@ const Button = ({ children, type, handleClick }) => {
     const classTypes = {
         default: "border-[1px] border-black p-1 px-3 rounded",
         panel: " border-black p-1 px-3",
-        like: "mx-2  text-red-500 fill-green-500 relative z-30 py-[1px] px-[8px] rounded-[50%]",
+        like: "mx-2  text-red-500 relative z-30 py-[1px] px-[8px] rounded-[50%] text-center w-full h-full flex items-center",
+        delete: "text-red-500 border-[1px] border-black p-1 px-3 rounded"
     }
 
     return(

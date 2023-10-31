@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
-import { closeFood } from "../features/food/foodSlice";
+import { addFavFoodsIds, closeFood, removeFavFoodsIds } from "../features/food/foodSlice";
 import Header from "../components/header/Header";
 import { redirect, useNavigate } from "react-router-dom";
+import Button from "../components/utils/Button";
+import { updateFoodIds } from "../services/dataBaseApis";
 const Food = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { selectedFoodInformation, youtubeId, isSelected, isLoading } = useSelector((state) => state.food);
+  const [isLiked, setIsLiked] = useState(false);    
+  
+  const {id: userId, isLoggedIn} = useSelector(store => store.auth);
+  const { selectedFoodInformation, favFoodsIds, youtubeId, isSelected, isLoading } = useSelector((store) => store.food);
 
   const { analyzedInstructions, diets, dishTypes, extendedIngredients, image, instructions, pricePerServing, readyInMinutes, summary, vegan, winePairing, title, imageType, id } =
     selectedFoodInformation;
@@ -16,6 +21,37 @@ const Food = () => {
     dispatch(closeFood(false));
     navigate(-1)
   }
+
+
+  function handleLike() {
+    if(!isLoggedIn) return navigate("/login");
+    
+    setIsLiked(!isLiked);
+    if(isLiked) {
+        dispatch(removeFavFoodsIds(id));
+        
+    }else {
+        dispatch(addFavFoodsIds(id));   
+    }        
+  }
+
+  useEffect(() => {
+      if(!isLoggedIn) return;
+
+      let foodIds = favFoodsIds.join(" ")
+      updateFoodIds(userId, foodIds)
+
+  }, [isLiked, favFoodsIds]);
+  useEffect(() => {
+      favFoodsIds.map(userId => {
+          if(Number(userId) === id) { 
+              setIsLiked(true)
+              console.log("true")
+          }
+      })
+  }, [isSelected])
+
+
 
   return (
     <>
@@ -90,9 +126,18 @@ const Food = () => {
         </>
       ) :  (
         <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
+          <div className="flex justify-start items-center">
           <button className="w-[5%] bg-black text-white outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
           <i class="fa-solid fa-arrow-left"></i>
           </button>
+          {/* <Button type="like" handleClick={handleLike} >
+                        { isLiked ? 
+                            <i className={`fa-solid fa-heart absolute text-4xl`}></i>
+                            :
+                            <i className={`fa-regular fa-heart absolute text-4xl `}></i>
+                        }
+          </Button> */}
+          </div>
           <h1 className="font-[1.2rem] my-[10px] mx-0" >{title}</h1>
           <div className="flex justify-between items-center">
             <div className="w-[48%] h-full flex justify-center">

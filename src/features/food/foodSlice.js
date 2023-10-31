@@ -8,6 +8,7 @@ const initialState = {
   isSelected: false,
   isLoading: false,
   favFoodsIds: [],
+  isLiked: false
 };
 
 const foodSlice = createSlice({
@@ -36,8 +37,7 @@ const foodSlice = createSlice({
       state.isLoading = action.payload;
     },
     addFavFoodsIds(state, action) {
-      console.log(typeof state.favFoodsIds, state.favFoodsIds)
-      if(state.favFoodsIds.find(id => id === action.payload)) return
+      state.favFoodsIds.filter(id => id !== action.payload)
       state.favFoodsIds.push(action.payload)
       
     },
@@ -45,7 +45,10 @@ const foodSlice = createSlice({
       state.favFoodsIds = state.favFoodsIds.filter(id => id !== action.payload)
     },
     setFoodsIds(state, action) {
-      state.favFoodsIds = action.payload
+      state.favFoodsIds = action.payload;
+    },
+    setIsLiked(state, action) {
+      state.isLiked = action.payload;
     }
   
   },
@@ -85,6 +88,6 @@ export function getYoutubeId(foodTitle) {
   };
 }
 
-export const { selectFood, closeFood, setFoodTitle, loadingFood, addFavFoodsIds, removeFavFoodsIds, setFoodsIds } = foodSlice.actions;
+export const { selectFood, closeFood, setFoodTitle, loadingFood, addFavFoodsIds, removeFavFoodsIds, setFoodsIds, setIsLiked } = foodSlice.actions;
 
 export default foodSlice.reducer;
