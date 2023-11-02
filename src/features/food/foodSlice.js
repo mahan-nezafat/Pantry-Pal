@@ -4,6 +4,7 @@ const apiKey = "f88e395dfddb4a21837e281aa658717c";
 
 const initialState = {
   selectedFoodInformation: {},
+  bulkFood: null,
   youtubeId: "",
   isSelected: false,
   isLoading: false,
@@ -20,6 +21,9 @@ const foodSlice = createSlice({
     },
     getFood(state, action) {
       state.selectedFoodInformation = action.payload;
+    },
+    getBulkFood(state, action) {
+      state.bulkFood = action.payload;
     },
     closeFood(state, action) {
       
@@ -61,6 +65,28 @@ export function getFood(selectedFoodId) {
       const data = await response.json();
 
       dispatch({ type: "food/getFood", payload: data });
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getBulkFood(favFoodsIds) {
+  return async function (dispatch) {
+    try {
+      let favFoodsIdsStrings = favFoodsIds.join(",")
+      const response = await fetch(`https://api.spoonacular.com/recipes/informationBulk?ids=${favFoodsIdsStrings}&apiKey=${apiKey}`);
+      const data = await response.json();
+      
+      let filteredData = []
+      data.forEach(item => {
+        const {title, id, image} = item;
+        filteredData.push({title, id, image})
+      })
+      console.log(filteredData)
+
+      dispatch({ type: "food/getBulkFood", payload: filteredData});
 
     } catch (error) {
       console.log(error);

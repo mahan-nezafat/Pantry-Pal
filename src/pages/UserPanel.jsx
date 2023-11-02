@@ -8,6 +8,7 @@ import MealPlaner from "../components/panel/MealPlaner";
 import ShoppingList from "../components/panel/ShoppingList";
 import FavoriteFoods from "../components/panel/FavoriteFoods";
 import Settings from "../components/panel/Settings";
+import { getBulkFood } from "../features/food/foodSlice";
 
 const UserPanel = () => {
     const {isLoggedIn} = useSelector(store => store.auth);
@@ -20,9 +21,18 @@ const UserPanel = () => {
         navigate(-1);
     }
 
+    function handleData() {
+            
+        dispatch(getBulkFood(favFoodsIds))
+          
+    }
+
+    
+  
+
     return (
         <>
-            <div className="flex flex-col w-full h-[100vh]">
+            <div className="flex flex-col w-full h-[80%]">
 
                 <Header />
                 <div className="flex w-full h-full justify-center items-center">
@@ -30,14 +40,14 @@ const UserPanel = () => {
                         <ul className="w-full">
                             <li onClick={() => setPanelContent("mealplaner")} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Meal Planer</Button></li>
                             {/* <li onClick={() => setPanelContent("shoppinglist")}  className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Shopping List</Button></li> */}
-                            <li onClick={() => setPanelContent("favoritefoods")} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button  type="panel" >Favorite Foods</Button></li>
+                            <li onClick={() =>{ setPanelContent("favoritefoods"); handleData()}} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button  type="panel" >Favorite Foods</Button></li>
                             <li onClick={() => setPanelContent("settings")} className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button  type="panel" >Settings</Button></li>
                             <li onClick={logOut}  className="py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer">
                                 <Button type="panel"><span className="text-red-500">Log Out</span></Button>
                             </li>
                         </ul>
                     </div>
-                    <div className="w-[90%] h-full flex justify-center items-start">
+                    <div className={`w-[90%] h-full flex justify-center items-center`}>
                         {
                             panelContent === "mealplaner" && <MealPlaner />
                         }

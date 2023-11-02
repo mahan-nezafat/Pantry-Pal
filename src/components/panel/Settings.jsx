@@ -2,26 +2,31 @@ import React, { useState } from "react";
 import Input from "../utils/Input";
 import Button  from "../utils/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setPassword } from "../../features/auth/authSlice";
+import { setEmail, setLoggedIn, setPassword } from "../../features/auth/authSlice";
 import { deleteUser, updateUser } from "../../services/dataBaseApis";
 import { useNavigate } from "react-router-dom";
 const Settings = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isDelete, setIsDelete] = useState(false)    
-    const {password, email, id} = useSelector(store => store.auth);
+    const {email, id} = useSelector(store => store.auth);
     const [newPassword, setNewPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     async function handleSubmit(e) {
         e.preventDefault();
-        if(!email || !password) return
-        if(isDelete && email && password) {
+        if(isDelete && !email) return setErrorMessage('no email entered');
+        if(!isDelete && !email || !isDelete && !newPassword) return setErrorMessage('no email or new password entered');
+        if(isDelete) {
             console.log('user is deleted')
             deleteUser(id);
-            navigate(-1);
+            dispatch(setLoggedIn(false));
+            navigate("/login");
         }else {
             const updatedUser = {password: newPassword, email};
             const data = await updateUser(id, updatedUser);
             console.log(updateUser, data)
+            dispatch(setLoggedIn(false));
+            navigate("/login");
 
         }
     }
@@ -40,17 +45,19 @@ const Settings = () => {
     }
     
     return (
-       <div className="flex w-full h-full justify-center items-center">
-         <form action="" onSubmit={handleSubmit} className="w-[24%]">
-            <div className="flex justify-center items-center flex-col w-full">
-            <Input handler={(e) => dispatch(setEmail(e.target.value)) } value={email}  label='Email' htmlFor='Email'  name="email" type="email" placeHolder='Your Email Address'/>
-            <Input  handler={(e) => dispatch(setPassword(e.target.value))} value={password} label='Password' htmlFor='password'  name="password" type="password" placeHolder='Your Old Password'/>
+       <div className="flex-col w-full h-[40%] justify-center items-center">
+        {
+            errorMessage && <h1 className="text-center text-red-500">{errorMessage}</h1>
+        }
+         <form action="" onSubmit={handleSubmit} className="w-[40%] mx-auto h-[100%] flex-col justify-between items-center">
+            <div className="flex justify-center items-center flex-col w-full h-full">
+            <Input handler={(e) => dispatch(setEmail(e.target.value)) } value={email}  label='Email' htmlFor='Email'  name="email" type="email" placeHolder='Your New Email Address'/>
             {
                 !isDelete && <Input handler={(e) => setNewPassword(e.target.value)} value={newPassword} label='New Password' name="new password" type="password" htmlFor='new Password' placeHolder='Your New Password'/>
             }
             </div>
-            <div className="flex justify-around items-center w-[70%] my-10 ml-10">
-            <Button handleClick={(e) => isDelete ? handleUpdate(e) : handleDelete(e)}><span className={isDelete ? "text-black" : "text-red-500"}>{isDelete ? "Update Account? " : "Delete Acount? "}</span></Button>
+            <div className="flex justify-center items-center w-full my-10 ml-10">
+            <p className="cursor-pointer mr-2" onClick={(e) => isDelete ? handleUpdate(e) : handleDelete(e)}><span className={isDelete ? "text-black" : "text-red-500"}>{isDelete ? "Update Account? " : "Delete Acount? "}</span></p>
             <Button type={isDelete ?  "delete" : "default" } handleClick={(e) => handleSubmit(e)} >{isDelete ? "Delete Account" : "Update Account"}</Button>
 
             </div>

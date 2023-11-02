@@ -33,7 +33,7 @@ const MealPlaner = () => {
    
 
     return (
-       <div className="flex flex-col w-full h-full justify-start items-center">
+       <div className="flex flex-col w-full h-[800px] justify-start items-center">
             <div className="flex w-[90%] h-[85%] border-2 border-black border-solid">
                 {typeof Object.values(mealPlan)[0] === "undefined" ?
                 ""
