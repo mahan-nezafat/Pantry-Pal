@@ -6,6 +6,7 @@ export const fetchUser = async (id) => {
     .from('users')
     .select('*')
     .eq('id', id)
+    console.log(user, error)
     return {user, error}
 }
 
@@ -24,6 +25,15 @@ export const updateFoodIds = async (id, foodIds) => {
     const { data, error } = await supabase
     .from('users')
     .update({favorite_foods_ids: foodIds})
+    .eq('id', id)
+    .select()
+    return {data, error}
+}
+
+export const addMealPlan = async (id, mealPlan) => {
+    const { data, error } = await supabase
+    .from('users')
+    .update({meal_plan: mealPlan})
     .eq('id', id)
     .select()
     return {data, error}
@@ -63,7 +73,7 @@ export const deleteUser = async (id) => {
 export const filterUser = async (email, password) => {
     const { data, error } = await supabase
     .from('users')
-    .select('id, full_name, email, admin, favorite_foods_ids')
+    .select('id, full_name, email, admin, favorite_foods_ids, meal_plan')
     .match({ email: email, password: password })
 
     return data

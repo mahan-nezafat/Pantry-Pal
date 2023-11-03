@@ -7,7 +7,8 @@ const initialState = {
     email: "",
     password: "",
     admin: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    mealPlan: {}
 }
 
 const authSlice = createSlice({
@@ -34,11 +35,14 @@ const authSlice = createSlice({
             state.fullName = action.payload[0].full_name
             state.email = action.payload[0].email
             state.id = action.payload[0].id
+        },
+
+        setMealPlan(state, action) {
+            state.mealPlan = action.payload;
         }
-        
     }
 })
 
-export const {setLoggedIn, setFullName, setEmail, setPassword, loginUser} = authSlice.actions;
+export const {setLoggedIn, setFullName, setEmail, setPassword, loginUser, setMealPlan} = authSlice.actions;
 
 export default authSlice.reducer;

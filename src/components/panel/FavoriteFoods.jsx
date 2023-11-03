@@ -3,7 +3,7 @@ import RecipeList from '../search/RecipeList';
 import { getBulkFood } from "../../features/food/foodSlice";
 import { useDispatch, useSelector } from "react-redux";
 import RecipeItem from "../search/RecipeItem";
-const FavoriteFoods = () => {
+const FavoriteFoods = ({ handleData }) => {
     const dispatch = useDispatch();
     const {favFoodsIds, bulkFood} = useSelector(store => store.food);
         
@@ -14,11 +14,10 @@ const FavoriteFoods = () => {
           { bulkFood &&
                
                Object.values(bulkFood).map((item, index) => {
-                return <RecipeItem item={item} key={item.id}/>
+                return <RecipeItem handleData={handleData} item={item} key={item.id}/>
               })
               
             }
-        {/* <h1 onClick={handleData}>click </h1> */}
       </div>
     );
 }

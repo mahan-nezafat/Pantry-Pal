@@ -6,13 +6,14 @@ import { getFood, selectFood, getYoutubeId, loadingFood, removeFavFoodsIds, addF
 import { useNavigate } from 'react-router-dom';
 import { updateFoodIds } from '../../services/dataBaseApis';
 import Button from '../utils/Button';
-const RecipeItem = ({ item }) => {
+import { setIsLoading } from '../../features/search/searchSlice';
+const RecipeItem = ({ item, handleData }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {title, image} = item;
     const {isLoading} = useSelector(store => store.search);
     const {id, isLoggedIn} = useSelector(store => store.auth);
-    const {favFoodsIds, isSelected} = useSelector(store => store.food)
+    const {favFoodsIds, isSelected, bulkFood} = useSelector(store => store.food)
     const [isLiked, setIsLiked] = useState(false);    
     
     
@@ -36,7 +37,10 @@ const RecipeItem = ({ item }) => {
             
         }else {
             dispatch(addFavFoodsIds(item.id));   
-        }        
+        }
+        if(handleData) {
+            handleData()
+        }
     }
 
     useEffect(() => {
@@ -49,13 +53,16 @@ const RecipeItem = ({ item }) => {
 
     useEffect(() => {
         if(!isLoading) return;
-        favFoodsIds.find(id => {
-            if(Number(id) === item.id) { 
-                setIsLiked(true)
-                console.log(typeof id, id, typeof item.id, item.id)
-            }
-        })
-    }, [isLoading, isSelected])
+        // if(isLoading || bulkFood.length > 0) {
+
+            favFoodsIds.find(id => {
+                if(Number(id) === item.id) { 
+                    setIsLiked(true)
+                    console.log(typeof id, id, typeof item.id, item.id)
+                }
+            })
+        // }
+    }, [isLoading])
       
     return (
         <div className='w-[24%] flex justify-center items-center flex-col cursor-pointer bg-white text-black'>

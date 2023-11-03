@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const apiKey = "f88e395dfddb4a21837e281aa658717c";
+import apiKey from "../../services/apiKeys";
+
 
 const initialState = {
   selectedFoodInformation: {},
