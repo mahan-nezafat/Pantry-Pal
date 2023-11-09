@@ -11,13 +11,13 @@ export const fetchUser = async (id) => {
 }
 
 export const fetchFoodIds = async (id) => {
-
-    const { data: user, error } = await supabase
+    // if(!id) return;
+    const { data, error } = await supabase
     .from('users')
-    .select('*')
-    .eq('id', id)
-    console.log(user);
-    return {user, error}
+    .select('favorite_foods_ids')
+    .match(id)
+    // console.log(user);
+    return {data, error}
 }
 
 export const updateFoodIds = async (id, foodIds) => {

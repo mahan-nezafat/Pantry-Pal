@@ -36,6 +36,9 @@ const authSlice = createSlice({
             state.email = action.payload[0].email
             state.id = action.payload[0].id
         },
+        setId(state, action) {
+            state.id = action.payload
+        },
 
         setMealPlan(state, action) {
             state.mealPlan = action.payload;
@@ -43,6 +46,6 @@ const authSlice = createSlice({
     }
 })
 
-export const {setLoggedIn, setFullName, setEmail, setPassword, loginUser, setMealPlan} = authSlice.actions;
+export const {setLoggedIn, setFullName, setEmail, setPassword, loginUser, setMealPlan, setId} = authSlice.actions;
 
 export default authSlice.reducer;
