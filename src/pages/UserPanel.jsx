@@ -4,13 +4,12 @@ import Button from "../components/utils/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import MealPlaner from "../components/panel/MealPlaner";
-import ShoppingList from "../components/panel/ShoppingList";
 import FavoriteFoods from "../components/panel/FavoriteFoods";
 import Settings from "../components/panel/Settings";
 import { getBulkFood, setFoodsIds } from "../features/food/foodSlice";
 import { setIsLoading } from "../features/search/searchSlice";
-import { setLoggedIn, setId } from "../features/auth/authSlice";
-import { fetchFoodIds } from "../services/dataBaseApis";
+import { setLoggedIn, setId, setMealPlan } from "../features/auth/authSlice";
+import { fetchFoodIds, fetchMealPlan } from "../services/dataBaseApis";
 
 const UserPanel = () => {
     const {isLoggedIn, id, email, password} = useSelector(store => store.auth);
@@ -21,6 +20,7 @@ const UserPanel = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [panelContent, setPanelContent] = useState("mealplaner");
+
     function logOut() {
         dispatch(setLoggedIn(false));
         navigate("/login");
@@ -39,7 +39,7 @@ const UserPanel = () => {
     
     useEffect(() => {
        async function handleReload() {
-        let ids;
+        let ids, mealPlan;
         let user = localStorage.getItem('user');
         let userId = JSON.parse(user).id;
         if(userCredintials.id) {
@@ -51,9 +51,13 @@ const UserPanel = () => {
             dispatch(setId(userId))
         }
         let {data} = await fetchFoodIds(userId) ;
+        let {mealPlanData} = await fetchMealPlan(userId);
         ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
-        console.log(id)
+        mealPlan = mealPlanData[0].meal_plan
+        
+        dispatch(setLoggedIn(true));
         dispatch(setFoodsIds(ids));
+        dispatch(setMealPlan(mealPlan))
         
     }
       handleReload();

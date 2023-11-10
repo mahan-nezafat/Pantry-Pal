@@ -11,6 +11,8 @@ const Food = lazy(() => import("./pages/Food"));
 const Login = lazy(() => import("./pages/Login"));
 const MealPlaner = lazy(() => import("./pages/MealPlaner"));
 const UserPanel = lazy(() => import("./pages/UserPanel"));
+const Settings = lazy(() => import("./components/panel/Settings"));
+const Favorite = lazy(() => import("./components/panel/FavoriteFoods"));
 const App = () => {
   return (
     <> 
@@ -23,7 +25,11 @@ const App = () => {
             <Route path="/food" element={<Food />} />
             <Route path="/login" element={<Login />} />
             <Route path="/mealplaner" element={<MealPlaner />} />
-            <Route path="/userpanel" element={<UserPanel />} />
+            <Route path="/userpanel" element={<UserPanel />} >
+            <Route path="settings" element={<Settings />} />
+            <Route path="favorite" element={<Favorite />} />
+
+            </Route>
             <Route path="*" element={<Notfounded />} />
           </Routes>
         </Suspense>

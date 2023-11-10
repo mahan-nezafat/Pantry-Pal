@@ -20,6 +20,16 @@ export const fetchFoodIds = async (id) => {
     return {data, error}
 }
 
+export const fetchMealPlan = async (id) => {
+    // if(!id) return;
+    const { data: mealPlanData, error } = await supabase
+    .from('users')
+    .select('meal_plan')
+    .match(id)
+    // console.log(user);
+    return {mealPlanData, error}
+}
+
 export const updateFoodIds = async (id, foodIds) => {
 
     const { data, error } = await supabase
