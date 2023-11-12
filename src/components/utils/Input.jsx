@@ -3,9 +3,9 @@ import { createUser } from "../../features/auth/authSlice";
 
 const Input = ({ type, label, htmlFor, name, placeHolder, value, handler }) => {
     return(
-        <div className="flex w-[95%] justify-between items-center my-4 outline-none ">
+        <div className="flex w-[95%] justify-between items-start my-4 outline-none flex-col">
             {label && <label className="text-base whitespace-nowrap" htmlFor={htmlFor} >{label}</label>}
-            <input onChange={(e) => handler(e)} className="w-[80%] border-solid border-[1px] border-black rounded py-1 px-5 focus-visible:outline-none autofill:bg-[#fff] filter-none !bg-transparent" value={value} name={name} type={type} placeholder={placeHolder} />
+            <input onChange={(e) => handler(e)} className="w-[100%] border-solid border-[1px] border-black rounded py-1 px-5 focus-visible:outline-none autofill:bg-[#fff] filter-none !bg-transparent" value={value} name={name} type={type} placeholder={placeHolder} />
         </div>
     );
 }

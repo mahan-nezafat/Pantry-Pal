@@ -16,7 +16,7 @@ const TableColumn = ({ day, mealDay }) => {
                         })
                         
                     }
-                    <div className="flex flex-col text-sm">
+                    <div className="flex flex-col text-sm p-2">
                         <span>Cals: {Math.floor(calories)}</span>
                         <span>Carbs: {Math.floor(carbohydrates)}</span>
                         <span>fat: {Math.floor(fat)}</span>

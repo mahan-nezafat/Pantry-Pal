@@ -9,7 +9,6 @@ import { setMealPlan } from "../../features/auth/authSlice";
 const MealPlaner = () => {
     const { id, isLoggedIn, mealPlan } = useSelector(store => store.auth);
     const dispatch = useDispatch();
-    // const [mealPlan, setMealPlan] = useState({});
     const days = ["Saturday","Sunday","Monday","Tuesday","Wendsday","Thursday","Friday"]
     const [isClicked, setIsClicked] = useState(false)
     const [calories, setCalories] = useState(0);
@@ -43,7 +42,7 @@ const MealPlaner = () => {
 
     return (
        <div className="flex flex-col w-full h-[800px] justify-start items-center">
-            <div className="flex w-[90%] h-[85%] border-2 border-black border-solid">
+            <div className="flex w-[90%] h-[85%] border-[1px] border-black border-solid rounded">
                 {typeof Object.values(mealPlan)[0] === "undefined" ?
                 ""
                 :
@@ -55,9 +54,9 @@ const MealPlaner = () => {
                 
             </div>
             <div className="flex w-[90%] mt-3 ">
-                <Button handleClick={handleAddMealPlan} type="default" >Add meal plan</Button>
+                <Button handleClick={handleAddMealPlan} type="default" >Add this meal plan</Button>
                 <Button handleClick={() => setIsClicked(true)} type="default">Generate a meal plan</Button>
-                <input placeholder="number of calories for each day" className="placeholder:text-base ml-2 outline-none border-[1px] border-black p-1 px-3 w-[18%] rounded" type="number" value={calories} onChange={(e) => setCalories(e.target.value)} />
+                <input placeholder="number of calories for each day" className="placeholder:text-base ml-2 outline-none border-[1px] border-black p-1 px-3 w-[18%] rounded" type="number" value={calories} onChange={(e) => e.target.value >= 0 ? setCalories(e.target.value) : ""} />
             </div>
        </div>
     );
