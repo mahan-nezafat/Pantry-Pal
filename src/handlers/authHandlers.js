@@ -7,18 +7,19 @@ import { setFoodsIds } from "../features/food/foodSlice";
 
 export  const handleLogin = async (e, email, password, dispatch) => {
     e.preventDefault();
-    let data;
-    let ids;
-    let mealPlan;
+    let data, ids, mealPlan, userId;
     try {
         data = await filterUser(email, password)
         ids =  data === null ? [] : data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
-        mealPlan = data === null ? {} : data[0].meal_plan
-        console.log(ids)
+        // mealPlan = data === null ? {} :
+        if(data !== null) mealPlan = data[0].meal_plan;
+        else mealPlan = null
     } catch (error) {
         console.log(error)
     }
     if(!data) return
+    userId = Object.assign(data[0]).id
+    localStorage.setItem('user', JSON.stringify({userId, email}))
     dispatch(loginUser(data))
     dispatch(setLoggedIn(true));
     dispatch(setFoodsIds(ids));
@@ -39,7 +40,6 @@ export const handleSignUp = async (e, user, dispatch) => {
         }
 
         const {data, error} = await insertUser(newUser)
-        console.log(data)
         dispatch(loginUser(data))
         dispatch(setLoggedIn(true));
     } catch (error) {

@@ -8,7 +8,7 @@ const initialState = {
     password: "",
     admin: false,
     isLoggedIn: false,
-    mealPlan: {}
+    mealPlan: null
 }
 
 const authSlice = createSlice({

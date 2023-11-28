@@ -41,20 +41,13 @@ const UserPanel = () => {
        async function handleReload() {
         let ids, mealPlan;
         let user = localStorage.getItem('user');
-        let userId = JSON.parse(user).id;
-        if(userCredintials.id) {
-            localStorage.setItem('user', JSON.stringify(userCredintials));
-            console.log(localStorage.user, "saving");
-        }else {
-            // console.log(localStorage.user, "loading", user.id);
-
-            dispatch(setId(userId))
-        }
+        let userId = JSON.parse(user).userId;
+       
+        console.log(userId)
         let {data} = await fetchFoodIds(userId) ;
         let {mealPlanData} = await fetchMealPlan(userId);
         ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
         mealPlan = mealPlanData[0].meal_plan
-        
         dispatch(setLoggedIn(true));
         dispatch(setFoodsIds(ids));
         dispatch(setMealPlan(mealPlan))

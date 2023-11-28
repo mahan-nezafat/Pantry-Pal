@@ -31,25 +31,27 @@ const MealPlaner = () => {
         handleGenerate();
         console.log(mealPlan)
         setIsClicked(false)
+        // console.log(Object.values(mealPlan).length)
     }, [isClicked])
 
 
     function handleAddMealPlan() {
         addMealPlan(id, mealPlan)
     }
-
    
 
     return (
        <div className="flex flex-col w-full h-[800px] justify-start items-center">
             <div className="flex w-[90%] h-[85%] border-[1px] border-black border-solid rounded">
-                {typeof Object.values(mealPlan)[0] === "undefined" ?
-                ""
-                :
-                   Object.values(Object.values(mealPlan)[0]).map((mealDay, index) => {
+                { mealPlan !== null ?
+                
+                Object.values(mealPlan.week).map((mealDay, index) => {
+                       console.log(mealPlan)
                         
                        return <TableColumn key={index} mealDay={mealDay} day={days[index]} />
                     })
+                :
+                ""
                 }
                 
             </div>
