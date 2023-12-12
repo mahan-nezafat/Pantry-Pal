@@ -70,17 +70,18 @@ export const updateUser = async (id, updatedUser) => {
     .update({email: updateUser.email, password: updatedUser.password})
     .eq('id', id)
     .select()
+    console.log(error)
     return {data, error}
 }
 
 export const deleteUser = async (id) => {
 
-    const { error } = await supabase
+    const { data, error } = await supabase
     .from('users')
     .delete()
     .eq('id', id)
 
-    return { error }
+    return { data, error }
 }
 
 export const filterUser = async (email, password) => {

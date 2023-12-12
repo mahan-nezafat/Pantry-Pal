@@ -10,6 +10,8 @@ import { getBulkFood, setFoodsIds } from "../features/food/foodSlice";
 import { setIsLoading } from "../features/search/searchSlice";
 import { setLoggedIn, setId, setMealPlan } from "../features/auth/authSlice";
 import { fetchFoodIds, fetchMealPlan } from "../services/dataBaseApis";
+import toast, { Toaster } from 'react-hot-toast';
+import { handleHotToast } from "../handlers/handleHotToast";
 
 const UserPanel = () => {
     const {isLoggedIn, id, email, password} = useSelector(store => store.auth);
@@ -35,6 +37,8 @@ const UserPanel = () => {
             
         }, 2000)     
     }
+
+   
 
     
     useEffect(() => {
@@ -76,18 +80,19 @@ const UserPanel = () => {
                     </div>
                     <div className={`w-[90%] h-full flex justify-center items-center`}>
                         {
-                            panelContent === "mealplaner" && <MealPlaner />
+                            panelContent === "mealplaner" && <MealPlaner handleHotToast={handleHotToast} />
                         }
                         
                         {
-                            panelContent === "favoritefoods" && <FavoriteFoods handleData={handleData} />
+                            panelContent === "favoritefoods" && <FavoriteFoods handleData={handleData}  />
                         }
                         {
-                            panelContent === "settings" && <Settings />
+                            panelContent === "settings" && <Settings  handleHotToast={handleHotToast} />
                         } 
                             
                     </div>
-                </div>   
+                </div>
+                <Toaster />   
                 
             </div>
         </>

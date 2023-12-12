@@ -9,6 +9,7 @@ import { filterUser } from "../services/dataBaseApis";
 import { useNavigate } from "react-router-dom";
 import { connectUser } from "../services/apiMealPlaner";
 import { handleLogin, handleSignUp } from "../handlers/authHandlers";
+import { Toaster } from "react-hot-toast";
 const Login = () => {
     const { isLoggedIn, fullName, email, password } = useSelector(state => state.auth)
     const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const Login = () => {
                     }</p>
                 </form>
             </div>
+            <Toaster />
         </>
     )
 }

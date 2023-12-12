@@ -5,42 +5,52 @@ import { useDispatch, useSelector } from "react-redux";
 import { setEmail, setLoggedIn, setPassword } from "../../features/auth/authSlice";
 import { deleteUser, updateUser } from "../../services/dataBaseApis";
 import { useNavigate } from "react-router-dom";
-const Settings = () => {
+const Settings = ({ handleHotToast }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isDelete, setIsDelete] = useState(false)    
-    const {email, id} = useSelector(store => store.auth);
+    let {email, id} = useSelector(store => store.auth);
     const [newPassword, setNewPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    let updateData, deleteData;
     async function handleSubmit(e) {
         e.preventDefault();
+        let userId = JSON.parse(localStorage.getItem('user')).userId;
+        if(id === null) id = userId;
         if(isDelete && !email) return setErrorMessage('no email entered');
         if(!isDelete && !email || !isDelete && !newPassword) return setErrorMessage('no email or new password entered');
         if(isDelete) {
             console.log('user is deleted')
-            deleteUser(id);
+            deleteData = deleteUser(id).then((data, error) => data)
+            handleHotToast('promise', {loading: 'deleting your account', success: 'deleting was successful', error: 'could not apply changes'}, deleteData)
             dispatch(setLoggedIn(false));
-            navigate("/login");
-        }else {
-            const updatedUser = {password: newPassword, email};
-            const data = await updateUser(id, updatedUser);
-            console.log(updateUser, data)
-            dispatch(setLoggedIn(false));
-            navigate("/login");
+            setTimeout(() => {
+                navigate("/login");
+            }, 2000)
 
+        }else {
+            console.log(id)
+            const updatedUser = {password: newPassword, email};
+            updateData = updateUser(id, updatedUser).then((data, error) => data)
+            console.log(updateData)
+            handleHotToast('promise', {loading: 'updating your account', success: 'updating was successful', error: 'could not apply changes'}, updateData)
+            dispatch(setLoggedIn(false));
+            setTimeout(() => {
+                navigate("/login");
+            }, 2000)
         }
     }
     
-    function handleUpdate(e) {
+    function handleUpdate() {
         // e.preventDefault();
         setIsDelete(false)
-       
+
     }   
 
 
     function handleDelete(e) {
         // e.preventDefault();
-        setIsDelete(true)
+        setIsDelete(true) 
 
     }
     
