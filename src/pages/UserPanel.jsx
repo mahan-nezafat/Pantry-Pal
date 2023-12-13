@@ -6,12 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 import MealPlaner from "../components/panel/MealPlaner";
 import FavoriteFoods from "../components/panel/FavoriteFoods";
 import Settings from "../components/panel/Settings";
-import { getBulkFood, setFoodsIds } from "../features/food/foodSlice";
-import { setIsLoading } from "../features/search/searchSlice";
-import { setLoggedIn, setId, setMealPlan } from "../features/auth/authSlice";
+import { getBulkFood, setFoodsIds, clearAllFood } from "../features/food/foodSlice";
+import { setIsLoading, clearAllSearch } from "../features/search/searchSlice";
+import { setLoggedIn, setId, setMealPlan, clearAllAuth } from "../features/auth/authSlice";
 import { fetchFoodIds, fetchMealPlan } from "../services/dataBaseApis";
 import toast, { Toaster } from 'react-hot-toast';
 import { handleHotToast } from "../handlers/handleHotToast";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const UserPanel = () => {
     const {isLoggedIn, id, email, password} = useSelector(store => store.auth);
@@ -24,6 +25,9 @@ const UserPanel = () => {
     const [panelContent, setPanelContent] = useState("mealplaner");
 
     function logOut() {
+        dispatch(clearAllAuth());
+        dispatch(clearAllFood());
+        dispatch(clearAllSearch());
         dispatch(setLoggedIn(false));
         navigate("/login");
     }

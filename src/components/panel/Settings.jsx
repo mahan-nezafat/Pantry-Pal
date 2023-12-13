@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Input from "../utils/Input";
 import Button  from "../utils/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setLoggedIn, setPassword } from "../../features/auth/authSlice";
+import { clearAllAuth, setEmail, setLoggedIn, setPassword } from "../../features/auth/authSlice";
 import { deleteUser, updateUser } from "../../services/dataBaseApis";
 import { useNavigate } from "react-router-dom";
+import { clearAllFood } from "../../features/food/foodSlice";
+import { clearAllSearch } from "../../features/search/searchSlice";
 const Settings = ({ handleHotToast }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -39,6 +41,9 @@ const Settings = ({ handleHotToast }) => {
                 navigate("/login");
             }, 2000)
         }
+        dispatch(clearAllAuth());
+        dispatch(clearAllFood());
+        dispatch(clearAllSearch());
     }
     
     function handleUpdate() {

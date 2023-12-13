@@ -54,7 +54,11 @@ const foodSlice = createSlice({
     },
     setIsLiked(state, action) {
       state.isLiked = action.payload;
-    }
+    },
+    clearAllFood(state) {
+      state = initialState;
+      console.log(state)
+  }
   
   },
 });
@@ -115,6 +119,6 @@ export function getYoutubeId(foodTitle) {
   };
 }
 
-export const { selectFood, closeFood, setFoodTitle, loadingFood, addFavFoodsIds, removeFavFoodsIds, setFoodsIds, setIsLiked } = foodSlice.actions;
+export const {clearAllFood, selectFood, closeFood, setFoodTitle, loadingFood, addFavFoodsIds, removeFavFoodsIds, setFoodsIds, setIsLiked } = foodSlice.actions;
 
 export default foodSlice.reducer;
