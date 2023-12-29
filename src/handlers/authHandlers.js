@@ -8,23 +8,23 @@ import { handleHotToast } from "./handleHotToast";
 
 export  const handleLogin = async (e, email, password, dispatch) => {
     e.preventDefault();
-    let data, ids, mealPlan, userId;
+    let data, ids, mealPlan, userId, fullName;
     let loadingData = filterUser(email, password).then(data => data);
     handleHotToast('promise', {loading: 'Logging you in', success: 'Login was successful', error: 'could not login'}, loadingData)
 
     try {
         data = await filterUser(email, password)
         ids =  data === null ? [] : data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
-        // mealPlan = data === null ? {} :
+        fullName = data === null ? '' : data[0].full_name;
         if(data !== null) mealPlan = data[0].meal_plan;
         else mealPlan = null
     } catch (error) {
         console.log(error)
     }
     if(!data) return
-
+    console.log(data)
     userId = Object.assign(data[0]).id
-    localStorage.setItem('user', JSON.stringify({userId, email}))
+    localStorage.setItem('user', JSON.stringify({userId, email, fullName}))
     dispatch(loginUser(data))
     dispatch(setLoggedIn(true));
     dispatch(setFoodsIds(ids));

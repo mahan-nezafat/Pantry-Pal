@@ -48,7 +48,7 @@ const Main = () => {
              
   return (
     <>
-      <div className="w-full flex h-full flex-col overflow-hidden bg-[#E0DBDF]">
+      <div className=" w-full flex h-full flex-col overflow-hidden bg-[#E0DBDF]">
         <Hero />
         <div
           ref={search}
@@ -67,7 +67,7 @@ const Main = () => {
               </div>
               <div className="flex justify-center flex-col items-center w-[40%] h-full ">
                 <h1 className="border-black border-[1px] border-solid rounded p-2"><Link to="/search" >SEARCH</Link>
-</h1>
+                </h1>
                 <p className="mt-5 w-[50%] text-center">
                   Search for your favorite foods by name, ingredients, tastes,
                   types and diets.

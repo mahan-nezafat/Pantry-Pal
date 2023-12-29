@@ -8,14 +8,14 @@ import FavoriteFoods from "../components/panel/FavoriteFoods";
 import Settings from "../components/panel/Settings";
 import { getBulkFood, setFoodsIds, clearAllFood } from "../features/food/foodSlice";
 import { setIsLoading, clearAllSearch } from "../features/search/searchSlice";
-import { setLoggedIn, setId, setMealPlan, clearAllAuth } from "../features/auth/authSlice";
+import { setLoggedIn, setId, setMealPlan, clearAllAuth, setFullName } from "../features/auth/authSlice";
 import { fetchFoodIds, fetchMealPlan } from "../services/dataBaseApis";
 import toast, { Toaster } from 'react-hot-toast';
 import { handleHotToast } from "../handlers/handleHotToast";
 import { clear } from "@testing-library/user-event/dist/clear";
 
 const UserPanel = () => {
-    const {isLoggedIn, id, email, password} = useSelector(store => store.auth);
+    const {isLoggedIn, id, email, password, fullName} = useSelector(store => store.auth);
     const {favFoodsIds} = useSelector(store => store.food);
     const {isLoading} = useSelector(store => store.search);
     let userCredintials = {email, password, id};
@@ -47,10 +47,10 @@ const UserPanel = () => {
     
     useEffect(() => {
        async function handleReload() {
-        let ids, mealPlan;
+        let ids, mealPlan, userName;
         let user = localStorage.getItem('user');
-        let userId = JSON.parse(user).userId;
-       
+        let {userId, fullName} = JSON.parse(user);
+        
         console.log(userId)
         let {data} = await fetchFoodIds(userId) ;
         let {mealPlanData} = await fetchMealPlan(userId);
@@ -59,7 +59,7 @@ const UserPanel = () => {
         dispatch(setLoggedIn(true));
         dispatch(setFoodsIds(ids));
         dispatch(setMealPlan(mealPlan))
-        
+        dispatch(setFullName(fullName))
     }
       handleReload();
     }, [])
@@ -70,7 +70,7 @@ const UserPanel = () => {
         <>
                 <Header />
             <div className="flex flex-col w-full h-[80%]">
-
+                <h1 className="ml-2 text-2xl mb-2 w-full text-center">Welcome to your panel {fullName}!</h1>
                 <div className="flex w-full h-full justify-end items-center relative">
                     <div className="w-[10%] h-[85%] justify-center items-center flex flex-col pl-4 fixed left-[0%] bottom-[2%]">
                         <ul className="w-full">
