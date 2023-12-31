@@ -6,13 +6,16 @@ import { Link, useNavigate } from "react-router-dom";
 import MealPlaner from "../components/panel/MealPlaner";
 import FavoriteFoods from "../components/panel/FavoriteFoods";
 import Settings from "../components/panel/Settings";
-import { getBulkFood, setFoodsIds } from "../features/food/foodSlice";
-import { setIsLoading } from "../features/search/searchSlice";
-import { setLoggedIn, setId, setMealPlan } from "../features/auth/authSlice";
+import { getBulkFood, setFoodsIds, clearAllFood } from "../features/food/foodSlice";
+import { setIsLoading, clearAllSearch } from "../features/search/searchSlice";
+import { setLoggedIn, setId, setMealPlan, clearAllAuth, setFullName } from "../features/auth/authSlice";
 import { fetchFoodIds, fetchMealPlan } from "../services/dataBaseApis";
+import toast, { Toaster } from 'react-hot-toast';
+import { handleHotToast } from "../handlers/handleHotToast";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const UserPanel = () => {
-    const {isLoggedIn, id, email, password} = useSelector(store => store.auth);
+    const {isLoggedIn, id, email, password, fullName} = useSelector(store => store.auth);
     const {favFoodsIds} = useSelector(store => store.food);
     const {isLoading} = useSelector(store => store.search);
     let userCredintials = {email, password, id};
@@ -22,6 +25,9 @@ const UserPanel = () => {
     const [panelContent, setPanelContent] = useState("mealplaner");
 
     function logOut() {
+        dispatch(clearAllAuth());
+        dispatch(clearAllFood());
+        dispatch(clearAllSearch());
         dispatch(setLoggedIn(false));
         navigate("/login");
     }
@@ -36,29 +42,24 @@ const UserPanel = () => {
         }, 2000)     
     }
 
+   
+
     
     useEffect(() => {
        async function handleReload() {
-        let ids, mealPlan;
+        let ids, mealPlan, userName;
         let user = localStorage.getItem('user');
-        let userId = JSON.parse(user).id;
-        if(userCredintials.id) {
-            localStorage.setItem('user', JSON.stringify(userCredintials));
-            console.log(localStorage.user, "saving");
-        }else {
-            // console.log(localStorage.user, "loading", user.id);
-
-            dispatch(setId(userId))
-        }
+        let {userId, fullName} = JSON.parse(user);
+        
+        console.log(userId)
         let {data} = await fetchFoodIds(userId) ;
         let {mealPlanData} = await fetchMealPlan(userId);
         ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
         mealPlan = mealPlanData[0].meal_plan
-        
         dispatch(setLoggedIn(true));
         dispatch(setFoodsIds(ids));
         dispatch(setMealPlan(mealPlan))
-        
+        dispatch(setFullName(fullName))
     }
       handleReload();
     }, [])
@@ -69,7 +70,7 @@ const UserPanel = () => {
         <>
                 <Header />
             <div className="flex flex-col w-full h-[80%]">
-
+                <h1 className="ml-2 text-2xl mb-2 w-full text-center">Welcome to your panel {fullName}!</h1>
                 <div className="flex w-full h-full justify-end items-center relative">
                     <div className="w-[10%] h-[85%] justify-center items-center flex flex-col pl-4 fixed left-[0%] bottom-[2%]">
                         <ul className="w-full">
@@ -83,18 +84,19 @@ const UserPanel = () => {
                     </div>
                     <div className={`w-[90%] h-full flex justify-center items-center`}>
                         {
-                            panelContent === "mealplaner" && <MealPlaner />
+                            panelContent === "mealplaner" && <MealPlaner handleHotToast={handleHotToast} />
                         }
                         
                         {
-                            panelContent === "favoritefoods" && <FavoriteFoods handleData={handleData} />
+                            panelContent === "favoritefoods" && <FavoriteFoods handleData={handleData}  />
                         }
                         {
-                            panelContent === "settings" && <Settings />
+                            panelContent === "settings" && <Settings  handleHotToast={handleHotToast} />
                         } 
                             
                     </div>
-                </div>   
+                </div>
+                <Toaster />   
                 
             </div>
         </>

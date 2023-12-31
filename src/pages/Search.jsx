@@ -26,8 +26,8 @@ const Search = () => {
       <div className="flex justify-center items-center my-[50px] mx-0">
         <div>
           <form onSubmit={handleSubmit} className="flex justify-center items-center font-[Lato]" >
-            <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="Enter your query..." className="py-[9px] px-[15px] border-black border-[1px] border-solid mr-[4px] bg-transparent outline-none text-black text-[1rem] font-[Lato] placeholder:text-black" />
-            <button className={`border-none p-[9px] bg-black text-white font-[1.1rem] ${isLoading ? "bg-gray" : ""}`} >Search</button>
+            <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="Enter your query..." className="rounded py-[9px] px-[15px] border-black border-[1px] border-solid mr-[4px] bg-transparent outline-none text-black text-[1rem] font-[Lato] placeholder:text-black" />
+            <button className={`rounded border-none p-[9px] bg-black text-white font-[1.1rem] ${isLoading ? "bg-gray" : ""}`} >Search</button>
           </form>
         </div>
       </div>

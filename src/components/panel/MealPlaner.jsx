@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import TableColumn from "./TableColumn";
 import { setMealPlan } from "../../features/auth/authSlice";
 
-const MealPlaner = () => {
-    const { id, isLoggedIn, mealPlan } = useSelector(store => store.auth);
+const MealPlaner = ({ handleHotToast }) => {
+    let { id, isLoggedIn, mealPlan } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const days = ["Saturday","Sunday","Monday","Tuesday","Wendsday","Thursday","Friday"]
     const [isClicked, setIsClicked] = useState(false)
@@ -31,25 +31,35 @@ const MealPlaner = () => {
         handleGenerate();
         console.log(mealPlan)
         setIsClicked(false)
+        // console.log(Object.values(mealPlan).length)
     }, [isClicked])
 
 
     function handleAddMealPlan() {
-        addMealPlan(id, mealPlan)
+        let userId = JSON.parse(localStorage.getItem('user')).userId;
+        if(id === null) id = userId;
+        const data = addMealPlan(id, mealPlan).then(data => data);
+        handleHotToast('promise',
+        {   loading:'replacing your previous meal plan',
+            success: 'new meal plan replaced',
+            error: 'could not add this meal plan'
+        },
+        data)
     }
-
    
 
     return (
        <div className="flex flex-col w-full h-[800px] justify-start items-center">
             <div className="flex w-[90%] h-[85%] border-[1px] border-black border-solid rounded">
-                {typeof Object.values(mealPlan)[0] === "undefined" ?
-                ""
-                :
-                   Object.values(Object.values(mealPlan)[0]).map((mealDay, index) => {
+                { mealPlan !== null ?
+                
+                Object.values(mealPlan.week).map((mealDay, index) => {
+                       console.log(mealPlan)
                         
                        return <TableColumn key={index} mealDay={mealDay} day={days[index]} />
                     })
+                :
+                ""
                 }
                 
             </div>

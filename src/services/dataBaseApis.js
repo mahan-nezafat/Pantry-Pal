@@ -15,8 +15,9 @@ export const fetchFoodIds = async (id) => {
     const { data, error } = await supabase
     .from('users')
     .select('favorite_foods_ids')
-    .match(id)
-    // console.log(user);
+    .match({id})
+    console.log(id);
+    console.log(data, error)
     return {data, error}
 }
 
@@ -25,8 +26,10 @@ export const fetchMealPlan = async (id) => {
     const { data: mealPlanData, error } = await supabase
     .from('users')
     .select('meal_plan')
-    .match(id)
+    .match({id})
     // console.log(user);
+    console.log(mealPlanData, error)
+
     return {mealPlanData, error}
 }
 
@@ -67,17 +70,18 @@ export const updateUser = async (id, updatedUser) => {
     .update({email: updateUser.email, password: updatedUser.password})
     .eq('id', id)
     .select()
+    console.log(error)
     return {data, error}
 }
 
 export const deleteUser = async (id) => {
 
-    const { error } = await supabase
+    const { data, error } = await supabase
     .from('users')
     .delete()
     .eq('id', id)
 
-    return { error }
+    return { data, error }
 }
 
 export const filterUser = async (email, password) => {

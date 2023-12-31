@@ -22,6 +22,10 @@ const searchSlice = createSlice({
       state.isLoading = action.payload;
 
     },
+    clearAllSearch(state) {
+      state = initialState;
+      console.log(state)
+  }
   },
 });
 
@@ -54,6 +58,6 @@ export function setData(searchQuery) {
   };
 }
 
-export const { setIsLoading, submitSearch } = searchSlice.actions;
+export const { setIsLoading, submitSearch, clearAllSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;
