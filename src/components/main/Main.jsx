@@ -48,7 +48,7 @@ const Main = () => {
              
   return (
     <>
-      <div className=" w-full flex h-full flex-col overflow-hidden bg-[#E0DBDF]">
+      <div className="text-amber-900 dark:text-amber-400 w-full flex h-full flex-col overflow-hidden">
         <Hero />
         <div
           ref={search}
@@ -93,7 +93,7 @@ const Main = () => {
               </div>
               <div className="flex justify-center flex-col items-center w-[40%] h-full ">
                 <h1 className="border-black border-[1px] border-solid rounded p-2"><Link to={"/mealplaner"}>MEAL PLANER</Link>
-</h1>
+                </h1>
                 <p className="mt-5 px-10 text-center">
                     get, add and delete meal planes 
                 </p>
