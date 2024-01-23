@@ -12,8 +12,11 @@ const Navbar = () => {
   useEffect(() => {
     if(darkMode) {
       document.documentElement.classList.add('dark');
+      document.body.style.backgroundColor = '#310F01'
+
     }else {
       document.documentElement.classList.remove('dark');
+      document.body.style.backgroundColor = '#E0DBDF'
 
     }
   }, [darkMode])

@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import "./index.css";
-
+import { useSelector } from "react-redux";
 
 const Home = lazy(() => import("./pages/Home"));
 const Notfounded = lazy(() => import("./pages/Notfounded"));
@@ -13,11 +13,18 @@ const MealPlaner = lazy(() => import("./pages/MealPlaner"));
 const UserPanel = lazy(() => import("./pages/UserPanel"));
 const Settings = lazy(() => import("./components/panel/Settings"));
 const Favorite = lazy(() => import("./components/panel/FavoriteFoods"));
+
 const App = () => {
+  
+  
+  
+  
+
+
   return (
     <> 
       <BrowserRouter>
-        <Suspense fallback={<Loading />}>
+        <Suspense>
           <Routes>
             {/* <Route index element={<Navigate replace to="/" />} /> */}
             <Route path="/" element={<Home />} />

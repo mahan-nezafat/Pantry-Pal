@@ -11,7 +11,7 @@ const Hero = () => {
 
   return (
     <>
-      <div className=" flex justify-between w-full h-[100vh] flex-col items-center hero bg-center bg-no-repeat bg-cover dark:bg-[#310F01] transition-background duration-1000 ease-in-out ">
+      <div className=" flex justify-between w-full h-[100vh] flex-col items-center hero bg-center bg-no-repeat bg-cover  transition-background duration-1000 ease-in-out">
         <Header />
 
         <div className="flex flex-col justify-center items-center">
