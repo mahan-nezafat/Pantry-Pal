@@ -64,7 +64,7 @@ const Settings = ({ handleHotToast }) => {
         {
             errorMessage && <h1 className="text-center text-red-500">{errorMessage}</h1>
         }
-         <form action="" onSubmit={handleSubmit} className="w-[40%] mx-auto h-[100%] flex-col justify-between items-center">
+         <form  onSubmit={handleSubmit} className="w-[40%] mx-auto h-[100%] flex-col justify-between items-center">
             <div className="flex justify-center items-center flex-col w-full h-full">
             <Input handler={(e) => dispatch(setEmail(e.target.value)) } value={email}  label='Email' htmlFor='Email'  name="email" type="email" placeHolder='Your New Email Address'/>
             {
@@ -72,7 +72,7 @@ const Settings = ({ handleHotToast }) => {
             }
             </div>
             <div className="flex justify-center items-center w-full my-10 ml-10">
-            <p className="cursor-pointer mr-2" onClick={(e) => isDelete ? handleUpdate(e) : handleDelete(e)}><span className={isDelete ? "text-black" : "text-red-500"}>{isDelete ? "Update Account? " : "Delete Acount? "}</span></p>
+            <p className="cursor-pointer mr-2" onClick={(e) => isDelete ? handleUpdate(e) : handleDelete(e)}><span className={isDelete ? "text-amber-900 dark:text-amber-400" : "text-red-500"}>{isDelete ? "Update Account " : "Delete Acount "}</span></p>
             <Button type={isDelete ?  "delete" : "default" } handleClick={(e) => handleSubmit(e)} >{isDelete ? "Delete Account" : "Update Account"}</Button>
 
             </div>

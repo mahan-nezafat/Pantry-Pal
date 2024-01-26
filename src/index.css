@@ -102,3 +102,46 @@ body::-webkit-scrollbar {
 .w-8 {
   width: 2rem /* 32px */;
 }
+
+.arrow {
+  display: flex;
+  cursor: pointer;
+  position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.arrow::before {
+  content: "";
+  
+  border-right: 18px solid #FDE67E;
+  border-left: 8px solid transparent;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-radius: 50%;
+  transition: all 0.3 ease-in-out;
+
+}
+
+.arrow::after {
+  content: "";
+  height: 3px;
+  width: 30px;
+  background-color: #FDE67E;
+  /* display: block; */
+  position: relative;
+  /* top: 9px; */
+  transition: all 0.3 ease-in-out;
+  border-radius: 10px;
+}
+
+
+.arrow::after:hover {
+  width: 40px;
+  transition: all 0.3 ease-in-out;
+}
+.arrow:hover {
+  transform: translateX(-10px);
+
+}

@@ -10,7 +10,7 @@ const RecipeList = ({bulkFood}) => {
   return (
     <>
       {
-        <div className="flex flex-wrap h-full relative justify-start items-center pl-[10px] gap-[14px] mb-5">
+        <div className="flex w-[95%] flex-wrap h-full relative justify-start items-center gap-[22px] mx-auto mb-5">
           
             
               

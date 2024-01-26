@@ -5,7 +5,7 @@ import { setDarkMode } from '../../../features/util/utilSlice';
 import DarkModeButton from '../../utils/DarkModeButton';
 const Link = ({ dispatch, darkMode }) => {
 
-    const darkModeLocal = localStorage.getItem('darkmode')
+    const darkModeLocal = JSON.parse(localStorage.getItem('darkmode'))
     // let darkModeLocal;
 
     function handleChange(e) {

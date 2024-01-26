@@ -70,14 +70,14 @@ const UserPanel = () => {
         <>
                 <Header />
             <div className="flex flex-col w-full h-[80%]">
-                <h1 className="ml-2 text-2xl mb-2 w-full text-center">Welcome to your panel {fullName}!</h1>
+                <h1 className="ml-2 text-2xl mb-2 w-full text-center text-amber-900 dark:text-amber-400">Welcome to your panel {fullName}!</h1>
                 <div className="flex w-full h-full justify-end items-center relative">
                     <div className="w-[10%] h-[85%] justify-center items-center flex flex-col pl-4 fixed left-[0%] bottom-[2%]">
                         <ul className="w-full">
-                            <Link to='/userpanel' onClick={() => setPanelContent("mealplaner")} className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button type="panel" >Meal Planer</Button></Link>
-                            <Link to='favorite' onClick={() =>{ setPanelContent("favoritefoods"); handleData()}} className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button  type="panel" >Favorite Foods</Button></Link>
-                            <Link to='settings' onClick={() => setPanelContent("settings")} className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer"><Button  type="panel" >Settings</Button></Link>
-                            <Link to='/login' onClick={logOut}  className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-black cursor-pointer">
+                            <Link to='/userpanel' onClick={() => setPanelContent("mealplaner")} className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-amber-900 text-amber-900 dark:text-amber-400 cursor-pointer"><Button type="panel" >Meal Planer</Button></Link>
+                            <Link to='favorite' onClick={() =>{ setPanelContent("favoritefoods"); handleData()}} className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-amber-900 text-amber-900 dark:text-amber-400 cursor-pointer"><Button  type="panel" >Favorite Foods</Button></Link>
+                            <Link to='settings' onClick={() => setPanelContent("settings")} className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-amber-900 text-amber-900 dark:text-amber-400 cursor-pointer"><Button  type="panel" >Settings</Button></Link>
+                            <Link to='/login' onClick={logOut}  className="rounded py-1 mb-5 flex justify-center items-center border-[1px] border-solid border-amber-900 cursor-pointer">
                                 <Button type="panel"><span className="text-red-500">Log Out</span></Button>
                             </Link>
                         </ul>

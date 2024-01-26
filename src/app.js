@@ -33,8 +33,8 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/mealplaner" element={<MealPlaner />} />
             <Route path="/userpanel" element={<UserPanel />} >
-            <Route path="settings" element={<Settings />} />
-            <Route path="favorite" element={<Favorite />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="favorite" element={<Favorite />} />
 
             </Route>
             <Route path="*" element={<Notfounded />} />

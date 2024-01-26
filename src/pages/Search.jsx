@@ -14,7 +14,7 @@ const Search = () => {
     e.preventDefault();
     if(!searchValue) return
     dispatch(submitSearch(true));
-    // dispatch(setIsLoading(true));
+    dispatch(setIsLoading(true));
     dispatch(setData(searchValue));
   }
   
@@ -26,8 +26,8 @@ const Search = () => {
       <div className="flex justify-center items-center my-[50px] mx-0">
         <div>
           <form onSubmit={handleSubmit} className="flex justify-center items-center font-[Lato]" >
-            <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="Enter your query..." className="rounded py-[9px] px-[15px] border-black border-[1px] border-solid mr-[4px] bg-transparent outline-none text-black text-[1rem] font-[Lato] placeholder:text-black" />
-            <button className={`rounded border-none p-[9px] bg-black text-white font-[1.1rem] ${isLoading ? "bg-gray" : ""}`} >Search</button>
+            <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="Enter your query..." className="rounded py-[9px] px-[15px] dark:border-amber-400 dark:text-amber-400 border-amber-900 border-[1px] border-solid mr-[4px] bg-transparent outline-none text-amber-900 text-[1rem] font-[Lato] placeholder:text-amber-900" />
+            <button className={`rounded border-none p-[9px]  transition-all duration-500 ease-in-out font-[1.1rem] ${isLoading ? "bg-amber-900 text-amber-400 dark:bg-[#92400E] dark:text-amber-400" : "text-amber-900 dark:text-amber-400"}`} >Search</button>
           </form>
         </div>
       </div>

@@ -50,7 +50,7 @@ const MealPlaner = ({ handleHotToast }) => {
 
     return (
        <div className="flex flex-col w-full h-[800px] justify-start items-center">
-            <div className="flex w-[90%] h-[85%] border-[1px] border-black border-solid rounded">
+            <div className="flex w-[90%] h-[85%] border-[1px] border-amber-900 border-solid rounded">
                 { mealPlan !== null ?
                 
                 Object.values(mealPlan.week).map((mealDay, index) => {
@@ -66,7 +66,7 @@ const MealPlaner = ({ handleHotToast }) => {
             <div className="flex w-[90%] mt-3 ">
                 <Button handleClick={handleAddMealPlan} type="default" >Add this meal plan</Button>
                 <Button handleClick={() => setIsClicked(true)} type="default">Generate a meal plan</Button>
-                <input placeholder="number of calories for each day" className="placeholder:text-base ml-2 outline-none border-[1px] border-black p-1 px-3 w-[18%] rounded" type="number" value={calories} onChange={(e) => e.target.value >= 0 ? setCalories(e.target.value) : ""} />
+                <input placeholder="number of calories for each day" className="bg-transparent text-amber-900 dark:text-amber-400 placeholder:text-base placeholder:text-amber-900 placeholder:dark:text-amber-700 ml-2 outline-none border-[1px] border-amber-900 p-1 px-3 w-[18%] rounded" type="number" value={calories} onChange={(e) => e.target.value >= 0 ? setCalories(e.target.value) : ""} />
             </div>
        </div>
     );

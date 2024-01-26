@@ -65,7 +65,7 @@ const RecipeItem = ({ item, handleData }) => {
     }, [isLoading])
       
     return (
-        <div className='w-[24%] flex justify-center items-center flex-col cursor-pointer bg-white text-black'>
+        <div className='w-[19%] h-[10%] flex justify-center items-center flex-col cursor-pointer bg-transparent text-amber-900 dark:text-amber-400'>
            {
              isLoading ? 
 
@@ -81,24 +81,28 @@ const RecipeItem = ({ item, handleData }) => {
                 </div>
              :
 
-             <div className='w-full my-2' >
+             <div className='w-full h-full ' >
 
-                <div className="w-full"  onClick={() =>  handleSelected(item.id, title)  }>
+                <div className="w-full h-full"  onClick={() =>  handleSelected(item.id, title)  }>
                         <img className='w-full rounded hover:rounded-none transition-all duration-150 ease-in-out' src={image} alt="food" />
                 </div>
                 
-                <div className="flex w-full flex-col justify-center items-center">
+                <div className="flex w-full flex-col justify-center h-[40px] items-center">
                     
-                    <h3 className='font-[1rem] whitespace-nowrap' >{title.length > 30 ? title.slice(0,30) : title}</h3>
-                    <div className="flex justify-start items-center w-full">
-                    <Button type="like" handleClick={handleLike} >
-                        { isLiked ? 
-                            <i className={`fa-solid fa-heart absolute `}></i>
-                            :
-                            <i className={`fa-regular fa-heart absolute `}></i>
-                        }
+                    <div className="flex justify-between items-center h-full w-full">
 
-                    </Button>
+                        <Button type="like" handleClick={handleLike} >
+                            { isLiked ? 
+                                <i className={`fa-solid fa-heart absolute `}></i>
+                                :
+                                <i className={`fa-regular fa-heart absolute `}></i>
+                            }
+
+                        </Button>
+                        <div className='w-[90%] flex justify-center items-center'>
+                        <h3 className='font-[1rem] whitespace-nowrap ' >{title.length > 30 ? title.slice(0,30) : title}</h3>
+
+                        </div>
                     </div>
                 </div>
 

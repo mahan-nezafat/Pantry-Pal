@@ -7,8 +7,8 @@ const TableColumn = ({ day, mealDay }) => {
     return (
         <>
             { mealDay &&
-                <div className={`flex flex-col w-[14.3%] ${ day === "Friday" ? "" : "border-r-2 border-black"}`}>
-                    <div className="flex justify-center items-center border-b-2 border-solid border-red-500 w-full h-[10%]">
+                <div className={`flex flex-col w-[14.3%] ${ day === "Friday" ? "" : "border-r-2 border-amber-900"}`}>
+                    <div className="flex justify-center text-amber-900 dark:text-amber-400 items-center border-b-2 border-solid border-red-500 w-full h-[10%]">
                         <h1>{day}</h1>
                     </div>
                     {mealDay && Object.values(mealDay.meals).map((mealItem, index) => {
@@ -16,7 +16,7 @@ const TableColumn = ({ day, mealDay }) => {
                         })
                         
                     }
-                    <div className="flex flex-col text-sm p-2">
+                    <div className="flex flex-col text-sm p-2 text-amber-900 dark:text-amber-400">
                         <span>Cals: {Math.floor(calories)}</span>
                         <span>Carbs: {Math.floor(carbohydrates)}</span>
                         <span>fat: {Math.floor(fat)}</span>
