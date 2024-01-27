@@ -6,7 +6,7 @@ export async function fetchData(searchQuery, isSubmit) {
   try {
     const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchQuery}&number=100`);
     const data = await response.json();
-    console.log(data)
+    // console.log(data)
     return data;
   } catch (error) {
     console.log(error);

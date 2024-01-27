@@ -22,7 +22,7 @@ const Settings = ({ handleHotToast }) => {
         if(isDelete && !email) return setErrorMessage('no email entered');
         if(!isDelete && !email || !isDelete && !newPassword) return setErrorMessage('no email or new password entered');
         if(isDelete) {
-            console.log('user is deleted')
+            // console.log('user is deleted')
             deleteData = deleteUser(id).then((data, error) => data)
             handleHotToast('promise', {loading: 'deleting your account', success: 'deleting was successful', error: 'could not apply changes'}, deleteData)
             dispatch(setLoggedIn(false));
@@ -31,10 +31,10 @@ const Settings = ({ handleHotToast }) => {
             }, 2000)
 
         }else {
-            console.log(id)
+            // console.log(id)
             const updatedUser = {password: newPassword, email};
             updateData = updateUser(id, updatedUser).then((data, error) => data)
-            console.log(updateData)
+            // console.log(updateData)
             handleHotToast('promise', {loading: 'updating your account', success: 'updating was successful', error: 'could not apply changes'}, updateData)
             dispatch(setLoggedIn(false));
             setTimeout(() => {

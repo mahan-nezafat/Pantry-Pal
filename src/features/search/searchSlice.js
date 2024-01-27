@@ -24,7 +24,7 @@ const searchSlice = createSlice({
     },
     clearAllSearch(state) {
       state = initialState;
-      console.log(state)
+      // console.log(state)
   }
   },
 });

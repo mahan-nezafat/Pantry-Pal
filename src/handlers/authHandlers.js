@@ -22,7 +22,7 @@ export  const handleLogin = async (e, email, password, dispatch) => {
         console.log(error)
     }
     if(!data) return
-    console.log(data)
+    // console.log(data)
     userId = Object.assign(data[0]).id
     localStorage.setItem('user', JSON.stringify({userId, email, fullName}))
     dispatch(loginUser(data))

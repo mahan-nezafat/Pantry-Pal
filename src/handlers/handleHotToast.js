@@ -25,7 +25,7 @@ export const handleHotToast = (type, message, promiseData) => {
                 position: 'bottom-center'
             })
         case 'promise':
-            console.log(promiseData)
+            // console.log(promiseData)
             return toast.promise(promiseData, {
                 loading: message.loading,
                 success: message.success,

@@ -3,7 +3,7 @@ import MealItem from "./MealItem";
 
 const TableColumn = ({ day, mealDay }) => {
     const {calories, carbohydrates, fat, protein} = mealDay.nutrients
-    console.log(day)
+    // console.log(day)
     return (
         <>
             { mealDay &&

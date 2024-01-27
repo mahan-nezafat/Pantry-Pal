@@ -2,7 +2,11 @@ import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import "./index.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setDarkMode } from "./features/util/utilSlice";
+import { fetchFoodIds, fetchMealPlan } from "./services/dataBaseApis";
+import { setFullName, setLoggedIn, setMealPlan } from "./features/auth/authSlice";
+import { getFood, setFoodsIds } from "./features/food/foodSlice";
 
 const Home = lazy(() => import("./pages/Home"));
 const Notfounded = lazy(() => import("./pages/Notfounded"));
@@ -16,11 +20,40 @@ const Favorite = lazy(() => import("./components/panel/FavoriteFoods"));
 
 const App = () => {
   
-  
-  
-  
+  const dispatch = useDispatch();
+  const darkMode = JSON.parse(localStorage.getItem('darkmode'))
+  useEffect(() => {
+      dispatch(setDarkMode(darkMode))
+      
+      // console.log(typeof darkMode, darkMode)
 
+    },[darkMode, dispatch])
 
+  useEffect(() => {
+    const foodData = JSON.parse(localStorage.getItem('food'));
+    dispatch(getFood(foodData));
+    console.log(foodData)
+  }, [])
+
+    useEffect(() => {
+      async function handleReload() {
+       let ids, mealPlan, userName;
+       let user = localStorage.getItem('user');
+       let {userId, fullName} = JSON.parse(user);
+       
+      //  console.log(userId)
+       let {data} = await fetchFoodIds(userId) ;
+       let {mealPlanData} = await fetchMealPlan(userId);
+       ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
+       mealPlan = mealPlanData[0].meal_plan
+       dispatch(setLoggedIn(true));
+       dispatch(setFoodsIds(ids));
+       dispatch(setMealPlan(mealPlan))
+       dispatch(setFullName(fullName))
+   }
+     handleReload();
+   }, [])
+  
   return (
     <> 
       <BrowserRouter>

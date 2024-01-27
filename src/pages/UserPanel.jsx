@@ -29,6 +29,7 @@ const UserPanel = () => {
         dispatch(clearAllFood());
         dispatch(clearAllSearch());
         dispatch(setLoggedIn(false));
+        localStorage.removeItem('user')
         navigate("/login");
     }
 
@@ -45,24 +46,24 @@ const UserPanel = () => {
    
 
     
-    useEffect(() => {
-       async function handleReload() {
-        let ids, mealPlan, userName;
-        let user = localStorage.getItem('user');
-        let {userId, fullName} = JSON.parse(user);
+    // useEffect(() => {
+    //    async function handleReload() {
+    //     let ids, mealPlan, userName;
+    //     let user = localStorage.getItem('user');
+    //     let {userId, fullName} = JSON.parse(user);
         
-        console.log(userId)
-        let {data} = await fetchFoodIds(userId) ;
-        let {mealPlanData} = await fetchMealPlan(userId);
-        ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
-        mealPlan = mealPlanData[0].meal_plan
-        dispatch(setLoggedIn(true));
-        dispatch(setFoodsIds(ids));
-        dispatch(setMealPlan(mealPlan))
-        dispatch(setFullName(fullName))
-    }
-      handleReload();
-    }, [])
+    //     console.log(userId)
+    //     let {data} = await fetchFoodIds(userId) ;
+    //     let {mealPlanData} = await fetchMealPlan(userId);
+    //     ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
+    //     mealPlan = mealPlanData[0].meal_plan
+    //     dispatch(setLoggedIn(true));
+    //     dispatch(setFoodsIds(ids));
+    //     dispatch(setMealPlan(mealPlan))
+    //     dispatch(setFullName(fullName))
+    // }
+    //   handleReload();
+    // }, [])
 
 
 

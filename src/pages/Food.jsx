@@ -43,16 +43,21 @@ const Food = () => {
       updateFoodIds(userId, foodIds)
 
   }, [isLiked, favFoodsIds]);
+
   useEffect(() => {
       favFoodsIds.map(userId => {
           if(Number(userId) === id) { 
               setIsLiked(true)
-              console.log("true")
+              // console.log("true")
           }
       })
   }, [isSelected])
 
-
+  // useEffect(() => {
+  //   // if(!isLoading) return
+  //   localStorage.setItem('food', JSON.stringify(selectedFoodInformation))
+  //   console.log(selectedFoodInformation)
+  // }, [selectedFoodInformation, isLoading])
 
   return (
     <>

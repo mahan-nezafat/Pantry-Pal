@@ -13,7 +13,7 @@ const RecipeItem = ({ item, handleData }) => {
     const {title, image} = item;
     const {isLoading} = useSelector(store => store.search);
     const {id, isLoggedIn} = useSelector(store => store.auth);
-    const {favFoodsIds, isSelected, bulkFood} = useSelector(store => store.food)
+    const {favFoodsIds, isSelected, bulkFood, selectedFoodInformation} = useSelector(store => store.food)
     const [isLiked, setIsLiked] = useState(false);    
     
     
@@ -24,7 +24,9 @@ const RecipeItem = ({ item, handleData }) => {
         dispatch(getFood(id));
         dispatch(getYoutubeId(title));
         dispatch(loadingFood(true));
+        
         navigate("/food")
+        localStorage.setItem('food', JSON.stringify(selectedFoodInformation))
     }
 
     
@@ -58,7 +60,7 @@ const RecipeItem = ({ item, handleData }) => {
             favFoodsIds.find(id => {
                 if(Number(id) === item.id) { 
                     setIsLiked(true)
-                    console.log(typeof id, id, typeof item.id, item.id)
+                    // console.log(typeof id, id, typeof item.id, item.id)
                 }
             })
         // }

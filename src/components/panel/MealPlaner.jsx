@@ -25,11 +25,11 @@ const MealPlaner = ({ handleHotToast }) => {
         async function handleGenerate() {
             const data = await generateMealPlan("week", calories)
             dispatch(setMealPlan(data));
-            console.log(Object.values(Object.values(mealPlan)[0]))
+            // console.log(Object.values(Object.values(mealPlan)[0]))
         }
 
         handleGenerate();
-        console.log(mealPlan)
+        // console.log(mealPlan)
         setIsClicked(false)
         // console.log(Object.values(mealPlan).length)
     }, [isClicked])
@@ -54,7 +54,7 @@ const MealPlaner = ({ handleHotToast }) => {
                 { mealPlan !== null ?
                 
                 Object.values(mealPlan.week).map((mealDay, index) => {
-                       console.log(mealPlan)
+                       {/* console.log(mealPlan) */}
                         
                        return <TableColumn key={index} mealDay={mealDay} day={days[index]} />
                     })

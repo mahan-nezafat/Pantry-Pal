@@ -11,7 +11,7 @@ const Link = ({ dispatch, darkMode }) => {
     function handleChange(e) {
         dispatch(setDarkMode(e.target.checked));
         localStorage.setItem('darkmode', e.target.checked)
-        console.log(localStorage.getItem('darkmode'))
+        // console.log(localStorage.getItem('darkmode'))
     }
     
    
