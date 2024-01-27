@@ -6,6 +6,7 @@ import Header from "../components/header/Header";
 import { redirect, useNavigate } from "react-router-dom";
 import Button from "../components/utils/Button";
 import { updateFoodIds } from "../services/dataBaseApis";
+import arrow from '../assets/images/arrow.svg';
 const Food = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,16 +43,21 @@ const Food = () => {
       updateFoodIds(userId, foodIds)
 
   }, [isLiked, favFoodsIds]);
+
   useEffect(() => {
       favFoodsIds.map(userId => {
           if(Number(userId) === id) { 
               setIsLiked(true)
-              console.log("true")
+              // console.log("true")
           }
       })
   }, [isSelected])
 
-
+  // useEffect(() => {
+  //   // if(!isLoading) return
+  //   localStorage.setItem('food', JSON.stringify(selectedFoodInformation))
+  //   console.log(selectedFoodInformation)
+  // }, [selectedFoodInformation, isLoading])
 
   return (
     <>
@@ -60,7 +66,7 @@ const Food = () => {
       {isLoading ? (
         <>
           <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
-            <button className="w-[5%] bg-black text-white outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
+            <button className="w-[5%] bg-amber-900 text-amber-400 outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
               <i class="fa-solid fa-arrow-left"></i>
             </button>
             <Skeleton width={50} height={20} />
@@ -127,8 +133,10 @@ const Food = () => {
       ) :  (
         <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
           <div className="flex justify-start items-center">
-          <button className="w-[5%] bg-black text-white outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
-          <i class="fa-solid fa-arrow-left"></i>
+          <button className="h-[30px] bg-amber-900 text-amber-200 outline-none p-[5px] flex justify-center items-center  w-20 rounded my-[5px] mx-0" onClick={handleClose}>
+          {/* <i class="fa-solid fa-arrow-left"></i> */}
+            {/* <img src={arrow} className="w-[40%] transition-all duration-300 ease-in-out" alt="arrow"/> */}
+            <span className="arrow"></span>
           </button>
           {/* <Button type="like" handleClick={handleLike} >
                         { isLiked ? 
@@ -138,7 +146,7 @@ const Food = () => {
                         }
           </Button> */}
           </div>
-          <h1 className="font-[1.2rem] my-[10px] mx-0" >{title}</h1>
+          <h1 className="font-[1.2rem] my-[10px] mx-0 text-amber-900 dark:text-amber-400" >{title}</h1>
           <div className="flex justify-between items-center">
             <div className="w-[48%] h-full flex justify-center">
               <img className="w-full h-full rounded-lg" src={`https://spoonacular.com/recipeImages/${id}-636x393.${imageType}`} alt="food" />
@@ -166,33 +174,33 @@ const Food = () => {
                 extendedIngredients.map((ingredient, index) => {
                   return (
                     <div className="flex w-[25%] my-[14px] mx-0 items-center justify-start" key={index}>
-                      <img className="w-[15%] my-0 mx-[4px] rounded-lg h-auto" src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} alt="ingredient" /> <span className="font-[0.8rem]">{ingredient.nameClean}</span>
+                      <img className="w-[15%] my-0 mx-[4px] rounded-lg h-auto" src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} alt="ingredient" /> <span className="font-[0.8rem] text-amber-900 dark:text-amber-400">{ingredient.nameClean}</span>
                     </div>
                   );
                 })}
             </div>
             <div className="flex justify-around">
-              <h4 className="border-[1px] border-black border-solid p-[10px] rounded text-black">
+              <h4 className="border-[1px] border-amber-900 border-solid p-[10px] rounded text-amber-900 dark:text-amber-400 dark:border-amber-400">
                 Estimated Price: <span className="text-green-500">${Math.floor(pricePerServing)}</span>
               </h4>
-              <h4 className="border-[1px] border-black border-solid p-[10px] rounded text-black">Estimated Time: {readyInMinutes < 60 ? `${readyInMinutes}min` : `${Math.floor(readyInMinutes / 60)} hours`}</h4>
-              <h4 className="border-[1px] border-black border-solid p-[10px] rounded text-black">Vegan: {vegan ? <span className="text-green-500">yes</span> : <span className="text-red-500">No</span>}</h4>
+              <h4 className="border-[1px] border-amber-900 border-solid p-[10px] rounded text-amber-900 dark:text-amber-400 dark:border-amber-400">Estimated Time: {readyInMinutes < 60 ? `${readyInMinutes}min` : `${Math.floor(readyInMinutes / 60)} hours`}</h4>
+              <h4 className="border-[1px] border-amber-900 border-solid p-[10px] rounded text-amber-900 dark:text-amber-400 dark:border-amber-400">Vegan: {vegan ? <span className="text-green-500">yes</span> : <span className="text-red-500">No</span>}</h4>
             </div>
             <div className="flex my-[30px] mx-0">
-              {diets && diets.length > 0 && <h4 className="border-b-2 border-b-red-500">Diets: </h4>}
+              {diets && diets.length > 0 && <h4 className="border-b-2 border-b-amber-900 text-amber-900  dark:text-amber-400 dark:border-b-amber-400">Diets: </h4>}
 
               {diets &&
                 diets.map((diet, index) => (
-                  <span key={index} className="ml-[5px]">
+                  <span key={index} className="ml-[5px] text-amber-900  dark:text-amber-400 ">
                     {diet},
                   </span>
                 ))}
             </div>
             <div className="flex my-[30px] mx-0">
-              {dishTypes && dishTypes.length > 0 && <h4 className="border-b-2 border-b-red-500">Dish Types:</h4>}
+              {dishTypes && dishTypes.length > 0 && <h4 className="border-b-2 border-b-amber-900 text-amber-900  dark:text-amber-400 dark:border-b-amber-400">Dish Types:</h4>}
               {dishTypes &&
                 dishTypes.map((dishType, index) => (
-                  <span key={index} className="ml-[5px]">
+                  <span key={index} className="ml-[5px] text-amber-900  dark:text-amber-400 ">
                     {dishType},
                   </span>
                 ))}
@@ -200,14 +208,14 @@ const Food = () => {
 
             <div className="flex flex-col ">
               <ul>
-                <h4>Instructions:</h4>
+                <h4 className="text-amber-900 dark:text-amber-400 ">Instructions</h4>
                 {analyzedInstructions &&
                   Object.values(analyzedInstructions)[0].steps.map((item, index) => {
                     return (
                       <li className="w-full inline-block" key={index}>
                         <div className="flex justify-start items-center m-[12px]">
-                          <span className="text-white bg-black py-[5px] px-[8px] rounded-[50%] mr-[4px]">{index + 1}</span>
-                          <p> {item.step}</p>
+                          <span className="text-amber-200 bg-amber-900 py-[2px] px-[8px] rounded-[50%] mr-[4px]">{index + 1}</span>
+                          <p className="text-amber-900 dark:text-amber-400 "> {item.step}</p>
                         </div>
                       </li>
                     );

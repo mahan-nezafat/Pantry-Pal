@@ -46,7 +46,7 @@ const authSlice = createSlice({
 
         clearAllAuth(state) {
             state = initialState;
-            console.log(state)
+            // console.log(state)
         }
     }
 })

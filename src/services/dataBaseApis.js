@@ -6,7 +6,7 @@ export const fetchUser = async (id) => {
     .from('users')
     .select('*')
     .eq('id', id)
-    console.log(user, error)
+    // console.log(user, error)
     return {user, error}
 }
 
@@ -16,8 +16,8 @@ export const fetchFoodIds = async (id) => {
     .from('users')
     .select('favorite_foods_ids')
     .match({id})
-    console.log(id);
-    console.log(data, error)
+    // console.log(id);
+    // console.log(data, error)
     return {data, error}
 }
 
@@ -28,7 +28,7 @@ export const fetchMealPlan = async (id) => {
     .select('meal_plan')
     .match({id})
     // console.log(user);
-    console.log(mealPlanData, error)
+    // console.log(mealPlanData, error)
 
     return {mealPlanData, error}
 }

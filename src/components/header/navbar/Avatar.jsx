@@ -10,7 +10,7 @@ const Avatar = () => {
         <>
             <div className='flex justify-center items-center'>
             <img src={avatar} alt="avatar" className='w-[40px] rounded-[50%] bg-transparent' />
-            <span className='px-2'>{fullName}</span>
+            <span className='px-2 text-amber-900 dark:text-amber-400'>{fullName}</span>
 
             </div>
         </>

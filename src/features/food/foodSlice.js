@@ -28,7 +28,7 @@ const foodSlice = createSlice({
     },
     closeFood(state, action) {
       
-      state.selectedFoodInformation = initialState.selectedFoodInformation
+      // state.selectedFoodInformation = initialState.selectedFoodInformation
       state.youtubeId = initialState.youtubeId
       state.isSelected = initialState.isSelected
       state.isLoading = initialState.isLoading
@@ -57,7 +57,7 @@ const foodSlice = createSlice({
     },
     clearAllFood(state) {
       state = initialState;
-      console.log(state)
+      // console.log(state)
   }
   
   },
@@ -89,7 +89,7 @@ export function getBulkFood(favFoodsIds) {
         const {title, id, image} = item;
         filteredData.push({title, id, image})
       })
-      console.log(filteredData)
+      // console.log(filteredData)
 
       dispatch({ type: "food/getBulkFood", payload: filteredData});
 

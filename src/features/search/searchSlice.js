@@ -24,7 +24,7 @@ const searchSlice = createSlice({
     },
     clearAllSearch(state) {
       state = initialState;
-      console.log(state)
+      // console.log(state)
   }
   },
 });
@@ -49,7 +49,7 @@ export function setData(searchQuery) {
       console.log(error);
       
     }finally {
-        // dispatch({ type: "search/setIsLoading", payload: false });
+        dispatch({ type: "search/setIsLoading", payload: false });
         // dispatch({ type: "search/submitSearch", payload: false });
         
       
