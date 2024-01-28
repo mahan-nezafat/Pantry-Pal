@@ -16,6 +16,9 @@ const Search = () => {
     dispatch(submitSearch(true));
     dispatch(setIsLoading(true));
     dispatch(setData(searchValue));
+    if(localStorage.getItem('food')) {
+      localStorage.removeItem('food');
+    }
   }
   
 

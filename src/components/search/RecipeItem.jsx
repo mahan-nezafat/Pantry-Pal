@@ -20,13 +20,15 @@ const RecipeItem = ({ item, handleData }) => {
    
 
     function handleSelected(id, title) {
+        
+        console.log("ff")
         dispatch(selectFood());
         dispatch(getFood(id));
         dispatch(getYoutubeId(title));
         dispatch(loadingFood(true));
-        
+            
         navigate("/food")
-        localStorage.setItem('food', JSON.stringify(selectedFoodInformation))
+        
     }
 
     
@@ -44,6 +46,15 @@ const RecipeItem = ({ item, handleData }) => {
             handleData()
         }
     }
+
+
+    // useEffect(() => {
+    //     const localFoodId = JSON.parse(localStorage.getItem('food')).id
+    //     console.log(localFoodId)
+    //     // if(id !== localFoodId) {
+    //     //     localStorage.removeItem('food');
+    //     // }    
+    // }, [isSelected])
 
     useEffect(() => {
         if(!isLoggedIn) return;

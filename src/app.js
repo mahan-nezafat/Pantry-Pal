@@ -25,15 +25,14 @@ const App = () => {
   useEffect(() => {
       dispatch(setDarkMode(darkMode))
       
-      // console.log(typeof darkMode, darkMode)
 
     },[darkMode, dispatch])
 
   useEffect(() => {
     const foodData = JSON.parse(localStorage.getItem('food'));
     dispatch(getFood(foodData));
-    console.log(foodData)
-  }, [])
+    // console.log(foodData.id)
+  }, [dispatch])
 
     useEffect(() => {
       async function handleReload() {

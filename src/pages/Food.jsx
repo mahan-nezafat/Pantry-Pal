@@ -20,6 +20,7 @@ const Food = () => {
 
   function handleClose() {
     dispatch(closeFood(false));
+    localStorage.removeItem('food');
     navigate(-1)
   }
 
@@ -35,6 +36,13 @@ const Food = () => {
         dispatch(addFavFoodsIds(id));   
     }        
   }
+
+  useEffect(() => {
+    if(Object.entries(selectedFoodInformation).length > 0 ) {
+
+      localStorage.setItem('food', JSON.stringify(selectedFoodInformation))
+  }
+  }, [isLoading, selectedFoodInformation])
 
   useEffect(() => {
       if(!isLoggedIn) return;

@@ -7,13 +7,19 @@ import { useSelector } from 'react-redux';
 const Menu = () => {
 
     const {isLoggedIn} = useSelector(store => store.auth);
+
+
+    function handleRemoveLocalFood() {
+        localStorage.removeItem('food');
+    }
+
     return ( 
     <> 
        <div className="flex justify-around items-center w-[100%]">
            
             <ul className='flex w-[40%] justify-around items-center'>
                 <Item><Link className='transition-colors duration-300 py-3 px-4 dark:text-amber-400 text-amber-900 hover:text-amber-200 hover:dark:text-amber-200' to="/search" >Search</Link></Item>
-                <Item><Link className='transition-colors duration-300 py-3 px-4 dark:text-amber-400 text-amber-900 hover:text-amber-200 hover:dark:text-amber-200' to={"/mealplaner"}>Meal Planer</Link></Item>
+                <Item><Link onClick={handleRemoveLocalFood} className='transition-colors duration-300 py-3 px-4 dark:text-amber-400 text-amber-900 hover:text-amber-200 hover:dark:text-amber-200' to={"/mealplaner"}>Meal Planer</Link></Item>
                 {
                     isLoggedIn ? 
                         <Avatar />
