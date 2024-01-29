@@ -13,6 +13,7 @@ const Search = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if(!searchValue) return
+    localStorage.removeItem('search');
     dispatch(submitSearch(true));
     dispatch(setIsLoading(true));
     dispatch(setData(searchValue));

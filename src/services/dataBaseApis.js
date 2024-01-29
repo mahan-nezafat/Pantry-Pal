@@ -2,16 +2,21 @@ import supabase from "./supabase";
 
 export const fetchUser = async (id) => {
 
+   try {
     const { data: user, error } = await supabase
     .from('users')
     .select('*')
     .eq('id', id)
     // console.log(user, error)
     return {user, error}
+   } catch (error) {
+    console.log(error)
+   }
 }
 
 export const fetchFoodIds = async (id) => {
-    // if(!id) return;
+    try {
+        // if(!id) return;
     const { data, error } = await supabase
     .from('users')
     .select('favorite_foods_ids')
@@ -19,10 +24,14 @@ export const fetchFoodIds = async (id) => {
     // console.log(id);
     // console.log(data, error)
     return {data, error}
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export const fetchMealPlan = async (id) => {
-    // if(!id) return;
+    try {
+        // if(!id) return;
     const { data: mealPlanData, error } = await supabase
     .from('users')
     .select('meal_plan')
@@ -31,29 +40,41 @@ export const fetchMealPlan = async (id) => {
     // console.log(mealPlanData, error)
 
     return {mealPlanData, error}
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export const updateFoodIds = async (id, foodIds) => {
 
+   try {
     const { data, error } = await supabase
     .from('users')
     .update({favorite_foods_ids: foodIds})
     .eq('id', id)
     .select()
     return {data, error}
+   } catch (error) {
+    console.log(error)
+   }
 }
 
 export const addMealPlan = async (id, mealPlan) => {
+   try {
     const { data, error } = await supabase
     .from('users')
     .update({meal_plan: mealPlan})
     .eq('id', id)
     .select()
     return {data, error}
+   } catch (error) {
+    console.log(error)
+   }
 }
 
 export const insertUser = async (newUser) => {
 
+   try {
     const { data, error } = await supabase
     .from('users')
     .insert([
@@ -61,10 +82,14 @@ export const insertUser = async (newUser) => {
     ])
     .select()
     return {data, error}
+   } catch (error) {
+    console.log(error)
+   }
 }
 
 export const updateUser = async (id, updatedUser) => {
 
+  try {
     const { data, error } = await supabase
     .from('users')
     .update({email: updateUser.email, password: updatedUser.password})
@@ -72,23 +97,34 @@ export const updateUser = async (id, updatedUser) => {
     .select()
     console.log(error)
     return {data, error}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const deleteUser = async (id) => {
 
+   try {
     const { data, error } = await supabase
     .from('users')
     .delete()
     .eq('id', id)
 
     return { data, error }
+   } catch (error) {
+    console.log(error)
+   }
 }
 
 export const filterUser = async (email, password) => {
-    const { data, error } = await supabase
+    try {
+        const { data, error } = await supabase
     .from('users')
     .select('id, full_name, email, admin, favorite_foods_ids, meal_plan')
     .match({ email: email, password: password })
 
     return data
+    } catch (error) {
+        console.log(error)
+    }
 }

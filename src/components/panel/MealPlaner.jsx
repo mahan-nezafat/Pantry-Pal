@@ -23,16 +23,20 @@ const MealPlaner = ({ handleHotToast }) => {
     useEffect(() => {
         if(!isClicked) return
         async function handleGenerate() {
-            const data = await generateMealPlan("week", calories)
-            dispatch(setMealPlan(data));
-            // console.log(Object.values(Object.values(mealPlan)[0]))
+            try {
+                const data = await generateMealPlan("week", calories)
+                dispatch(setMealPlan(data));
+            
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         handleGenerate();
         // console.log(mealPlan)
         setIsClicked(false)
         // console.log(Object.values(mealPlan).length)
-    }, [isClicked])
+    }, [isClicked, dispatch, calories])
 
 
     function handleAddMealPlan() {

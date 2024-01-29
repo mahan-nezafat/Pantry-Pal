@@ -7,6 +7,7 @@ import { setDarkMode } from "./features/util/utilSlice";
 import { fetchFoodIds, fetchMealPlan } from "./services/dataBaseApis";
 import { setFullName, setLoggedIn, setMealPlan } from "./features/auth/authSlice";
 import { getFood, setFoodsIds } from "./features/food/foodSlice";
+import { setData } from "./features/search/searchSlice";
 
 const Home = lazy(() => import("./pages/Home"));
 const Notfounded = lazy(() => import("./pages/Notfounded"));
@@ -31,26 +32,32 @@ const App = () => {
   useEffect(() => {
     const foodData = JSON.parse(localStorage.getItem('food'));
     dispatch(getFood(foodData));
+    // const searchData = JSON.parse(localStorage.getItem('search'));
+    dispatch(setData());
     // console.log(foodData.id)
   }, [dispatch])
 
     useEffect(() => {
-      async function handleReload() {
-       let ids, mealPlan, userName;
-       let user = localStorage.getItem('user');
-       let {userId, fullName} = JSON.parse(user);
-       
-      //  console.log(userId)
-       let {data} = await fetchFoodIds(userId) ;
-       let {mealPlanData} = await fetchMealPlan(userId);
-       ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
-       mealPlan = mealPlanData[0].meal_plan
-       dispatch(setLoggedIn(true));
-       dispatch(setFoodsIds(ids));
-       dispatch(setMealPlan(mealPlan))
-       dispatch(setFullName(fullName))
-   }
-     handleReload();
+      try {
+        async function handleReload() {
+          let ids, mealPlan, userName;
+          let user = localStorage.getItem('user');
+          let {userId, fullName} = JSON.parse(user);
+          
+         //  console.log(userId)
+          let {data} = await fetchFoodIds(userId) ;
+          let {mealPlanData} = await fetchMealPlan(userId);
+          ids =  data[0].favorite_foods_ids.split(" ").filter(id => id !== "").map(id => Number(id));
+          mealPlan = mealPlanData[0].meal_plan
+          dispatch(setLoggedIn(true));
+          dispatch(setFoodsIds(ids));
+          dispatch(setMealPlan(mealPlan))
+          dispatch(setFullName(fullName))
+      }
+        handleReload();
+      } catch (error) {
+        console.log(error)
+      }
    }, [])
   
   return (

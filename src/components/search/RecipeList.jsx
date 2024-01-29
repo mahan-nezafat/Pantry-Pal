@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RecipeItem from "./RecipeItem";
 import { useSelector } from "react-redux";
 import Food from "../../pages/Food";
@@ -6,7 +6,13 @@ import Food from "../../pages/Food";
 const RecipeList = ({bulkFood}) => {
   const { data, searchQuery } = useSelector((state) => state.search);
   const { isSelected, favFoodsIds } = useSelector((state) => state.food);
-  const {results} = data
+  const {results} = data;
+  
+  useEffect(() => {
+    if(data.length <= 0) return;
+    localStorage.setItem('search', JSON.stringify(data));
+  }, [data])
+
   return (
     <>
       {

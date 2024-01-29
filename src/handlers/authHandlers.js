@@ -18,17 +18,18 @@ export  const handleLogin = async (e, email, password, dispatch) => {
         fullName = data === null ? '' : data[0].full_name;
         if(data !== null) mealPlan = data[0].meal_plan;
         else mealPlan = null
+        if(!data) return
+        // console.log(data)
+        userId = Object.assign(data[0]).id
+        localStorage.setItem('user', JSON.stringify({userId, email, fullName}))
+        dispatch(loginUser(data))
+        dispatch(setLoggedIn(true));
+        dispatch(setFoodsIds(ids));
+        dispatch(setMealPlan(mealPlan))
     } catch (error) {
         console.log(error)
     }
-    if(!data) return
-    // console.log(data)
-    userId = Object.assign(data[0]).id
-    localStorage.setItem('user', JSON.stringify({userId, email, fullName}))
-    dispatch(loginUser(data))
-    dispatch(setLoggedIn(true));
-    dispatch(setFoodsIds(ids));
-    dispatch(setMealPlan(mealPlan))
+    
 }       
 
 export const handleSignUp = async (e, user, dispatch) => {

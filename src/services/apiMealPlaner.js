@@ -1,7 +1,8 @@
 import apiKey from "./apiKeys"
 
 export const connectUser = async (newUser) => {
-    const response = await fetch(`https://api.spoonacular.com/users/connect?apiKey=${apiKey}`,{
+    try {
+        const response = await fetch(`https://api.spoonacular.com/users/connect?apiKey=${apiKey}`,{
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -13,6 +14,9 @@ export const connectUser = async (newUser) => {
 
     // console.log(data);
     return data
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export const getMealPlanWeek = async (hash, username) => {
