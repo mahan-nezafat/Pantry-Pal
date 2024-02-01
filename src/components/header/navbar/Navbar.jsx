@@ -23,12 +23,13 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=" flex h-full w-full justify-between items-center  px-2 bg-transparent relative">
+      <div className=" flex h-full w-full justify-between items-center max-md:justify-center px-2 bg-transparent relative">
         <div className="flex w-[70%] justify-between">
           <Logo darkMode={darkMode} />
           <Menu darkMode={darkMode}/>
         </div>
         <Link darkMode={darkMode} dispatch={dispatch}/>
+        <div className="hidden max-md:block max-md:w-4 max-md:h-4 max-md:bg-amber-400 "></div>
       </div>
     </>
   );

@@ -50,7 +50,7 @@ export function setData(searchQuery) {
       
     } catch (error) {
       
-      console.log(error);
+      console.log(error.message);
       
     }finally {
         dispatch({ type: "search/setIsLoading", payload: false });

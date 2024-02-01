@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@gsap/react": "^2.1.0",
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@supabase/supabase-js": "^2.36.0",
@@ -12,6 +13,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "css-loader": "^6.8.1",
+    "gsap": "^3.12.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",

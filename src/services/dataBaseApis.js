@@ -81,6 +81,8 @@ export const insertUser = async (newUser) => {
         newUser
     ])
     .select()
+    console.log(error)
+
     return {data, error}
    } catch (error) {
     console.log(error)
@@ -123,6 +125,7 @@ export const filterUser = async (email, password) => {
     .select('id, full_name, email, admin, favorite_foods_ids, meal_plan')
     .match({ email: email, password: password })
 
+    console.log(error)
     return data
     } catch (error) {
         console.log(error)

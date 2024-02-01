@@ -77,9 +77,11 @@ const App = () => {
 
             </Route>
             <Route path="*" element={<Notfounded />} />
+              
           </Routes>
         </Suspense>
       </BrowserRouter>
+
     </>
   );
 };
