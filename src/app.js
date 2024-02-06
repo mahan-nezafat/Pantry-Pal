@@ -22,7 +22,20 @@ const Favorite = lazy(() => import("./components/panel/FavoriteFoods"));
 const App = () => {
   
   const dispatch = useDispatch();
-  const darkMode = JSON.parse(localStorage.getItem('darkmode'))
+  const darkMode = JSON.parse(localStorage.getItem('darkmode'));
+  let isPageClosed = false;
+
+  window.addEventListener("beforeunload", () => {
+    isPageClosed = true;  
+  })
+
+  window.addEventListener("unload", () => {
+    if(isPageClosed) {
+      window.alert('are you sure ?')
+      localStorage.removeItem('search')
+    }
+  })
+
   useEffect(() => {
       dispatch(setDarkMode(darkMode))
       

@@ -36,7 +36,7 @@ const Login = () => {
         <>
             <Header />
 
-            <div className="flex flex-col justify-center w-[30%] h-[400px] mx-auto py-1 rounded shadow-lg items-center border-[1px] border-amber-900 mt-20 ">
+            <div className="flex flex-col justify-center w-[30%] max-xl:w-[40%] max-md:w-[50%] max-sm:w-[60%] h-[400px] mx-auto py-1 rounded shadow-lg items-center border-[1px] border-amber-900 mt-20 ">
                 <div className="w-full h-[10%] flex justify-center items-start">
                     <h1 className="text-amber-900 dark:text-amber-400">{signUp ? "LogIn Form" : "SignUp Form"}</h1>
 

@@ -61,11 +61,7 @@ const Food = () => {
       })
   }, [isSelected])
 
-  // useEffect(() => {
-  //   // if(!isLoading) return
-  //   localStorage.setItem('food', JSON.stringify(selectedFoodInformation))
-  //   console.log(selectedFoodInformation)
-  // }, [selectedFoodInformation, isLoading])
+ 
 
   return (
     <>
@@ -73,7 +69,7 @@ const Food = () => {
 
       {isLoading ? (
         <>
-          <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
+          <div className="flex w-[80%] max-lg:w-full my-[40px] mx-auto flex-col pl-[10px]">
             <button className="w-[5%] bg-amber-900 text-amber-400 outline-none p-[5px] rounded my-[5px] mx-0" onClick={handleClose}>
               <i class="fa-solid fa-arrow-left"></i>
             </button>
@@ -139,29 +135,21 @@ const Food = () => {
           </div>
         </>
       ) :  (
-        <div className="flex w-[80%] my-[40px] mx-auto flex-col pl-[10px]">
-          <div className="flex justify-start items-center">
+        <div className="flex w-[80%] max-lg:w-full my-[40px] mx-auto flex-col pl-[10px]">
+          <div className="flex justify-start items-center max-md:w-[80%] max-md:mx-auto">
           <button className="h-[30px] bg-amber-900 text-amber-200 outline-none p-[5px] flex justify-center items-center  w-20 rounded my-[5px] mx-0" onClick={handleClose}>
-          {/* <i class="fa-solid fa-arrow-left"></i> */}
-            {/* <img src={arrow} className="w-[40%] transition-all duration-300 ease-in-out" alt="arrow"/> */}
-            <span className="arrow"></span>
+              <span className="arrow"></span>
           </button>
-          {/* <Button type="like" handleClick={handleLike} >
-                        { isLiked ? 
-                            <i className={`fa-solid fa-heart absolute text-4xl`}></i>
-                            :
-                            <i className={`fa-regular fa-heart absolute text-4xl `}></i>
-                        }
-          </Button> */}
+        
           </div>
-          <h1 className="font-[1.2rem] my-[10px] mx-0 text-amber-900 dark:text-amber-400" >{title}</h1>
-          <div className="flex justify-between items-center">
-            <div className="w-[48%] h-full flex justify-center">
+          <h1 className="font-[1.2rem] my-[10px] max-md:w-[80%] max-md:mx-auto mx-0 text-amber-900 dark:text-amber-400" >{title}</h1>
+          <div className="flex justify-between items-center max-md:flex-col max-md:justify-between">
+            <div className="w-[48%] mb-10 max-md:w-[80%] h-full flex justify-center">
               <img className="w-full h-full rounded-lg" src={`https://spoonacular.com/recipeImages/${id}-636x393.${imageType}`} alt="food" />
             </div>
             {youtubeId !== "" ? (
-              <div className="w-[48%] h-full flex justify-center">
-                <iframe className="rounded-lg"
+              <div className="w-[48%] max-md:w-[80%] max-md:h-[300px] flex justify-center">
+                <iframe className="rounded-lg w-full max-md:h-full"
                   width="560"
                   height="315"
                   src={`https://www.youtube.com/embed/${youtubeId}?si=-nxhoaFiO_zVNH6H`}
@@ -194,22 +182,22 @@ const Food = () => {
               <h4 className="border-[1px] border-amber-900 border-solid p-[10px] rounded text-amber-900 dark:text-amber-400 dark:border-amber-400">Estimated Time: {readyInMinutes < 60 ? `${readyInMinutes}min` : `${Math.floor(readyInMinutes / 60)} hours`}</h4>
               <h4 className="border-[1px] border-amber-900 border-solid p-[10px] rounded text-amber-900 dark:text-amber-400 dark:border-amber-400">Vegan: {vegan ? <span className="text-green-500">yes</span> : <span className="text-red-500">No</span>}</h4>
             </div>
-            <div className="flex my-[30px] mx-0">
-              {diets && diets.length > 0 && <h4 className="border-b-2 border-b-amber-900 text-amber-900  dark:text-amber-400 dark:border-b-amber-400">Diets: </h4>}
+            <div className="flex my-[30px] mx-0  max-md:flex-col">
+              {diets && diets.length > 0 && <h4 className="border-b-2 max-md:w-[8%] max-md:mb-2  border-b-amber-900 text-amber-900  dark:text-amber-400 dark:border-b-amber-400">Diets: </h4>}
 
               {diets &&
                 diets.map((diet, index) => (
                   <span key={index} className="ml-[5px] text-amber-900  dark:text-amber-400 ">
-                    {diet},
+                    {diet}<span className="max-md:hidden">,</span>
                   </span>
                 ))}
             </div>
-            <div className="flex my-[30px] mx-0">
-              {dishTypes && dishTypes.length > 0 && <h4 className="border-b-2 border-b-amber-900 text-amber-900  dark:text-amber-400 dark:border-b-amber-400">Dish Types:</h4>}
+            <div className="flex my-[30px] mx-0 max-md:flex-col">
+              {dishTypes && dishTypes.length > 0 && <h4 className="border-b-2 max-md:w-[13%] max-md:mb-2  border-b-amber-900 text-amber-900  dark:text-amber-400 dark:border-b-amber-400">Dish Types:</h4>}
               {dishTypes &&
                 dishTypes.map((dishType, index) => (
                   <span key={index} className="ml-[5px] text-amber-900  dark:text-amber-400 ">
-                    {dishType},
+                    {dishType}<span className="max-md:hidden">,</span>
                   </span>
                 ))}
             </div>
