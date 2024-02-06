@@ -8,7 +8,7 @@ const Avatar = () => {
 
     return ( 
         <>
-            <div className='flex justify-center items-center'>
+            <div className='flex justify-center items-center max-md:py-10 '>
             <img src={avatar} alt="avatar" className='w-[40px] rounded-[50%] bg-transparent' />
             <span className='px-2 text-amber-900 dark:text-amber-400'>{fullName}</span>
 

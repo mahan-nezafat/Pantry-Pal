@@ -32,6 +32,10 @@ const searchSlice = createSlice({
 export function setData(searchQuery) {
   return async function (dispatch) {
     try {
+      if(localStorage.getItem('search')) {
+        const searchData = JSON.parse(localStorage.getItem('search'));
+        return dispatch({type: "search/setData", payload: searchData});
+      }
       // dispatch({ type: "search/setIsLoading", payload: true });
       const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchQuery}&number=100`);
       const data = await response.json();
@@ -46,7 +50,7 @@ export function setData(searchQuery) {
       
     } catch (error) {
       
-      console.log(error);
+      console.log(error.message);
       
     }finally {
         dispatch({ type: "search/setIsLoading", payload: false });

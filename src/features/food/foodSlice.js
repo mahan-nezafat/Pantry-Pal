@@ -22,6 +22,7 @@ const foodSlice = createSlice({
     },
     getFood(state, action) {
       state.selectedFoodInformation = action.payload;
+      console.log('working')
     },
     getBulkFood(state, action) {
       state.bulkFood = action.payload;
@@ -66,6 +67,10 @@ const foodSlice = createSlice({
 export function getFood(selectedFoodId) {
   return async function (dispatch) {
     try {
+      if(localStorage.getItem('food')) {
+        const localFoodData = JSON.parse(localStorage.getItem('food'));
+        return dispatch({ type: "food/getFood", payload:localFoodData })
+      }
       const response = await fetch(`https://api.spoonacular.com/recipes/${selectedFoodId}/information?apiKey=${apiKey}`);
       const data = await response.json();
 

@@ -12,6 +12,13 @@ const MealItem = ({ mealItem }) => {
         dispatch(getFood(id));
         dispatch(getYoutubeId(title));
         dispatch(loadingFood(true));
+        // let localFood;
+        // if(localStorage.getItem('food')) localFood = JSON.parse(localStorage.getItem('food'))
+        // if(id !== localFood.id) {
+        //     console.log('not matched')
+
+        //     localStorage.removeItem('food');
+        // }
         navigate("/food")
  
     }

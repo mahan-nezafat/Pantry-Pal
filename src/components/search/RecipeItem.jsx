@@ -15,18 +15,22 @@ const RecipeItem = ({ item, handleData }) => {
     const {id, isLoggedIn} = useSelector(store => store.auth);
     const {favFoodsIds, isSelected, bulkFood, selectedFoodInformation} = useSelector(store => store.food)
     const [isLiked, setIsLiked] = useState(false);    
-    
-    
+    let modifiedTitle;
+    if(window.innerWidth <= 1024) {
+        modifiedTitle = title.slice(0, 20)
+    }
    
 
     function handleSelected(id, title) {
+        
+        console.log("ff")
         dispatch(selectFood());
         dispatch(getFood(id));
         dispatch(getYoutubeId(title));
         dispatch(loadingFood(true));
-        
+            
         navigate("/food")
-        localStorage.setItem('food', JSON.stringify(selectedFoodInformation))
+        
     }
 
     
@@ -67,7 +71,7 @@ const RecipeItem = ({ item, handleData }) => {
     }, [isLoading])
       
     return (
-        <div className='w-[19%] h-[10%] flex justify-center items-center flex-col cursor-pointer bg-transparent text-amber-900 dark:text-amber-400'>
+        <div className='max-xl:w-[23%] max-lg:w-[31%] max-md:w-[47%]  w-[19%] h-[10%] flex justify-center items-center flex-col cursor-pointer bg-transparent text-amber-900 dark:text-amber-400'>
            {
              isLoading ? 
 
@@ -102,7 +106,7 @@ const RecipeItem = ({ item, handleData }) => {
 
                         </Button>
                         <div className='w-[90%] flex justify-center items-center'>
-                        <h3 className='font-[1rem] whitespace-nowrap ' >{title.length > 30 ? title.slice(0,30) : title}</h3>
+                        <h3 className='font-[1rem] whitespace-nowrap ' >{modifiedTitle ? modifiedTitle : title.slice(0, 30)}</h3>
 
                         </div>
                     </div>

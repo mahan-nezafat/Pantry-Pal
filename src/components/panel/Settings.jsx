@@ -18,7 +18,8 @@ const Settings = ({ handleHotToast }) => {
     async function handleSubmit(e) {
         e.preventDefault();
         let userId = JSON.parse(localStorage.getItem('user')).userId;
-        if(id === null) id = userId;
+        try {
+            if(id === null) id = userId;
         if(isDelete && !email) return setErrorMessage('no email entered');
         if(!isDelete && !email || !isDelete && !newPassword) return setErrorMessage('no email or new password entered');
         if(isDelete) {
@@ -26,6 +27,9 @@ const Settings = ({ handleHotToast }) => {
             deleteData = deleteUser(id).then((data, error) => data)
             handleHotToast('promise', {loading: 'deleting your account', success: 'deleting was successful', error: 'could not apply changes'}, deleteData)
             dispatch(setLoggedIn(false));
+            dispatch(clearAllAuth());
+            localStorage.removeItem('search')
+            localStorage.removeItem('user')
             setTimeout(() => {
                 navigate("/login");
             }, 2000)
@@ -44,6 +48,9 @@ const Settings = ({ handleHotToast }) => {
         dispatch(clearAllAuth());
         dispatch(clearAllFood());
         dispatch(clearAllSearch());
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     function handleUpdate() {
@@ -64,7 +71,7 @@ const Settings = ({ handleHotToast }) => {
         {
             errorMessage && <h1 className="text-center text-red-500">{errorMessage}</h1>
         }
-         <form  onSubmit={handleSubmit} className="w-[40%] mx-auto h-[100%] flex-col justify-between items-center">
+         <form  onSubmit={handleSubmit} className="w-[40%] mx-auto h-[400px] flex-col justify-between items-center">
             <div className="flex justify-center items-center flex-col w-full h-full">
             <Input handler={(e) => dispatch(setEmail(e.target.value)) } value={email}  label='Email' htmlFor='Email'  name="email" type="email" placeHolder='Your New Email Address'/>
             {

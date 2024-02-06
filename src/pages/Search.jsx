@@ -5,6 +5,9 @@ import Header from "../components/header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading, submitSearch, setData } from "../features/search/searchSlice";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { handleHotToast } from "../handlers/handleHotToast";
+
 const Search = () => {
   const {isLoading} = useSelector((state) => state.search);
   const [searchValue, setSearchValue] = useState("");
@@ -13,9 +16,13 @@ const Search = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if(!searchValue) return
+    localStorage.removeItem('search');
     dispatch(submitSearch(true));
     dispatch(setIsLoading(true));
     dispatch(setData(searchValue));
+    if(localStorage.getItem('food')) {
+      localStorage.removeItem('food');
+    }
   }
   
 
@@ -32,6 +39,9 @@ const Search = () => {
         </div>
       </div>
       <RecipeList />
+      <Toaster />   
+        
+
     </>
   );
 };
