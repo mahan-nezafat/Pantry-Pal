@@ -60,7 +60,7 @@ const Main = () => {
         >
         
             <div className="w-[100%] max-xl:flex-col h-full flex items-center slide1 justify-center  relative translate-y-[180px] opacity-0">
-              <div className="w-[62%] max-xl:w-full h-full bg-cover bg-center bg-[url(./assets/images/slide1.png)]"></div>
+              <div className="w-[62%] max-xl:w-full h-full bg-cover bg-center bg-[url(./assets/images/slide1-min.png)]"></div>
               <div className="flex justify-center flex-col items-center max-xl:w-full max-xl:h-[20%] h-full">
                 <p className="mt-5 w-full text-xl text-center">
                   Search for your favorite foods by name, ingredients, tastes,
@@ -78,8 +78,8 @@ const Main = () => {
         >
           
             <div className="w-full h-full max-xl:flex-col flex items-center justify-center  slide2 translate-y-[180px] opacity-0">
-              <div className="w-[70%] max-xl:w-full h-full max-xl:h-[90%] bg-cover bg-center bg-[url(./assets/images/slide4.png)]"></div>
-              <div className="flex justify-center flex-col items-center h-full  max-xl:w-full max-xl:h-[10%]">
+              <div className="w-[62%] max-xl:w-full h-full max-xl:h-[90%] bg-cover bg-center bg-[url(./assets/images/slide4-min.png)]"></div>
+              <div className="flex justify-center flex-col items-center h-full  max-xl:w-full max-xl:h-[20%]">
                 <p className="mt-5 w-full text-xl text-center ">
                     get, add and delete meal planes 
                 </p>

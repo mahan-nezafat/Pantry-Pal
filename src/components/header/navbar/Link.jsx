@@ -19,7 +19,7 @@ const Link = ({ dispatch, darkMode }) => {
         <>
            <div className='flex w-[20%] justify-center flex-row-reverse'>
                
-                <div >
+                <div className='max-sm:mr-4'>
                 {/* darkmode button */}
                 <DarkModeButton handleChange={handleChange} darkMode={darkMode} />
                 </div>
