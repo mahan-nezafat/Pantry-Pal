@@ -17,7 +17,6 @@ const RecipeList = ({bulkFood}) => {
     localStorage.setItem('search', JSON.stringify(data));
   }, [data])
 
-  console.log(results)
   return (
     <>
       {
